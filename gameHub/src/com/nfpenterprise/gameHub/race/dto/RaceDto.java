@@ -2,6 +2,7 @@ package com.nfpenterprise.gameHub.race.dto;
 
 public class RaceDto {
 	private Integer raceId;
+	private String raceName;
 	private Integer speed;
 	
 	public RaceDto(Integer raceId) {
@@ -10,6 +11,14 @@ public class RaceDto {
 
 	public Integer getRaceId() {
 		return raceId;
+	}
+
+	public String getRaceName() {
+		return raceName;
+	}
+
+	public void setRaceName(String raceName) {
+		this.raceName = raceName;
 	}
 
 	public Integer getSpeed() {

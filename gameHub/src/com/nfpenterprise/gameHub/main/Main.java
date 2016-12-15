@@ -1,4 +1,4 @@
-package com.nfpenterprise.gameHub;
+package com.nfpenterprise.gameHub.main;
 
 import java.io.IOException;
 
