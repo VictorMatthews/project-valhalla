@@ -2,13 +2,26 @@ package com.nfpenterprise.gameHub.character.dto;
 
 public class CharacterDto {
 	private Integer characterId;
+
 	private String characterName;
-	private Integer alignmentId;
-	private Integer raceId;
-	private Integer subRaceId;
-	private Integer classId;
-	private Integer archetypeId;
-	private Integer backgroundId;
+	private String alignment;
+	private String background;
+	private String race;
+	private String className;
+	private Integer classLevel;
+	private Integer experience;
+
+	private Integer strength;
+	private Integer dexterity;
+	private Integer constitution;
+	private Integer intelligence;
+	private Integer wisdom;
+	private Integer charisma;
+
+	private String personalityTrait;
+	private String ideals;
+	private String bonds;
+	private String flaws;
 	
 	public CharacterDto(Integer characterId) {
 		this.characterId = characterId;
@@ -26,51 +39,131 @@ public class CharacterDto {
 		this.characterName = characterName;
 	}
 
-	public Integer getAlignmentId() {
-		return alignmentId;
+	public String getAlignment() {
+		return alignment;
 	}
 
-	public void setAlignmentId(Integer alignmentId) {
-		this.alignmentId = alignmentId;
+	public void setAlignment(String alignmentId) {
+		this.alignment = alignmentId;
 	}
 
-	public Integer getRaceId() {
-		return raceId;
+	public String getBackground() {
+		return background;
 	}
 
-	public void setRaceId(Integer raceId) {
-		this.raceId = raceId;
+	public void setBackground(String background) {
+		this.background = background;
 	}
 
-	public Integer getSubRaceId() {
-		return subRaceId;
+	public String getRace() {
+		return race;
 	}
 
-	public void setSubRaceId(Integer subRaceId) {
-		this.subRaceId = subRaceId;
+	public void setRace(String race) {
+		this.race = race;
 	}
 
-	public Integer getClassId() {
-		return classId;
+	public String getClassName() {
+		return className;
 	}
 
-	public void setClassId(Integer classId) {
-		this.classId = classId;
+	public void setClassName(String className) {
+		this.className = className;
 	}
 
-	public Integer getArchetypeId() {
-		return archetypeId;
+	public Integer getClassLevel() {
+		return classLevel;
 	}
 
-	public void setArchetypeId(Integer archetypeId) {
-		this.archetypeId = archetypeId;
+	public void setClassLevel(Integer classLevel) {
+		this.classLevel = classLevel;
 	}
 
-	public Integer getBackgroundId() {
-		return backgroundId;
+	public Integer getExperience() {
+		return experience;
 	}
 
-	public void setBackgroundId(Integer backgroundId) {
-		this.backgroundId = backgroundId;
+	public void setExperience(Integer experience) {
+		this.experience = experience;
+	}
+
+	public Integer getStrength() {
+		return strength;
+	}
+
+	public void setStrength(Integer strength) {
+		this.strength = strength;
+	}
+
+	public Integer getDexterity() {
+		return dexterity;
+	}
+
+	public void setDexterity(Integer dexterity) {
+		this.dexterity = dexterity;
+	}
+
+	public Integer getConstitution() {
+		return constitution;
+	}
+
+	public void setConstitution(Integer constitution) {
+		this.constitution = constitution;
+	}
+
+	public Integer getIntelligence() {
+		return intelligence;
+	}
+
+	public void setIntelligence(Integer intelligence) {
+		this.intelligence = intelligence;
+	}
+
+	public Integer getWisdom() {
+		return wisdom;
+	}
+
+	public void setWisdom(Integer wisdom) {
+		this.wisdom = wisdom;
+	}
+
+	public Integer getCharisma() {
+		return charisma;
+	}
+
+	public void setCharisma(Integer charisma) {
+		this.charisma = charisma;
+	}
+
+	public String getPersonalityTrait() {
+		return personalityTrait;
+	}
+
+	public void setPersonalityTrait(String personalityTrait) {
+		this.personalityTrait = personalityTrait;
+	}
+
+	public String getIdeals() {
+		return ideals;
+	}
+
+	public void setIdeals(String ideals) {
+		this.ideals = ideals;
+	}
+
+	public String getBonds() {
+		return bonds;
+	}
+
+	public void setBonds(String bonds) {
+		this.bonds = bonds;
+	}
+
+	public String getFlaws() {
+		return flaws;
+	}
+
+	public void setFlaws(String flaws) {
+		this.flaws = flaws;
 	}
 }
