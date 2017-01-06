@@ -22,7 +22,16 @@ public class CharacterDto {
 	private String ideals;
 	private String bonds;
 	private String flaws;
-	
+
+	private Integer newCharacterId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public CharacterDto() {
+		new CharacterDto(newCharacterId());
+	}
+
 	public CharacterDto(Integer characterId) {
 		this.characterId = characterId;
 	}
