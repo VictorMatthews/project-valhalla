@@ -45,7 +45,8 @@ public class RootLayoutController {
     }
 
     public CharacterDto createTestCharacterData() {
-    	CharacterDto newCharacter = new CharacterDto(123456789);
+    	CharacterDto newCharacter = new CharacterDto();
+    	newCharacter.setCharacterId(123456789);
     	newCharacter.setCharacterName("My Character Name");
     	newCharacter.setAlignment("Neutral Good");
     	newCharacter.setBackground("Criminal");

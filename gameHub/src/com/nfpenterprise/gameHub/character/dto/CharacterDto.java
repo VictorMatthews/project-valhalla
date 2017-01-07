@@ -1,8 +1,8 @@
 package com.nfpenterprise.gameHub.character.dto;
 
 public class CharacterDto {
-	private Integer characterId;
 
+	private Integer characterId;
 	private String characterName;
 	private String alignment;
 	private String background;
@@ -23,21 +23,16 @@ public class CharacterDto {
 	private String bonds;
 	private String flaws;
 
-	private Integer newCharacterId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public CharacterDto() {
-		new CharacterDto(newCharacterId());
-	}
-
-	public CharacterDto(Integer characterId) {
-		this.characterId = characterId;
 	}
 
 	public Integer getCharacterId() {
 		return characterId;
+	}
+
+	public void setCharacterId(Integer characterId) {
+		this.characterId = characterId;
 	}
 
 	public String getCharacterName() {

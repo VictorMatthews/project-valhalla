@@ -14,6 +14,7 @@ import com.nfpenterprise.gameHub.constants.Field;
 import com.nfpenterprise.gameHub.constants.Paths;
 import com.nfpenterprise.gameHub.view.RootLayoutController;
 import com.nfpenterprise.gameHub.view.myCharacters.MyCharactersController;
+import com.nfpenterprise.gameHub.view.newCharacter.NewCharacterController;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -22,6 +23,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -42,6 +44,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle(Field.APPLICATION_NAME.toString());
+        this.primaryStage.getIcons().add(new Image(Paths.APPLICATION_ICON.getPath()));
 
 		initRootLayout();
 
@@ -54,8 +57,19 @@ public class Main extends Application {
         return primaryStage;
     }
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
+		setupIfRunningOnMac();
 		launch(args);
+	}
+
+	private static void setupIfRunningOnMac() {
+		String osName = System.getProperty("os.name").toLowerCase();
+		boolean isMacOs = osName.startsWith("mac os x");
+		if (isMacOs) {
+			//Set Mac Menubar Application Name
+			System.setProperty("apple.laf.useScreenMenuBar", "true");
+			System.setProperty("com.apple.mrj.application.apple.menu.about.name", Field.APPLICATION_NAME.toString());
+		}
 	}
 
     public File getCharactersFilePath() {
@@ -101,6 +115,11 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+		File file = getCharactersFilePath();
+        if (file != null) {
+            loadCharacterDataFromFile(file);
+        }
 	}
 
 	public void showNewCharacterMain() {
@@ -113,9 +132,9 @@ public class Main extends Application {
             // Set person overview into the center of root layout.
             rootLayout.setCenter(newCharacterPane);
 
-//            Give the controller access to the main app.
-//            NewCharacterController controller = loader.getController();
-//            controller.setMainApp(this);
+            //Give the controller access to the main app.
+            NewCharacterController controller = loader.getController();
+            controller.setMainApp(this);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -138,7 +157,10 @@ public class Main extends Application {
             setCharacterFilePath(file);
 
         } catch (Exception e) { // catches ANY exception
-        	Alert alert = couldNotLoadDataError(file);
+        	Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not load data");
+            alert.setContentText("Could not load data to file:\n" + file.getPath());
         	alert.showAndWait();
         }
     }
@@ -162,7 +184,10 @@ public class Main extends Application {
 	            setCharacterFilePath(file);
         	}
         } catch (Exception e) { // catches ANY exception
-            Alert alert = couldNotLoadDataError(file);
+        	Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not save data");
+            alert.setContentText("Could not save data to file:\n" + file.getPath());
             alert.showAndWait();
         }
     }
@@ -180,14 +205,6 @@ public class Main extends Application {
             // Update the stage title.
             primaryStage.setTitle(Field.APPLICATION_NAME.toString());
         }
-    }
-    
-    private Alert couldNotLoadDataError(File file) {
-    	Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText("Could not save data");
-        alert.setContentText("Could not save data to file:\n" + file.getPath());
-        return alert;
     }
 
     @Override
