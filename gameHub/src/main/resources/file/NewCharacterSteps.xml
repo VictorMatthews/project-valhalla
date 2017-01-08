@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<steps>
+    <step>
+        <stepId>01</stepId>
+        <stepText>Race</stepText>
+    </step>
+    <step>
+        <stepId>02</stepId>
+        <stepText>SubRace</stepText>
+    </step>
+    <step>
+        <stepId>03</stepId>
+        <stepText>Class</stepText>
+    </step>
+    <step>
+        <stepId>04</stepId>
+        <stepText>Backgroud</stepText>
+    </step>
+    <step>
+        <stepId>05</stepId>
+        <stepText>Attributes</stepText>
+    </step>
+    <step>
+        <stepId>06</stepId>
+        <stepText>Skills</stepText>
+    </step>
+</steps>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<characters>
+    <character>
+        <alignment>Neutral Good</alignment>
+        <background>Criminal</background>
+        <bonds>My ill-gotten gains go to support my family.</bonds>
+        <characterId>123456789</characterId>
+        <characterName>My Character Name</characterName>
+        <charisma>14</charisma>
+        <classLevel>1</classLevel>
+        <className>Bard</className>
+        <constitution>14</constitution>
+        <dexterity>14</dexterity>
+        <experience>0</experience>
+        <flaws>When I see something valuable, I can't think about anything but how to steal it.</flaws>
+        <ideals>People. I'm loyal to my friends, not to any ideals, and everyone else can take a trip down the Styx for all I care. (Neutral)</ideals>
+        <intelligence>14</intelligence>
+        <personalityTrait>I do whatever I can to help the group over everything else.</personalityTrait>
+        <race>Forest Gnome</race>
+        <strength>8</strength>
+        <wisdom>12</wisdom>
+    </character>
+</characters>
