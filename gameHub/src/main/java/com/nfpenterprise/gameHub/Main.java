@@ -50,7 +50,7 @@ public class Main extends Application {
 
 		initRootLayout();
 
-		myCharacters.add(mainController.createTestCharacterData());
+//		myCharacters.add(mainController.createTestCharacterData());
 
 		showMyCharacters();
 		wrapperController = new WrapperController(this);
@@ -63,8 +63,7 @@ public class Main extends Application {
         	wrapperController.loadCharacterDataFromFile(file);
         }
 
-        file = new File(Main.class.getClassLoader().getResource(Paths.NEW_CHARACTER_STEPS_DATA.getPath()).getFile());
-        wrapperController.loadNewCharacterStepsDataFromFile(file);
+        wrapperController.loadNewCharacterStepsDataFromFile();
 		
 	}
 

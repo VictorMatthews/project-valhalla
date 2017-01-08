@@ -47,7 +47,7 @@ public class RootLayoutController {
     public CharacterDto createTestCharacterData() {
     	CharacterDto newCharacter = new CharacterDto();
     	newCharacter.setCharacterId(123456789);
-    	newCharacter.setCharacterName("My Character Name");
+    	newCharacter.setCharacterName("Aifur Gott");
     	newCharacter.setAlignment("Neutral Good");
     	newCharacter.setBackground("Criminal");
     	newCharacter.setRace("Forest Gnome");
