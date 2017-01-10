@@ -1,19 +1,17 @@
 package com.nfpenterprise.gameHub.race.dto;
 
+import com.nfpenterprise.gameHub.constants.SubRaces;
+
 public class SubRaceDto {
-	private Integer subRaceId;
 	private Integer	raceId;
 	private String subRaceName;
 	
 	public SubRaceDto() {
 	}
 
-	public Integer getSubRaceId() {
-		return subRaceId;
-	}
-
-	public void setSubRaceId(Integer subRaceId) {
-		this.subRaceId = subRaceId;
+	public SubRaceDto(SubRaces subRace) {
+		setRaceId(subRace.getRaceId());
+		setSubRaceName(subRace.getSubRaceName());
 	}
 
 	public Integer getRaceId() {

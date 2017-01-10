@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<races>
+    <race>
+        <raceId>20</raceId>
+        <subRaceName>Rock Gnome</subRaceName>
+    </race>
+    <race>
+        <raceId>20</raceId>
+        <subRaceName>Forest Gnome</subRaceName>
+    </race>
+</races>

@@ -10,6 +10,7 @@ public class CharacterDto {
 	private String className;
 	private Integer classLevel;
 	private Integer experience;
+	private Integer speed;
 
 	private Integer strength;
 	private Integer dexterity;
@@ -169,5 +170,13 @@ public class CharacterDto {
 
 	public void setFlaws(String flaws) {
 		this.flaws = flaws;
+	}
+
+	public Integer getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(Integer speed) {
+		this.speed = speed;
 	}
 }

@@ -1,11 +1,20 @@
 package com.nfpenterprise.gameHub.race.dto;
 
+import com.nfpenterprise.gameHub.constants.Races;
+
 public class RaceDto {
 	private Integer raceId;
 	private String raceName;
 	private Integer speed;
 	
 	public RaceDto() {
+	}
+
+	public RaceDto(Races race) {
+		setRaceId(race.getRaceId());
+		setRaceName(race.getRaceName());
+		setSpeed(race.getRaceSpeed());
+		
 	}
 
 	public Integer getRaceId() {

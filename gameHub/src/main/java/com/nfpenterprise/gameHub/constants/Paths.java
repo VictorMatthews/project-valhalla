@@ -4,7 +4,6 @@ public enum Paths {
 	APPLICATION_ICON("file:src/main/resources/images/Project_Valhalla.png"),
 
 	MY_CHARACTER_DATA("file/Characters.xml"),
-	NEW_CHARACTER_STEPS_DATA("file/NewCharacterSteps.xml"),
 	RACE_DATA("file/Races.xml"),
 	SUB_RACE_DATA("file/SubRaces.xml"),
 	CLASS_DATA("file/Classes.xml"),
