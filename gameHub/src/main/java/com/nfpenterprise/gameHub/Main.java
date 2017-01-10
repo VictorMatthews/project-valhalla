@@ -6,7 +6,6 @@ import java.net.URL;
 import java.util.prefs.Preferences;
 
 import com.nfpenterprise.gameHub.character.dto.CharacterDto;
-import com.nfpenterprise.gameHub.character.steps.dto.StepsDto;
 import com.nfpenterprise.gameHub.constants.Field;
 import com.nfpenterprise.gameHub.constants.Paths;
 import com.nfpenterprise.gameHub.util.WrapperController;
@@ -32,14 +31,9 @@ public class Main extends Application {
 	private WrapperController wrapperController;
 
     private ObservableList<CharacterDto> myCharacters = FXCollections.observableArrayList();
-    private ObservableList<StepsDto> newCharacterSteps = FXCollections.observableArrayList();
 
     public ObservableList<CharacterDto> getMyCharacterData() {
         return myCharacters;
-    }
-
-    public ObservableList<StepsDto> getNewCharacterStepsData() {
-        return newCharacterSteps;
     }
 
 	@Override
@@ -53,18 +47,11 @@ public class Main extends Application {
 //		myCharacters.add(mainController.createTestCharacterData());
 
 		showMyCharacters();
-		wrapperController = new WrapperController(this);
-		loadDataFromFiles();
-	}
-
-    private void loadDataFromFiles() {
+		wrapperController = new WrapperController();
 		File file = getCharactersFilePath();
         if (file != null) {
-        	wrapperController.loadCharacterDataFromFile(file);
+        	wrapperController.loadCharacterDataFromFile(file, myCharacters);
         }
-
-        wrapperController.loadNewCharacterStepsDataFromFile();
-		
 	}
 
 	public Stage getPrimaryStage() {
@@ -129,6 +116,7 @@ public class Main extends Application {
             MyCharactersController controller = loader.getController();
             controller.setMainApp(this);
 
+    		this.primaryStage.setTitle(Field.APPLICATION_NAME.toString() + " - " + Field.MY_CHARACTERS.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -148,13 +136,14 @@ public class Main extends Application {
             NewCharacterController controller = loader.getController();
             controller.setMainApp(this);
 
+    		this.primaryStage.setTitle(Field.APPLICATION_NAME.toString() + " - " + Field.NEW_CHARACTER.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
 	}
 
 	public void saveCharacterDataToFile(File file) {
-    	wrapperController.saveCharacterDataToFile(file);
+    	wrapperController.saveCharacterDataToFile(file, myCharacters);
 	}
 
     @Override

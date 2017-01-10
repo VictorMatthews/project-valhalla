@@ -13,12 +13,12 @@ public class RacesWrapper {
     private List<RaceDto> races;
 
     @XmlElement(name = "race")
-    public List<RaceDto> getCharacters() {
+    public List<RaceDto> getRaces() {
         return races;
     }
 
-    public void setCharacters(List<RaceDto> characters) {
-        this.races = characters;
+    public void setRaces(List<RaceDto> races) {
+        this.races = races;
     }
 
 }

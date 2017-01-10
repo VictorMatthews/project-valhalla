@@ -1,7 +1,9 @@
 package com.nfpenterprise.gameHub.constants;
 
 public enum Field {
-	APPLICATION_NAME("Project Valhalla");
+	APPLICATION_NAME("Project Valhalla"),
+	NEW_CHARACTER("New Character"),
+	MY_CHARACTERS("My Characters");
 
 	private final String fieldString;
 

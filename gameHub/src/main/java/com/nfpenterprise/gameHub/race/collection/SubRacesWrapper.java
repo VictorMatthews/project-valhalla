@@ -10,15 +10,15 @@ import com.nfpenterprise.gameHub.race.dto.SubRaceDto;
 @XmlRootElement(name = "subraces")
 public class SubRacesWrapper {
 
-    private List<SubRaceDto> races;
+    private List<SubRaceDto> subRaces;
 
     @XmlElement(name = "subrace")
-    public List<SubRaceDto> getCharacters() {
-        return races;
+    public List<SubRaceDto> getSubRaces() {
+        return subRaces;
     }
 
-    public void setCharacters(List<SubRaceDto> characters) {
-        this.races = characters;
+    public void setSubRaces(List<SubRaceDto> subRaces) {
+        this.subRaces = subRaces;
     }
 
 }

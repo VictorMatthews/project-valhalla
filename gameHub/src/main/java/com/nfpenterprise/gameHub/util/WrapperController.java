@@ -9,21 +9,26 @@ import javax.xml.bind.Unmarshaller;
 
 import com.nfpenterprise.gameHub.Main;
 import com.nfpenterprise.gameHub.character.collection.CharactersWrapper;
-import com.nfpenterprise.gameHub.character.steps.collection.StepsWrapper;
+import com.nfpenterprise.gameHub.character.dto.CharacterDto;
+import com.nfpenterprise.gameHub.characterClass.collection.ClassesWrapper;
+import com.nfpenterprise.gameHub.characterClass.dto.ClassDto;
 import com.nfpenterprise.gameHub.constants.Paths;
+import com.nfpenterprise.gameHub.race.collection.RacesWrapper;
+import com.nfpenterprise.gameHub.race.collection.SubRacesWrapper;
+import com.nfpenterprise.gameHub.race.dto.RaceDto;
+import com.nfpenterprise.gameHub.race.dto.SubRaceDto;
 
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class WrapperController {
 
-	private Main mainApp;
 	
-	public WrapperController(Main mainApp) {
-		this.mainApp = mainApp;
+	public WrapperController() {
 	}
 
-    public void loadCharacterDataFromFile(File file) {
+    public void loadCharacterDataFromFile(File file, ObservableList<CharacterDto> characterData) {
         try {
             JAXBContext context = JAXBContext.newInstance(CharactersWrapper.class);
             Unmarshaller um = context.createUnmarshaller();
@@ -31,8 +36,8 @@ public class WrapperController {
             // Reading XML from the file and unmarshalling.
             CharactersWrapper wrapper = (CharactersWrapper) um.unmarshal(file);
 
-            mainApp.getMyCharacterData().clear();
-            mainApp.getMyCharacterData().addAll(wrapper.getCharacters());
+            characterData.clear();
+            characterData.addAll(wrapper.getCharacters());
 
             // Save the file path to the registry.
             setCharacterFilePath(file);
@@ -43,16 +48,16 @@ public class WrapperController {
         }
     }
 
-	public void saveCharacterDataToFile(File file) {
+	public void saveCharacterDataToFile(File file, ObservableList<CharacterDto> characterData) {
         try {
-        	if (!mainApp.getMyCharacterData().isEmpty()) {
+        	if (!characterData.isEmpty()) {
 	            JAXBContext context = JAXBContext.newInstance(CharactersWrapper.class);
 	            Marshaller m = context.createMarshaller();
 	            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 	
 	            // Wrapping our person data.
 	            CharactersWrapper wrapper = new CharactersWrapper();
-	            wrapper.setCharacters(mainApp.getMyCharacterData());
+	            wrapper.setCharacters(characterData);
 	
 	            // Marshalling and saving XML to the file.
 	            m.marshal(wrapper, file);
@@ -66,17 +71,51 @@ public class WrapperController {
         }
     }
 
-    public void loadNewCharacterStepsDataFromFile() {
-        File file = new File(Main.class.getClassLoader().getResource(Paths.NEW_CHARACTER_STEPS_DATA.getPath()).getFile());
+    public void loadRaceDataFromFile(ObservableList<RaceDto> raceData) {
+        File file = new File(Main.class.getClassLoader().getResource(Paths.RACE_DATA.getPath()).getFile());
         try {
-            JAXBContext context = JAXBContext.newInstance(StepsWrapper.class);
+            JAXBContext context = JAXBContext.newInstance(RacesWrapper.class);
             Unmarshaller um = context.createUnmarshaller();
 
             // Reading XML from the file and unmarshalling.
-            StepsWrapper wrapper = (StepsWrapper) um.unmarshal(file);
+            RacesWrapper wrapper = (RacesWrapper) um.unmarshal(file);
 
-            mainApp.getNewCharacterStepsData().clear();
-            mainApp.getNewCharacterStepsData().addAll(wrapper.getSteps());
+            raceData.clear();
+            raceData.addAll(wrapper.getRaces());
+        } catch (Exception e) { // catches ANY exception
+        	Alert alert = couldNotLoadData(file);
+        	alert.showAndWait();
+        }
+    }
+
+    public void loadSubRaceDataFromFile(ObservableList<SubRaceDto> subRaceData) {
+        File file = new File(Main.class.getClassLoader().getResource(Paths.SUB_RACE_DATA.getPath()).getFile());
+        try {
+            JAXBContext context = JAXBContext.newInstance(SubRacesWrapper.class);
+            Unmarshaller um = context.createUnmarshaller();
+
+            // Reading XML from the file and unmarshalling.
+            SubRacesWrapper wrapper = (SubRacesWrapper) um.unmarshal(file);
+
+            subRaceData.clear();
+            subRaceData.addAll(wrapper.getSubRaces());
+        } catch (Exception e) { // catches ANY exception
+        	Alert alert = couldNotLoadData(file);
+        	alert.showAndWait();
+        }
+    }
+
+    public void loadClassDataFromFile(ObservableList<ClassDto> classData) {
+        File file = new File(Main.class.getClassLoader().getResource(Paths.CLASS_DATA.getPath()).getFile());
+        try {
+            JAXBContext context = JAXBContext.newInstance(ClassesWrapper.class);
+            Unmarshaller um = context.createUnmarshaller();
+
+            // Reading XML from the file and unmarshalling.
+            ClassesWrapper wrapper = (ClassesWrapper) um.unmarshal(file);
+
+            classData.clear();
+            classData.addAll(wrapper.getClasses());
         } catch (Exception e) { // catches ANY exception
         	Alert alert = couldNotLoadData(file);
         	alert.showAndWait();
