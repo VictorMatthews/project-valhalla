@@ -3,7 +3,8 @@ package com.nfpenterprise.gameHub.constants;
 public enum Bonds {
 	//@formatter:off
 
-	BONDS			(Backgrounds.ACOLYTE.getBackgroundId(), 	"test");
+	BONDS			(Backgrounds.ACOLYTE.getBackgroundId(), 	"test"),
+	CRIMINAL_2		(Backgrounds.CRIMINAL.getBackgroundId(),	"My ill-gotten gains go to support my family.");
 
 	//@formatter:on
 

@@ -3,7 +3,8 @@ package com.nfpenterprise.gameHub.constants;
 public enum Ideals {
 	//@formatter:off
 
-	IDEALS			(Backgrounds.ACOLYTE.getBackgroundId(), 	"test");
+	IDEALS			(Backgrounds.ACOLYTE.getBackgroundId(), 	"test"),
+	CRIMINAL_5		(Backgrounds.CRIMINAL.getBackgroundId(),	"People. I’m loyal to my friends, not to any ideals, and everyone else can take a trip down the Styx for all I care. (Neutral)");
 
 	//@formatter:on
 

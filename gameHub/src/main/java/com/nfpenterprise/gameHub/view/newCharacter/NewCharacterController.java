@@ -1,5 +1,8 @@
 package com.nfpenterprise.gameHub.view.newCharacter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.nfpenterprise.gameHub.Main;
 import com.nfpenterprise.gameHub.character.dto.CharacterDto;
 import com.nfpenterprise.gameHub.constants.Backgrounds;
@@ -86,8 +89,23 @@ public class NewCharacterController {
 
 	private void showRaceDetails(Races oldRace, Races newRace) {
 		// TODO Incomplete
-		if (oldRace != null && !oldRace.equals(newRace) && !subRaceTab.isDisabled()) {
-			disableTabs();
+		if (oldRace == null) {
+			oldRace = newRace;
+			populateSubRaces(newRace);
+		}
+
+		if (!oldRace.equals(newRace)) {
+			populateSubRaces(newRace);
+		}
+
+		//Populate Side Text
+	}
+
+	private void populateSubRaces(Races race) {
+		ObservableList<SubRaces> subRacesFromRaces = dataController.populateSubRaceData(race);
+		if (subRacesFromRaces != null && !subRacesFromRaces.isEmpty() && subRacesFromRaces.contains(SubRaces.NO_SUBRACE)) {
+			subRacesTable.setItems(subRacesFromRaces);
+			subRacesTable.getSelectionModel().selectFirst();
 		}
 	}
 
@@ -115,28 +133,12 @@ public class NewCharacterController {
 
 	@FXML
     private void handleNext() {
-		if (verifyNext()) {
-			tabSelectionModel.selectNext();
-			tabSelectionModel.getSelectedItem().setDisable(false);
-		}
+//		if (subRacesFromRaces.contains(SubRaces.NO_SUBRACE)) {
+//			subRaceTab.isDisabled();
+//		}
+		tabSelectionModel.selectNext();
+		tabSelectionModel.getSelectedItem().setDisable(false);
     }
-
-	private boolean verifyNext() {
-		// TODO Not Finished
-		if (tabSelectionModel.getSelectedItem().equals(raceTab) && racesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
-			screenNotCompleteError(Message.MUST_COMPLETE_RACE);
-			return false;
-		}
-		if (tabSelectionModel.getSelectedItem().equals(subRaceTab) && subRacesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
-			screenNotCompleteError(Message.MUST_COMPLETE_SUB_RACE);
-			return false;
-		}
-		if (tabSelectionModel.getSelectedItem().equals(classTab) && classesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
-			screenNotCompleteError(Message.MUST_COMPLETE_CLASS);
-			return false;
-		}
-		return true;
-	}
 
 	@FXML
     private void handleTabSelection() {
@@ -145,27 +147,55 @@ public class NewCharacterController {
 			Races selectedRace = racesTable.getSelectionModel().selectedItemProperty().getValue();
 			SubRaces selectedSubRace = subRacesTable.getSelectionModel().selectedItemProperty().getValue();
 			Classes selectedClass = classesTable.getSelectionModel().selectedItemProperty().getValue();
+			Backgrounds selectedBackground = cmbBackground.getSelectionModel().getSelectedItem();
+			PersonalityTraits selectedPersonalityTrait = cmbPersonalityTraits.getSelectionModel().getSelectedItem();
+			Ideals selectedIdeal = cmbIdeals.getSelectionModel().getSelectedItem();
+			Bonds selectedBond = cmbBonds.getSelectionModel().getSelectedItem();
+			Flaws selectedFlaw = cmbFlaws.getSelectionModel().getSelectedItem();
 
 			if (tabSelectionModel.getSelectedItem().equals(subRaceTab)) {
 				subRacesTable.setItems(dataController.populateSubRaceData(selectedRace));
 				subRacesTable.getSelectionModel().selectFirst();
 			}
 
-			if (selectedRace != null) {
-				newCharacter.setRace(selectedRace.getRaceName());
-			}
-			newCharacter.setSpeed(selectedRace != null ? selectedRace.getRaceSpeed() : null);
-			newCharacter.setSubRace(selectedSubRace != null ? selectedSubRace.getSubRaceName() : null);
-			newCharacter.setClassName(selectedClass != null ? selectedClass.getClassName() : null);
+			newCharacter.setRace(selectedRace);
+			newCharacter.setSubRace(selectedSubRace);
+			newCharacter.setClassName(selectedClass);
+			newCharacter.setBackground(selectedBackground);
+			newCharacter.setPersonalityTrait(selectedPersonalityTrait);
+			newCharacter.setIdeals(selectedIdeal);
+			newCharacter.setBonds(selectedBond);
+			newCharacter.setFlaws(selectedFlaw);
 		}
 	}
 
     @FXML
     private void handleFinish() {
 		// TODO Not Finished
-//    	mainApp.getMyCharacterData().add(newCharacter);
-        mainApp.showMyCharacters();
+    	if (verifyFinished()) {
+//    		mainApp.getMyCharacterData().add(newCharacter);
+    		mainApp.showMyCharacters();
+    	}
     }
+
+	private boolean verifyFinished() {
+		// TODO Not Finished
+		Set<Message> messages = new HashSet<Message>();
+		if (racesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
+			messages.add(Message.MUST_COMPLETE_RACE);
+		}
+		if (subRacesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
+			messages.add(Message.MUST_COMPLETE_SUB_RACE);
+		}
+		if (classesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
+			messages.add(Message.MUST_COMPLETE_CLASS);
+		}
+		if (!messages.isEmpty()) {
+			screenNotCompleteError(messages);
+			return false;
+		}
+		return true;
+	}
 
     @FXML
     private void handleCancel() {
@@ -194,21 +224,16 @@ public class NewCharacterController {
     	}
     }
 
-    private void screenNotCompleteError(Message message) {
+    private void screenNotCompleteError(Set<Message> messages) {
     	//TODO this should go in a util class!
     	Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("ERROR");
-        alert.setHeaderText("Can not continue, screen is not complete");
-        alert.setContentText(message.toString());
+        alert.setHeaderText("Character Not Finished.");
+        StringBuilder content = new StringBuilder();
+        for (Message message : messages) {
+        	content.append("\n" + message.toString());
+        }
+        alert.setContentText(content.toString());
         alert.showAndWait();
     }
-
-	private void disableTabs() {
-		subRaceTab.setDisable(true);
-		classTab.setDisable(true);
-		backgorundTab.setDisable(true);
-		attributesTab.setDisable(true);
-		skillsTab.setDisable(true);
-		spellsTab.setDisable(true);
-	}
 }

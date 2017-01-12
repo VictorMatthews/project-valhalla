@@ -1,3 +1,8 @@
+/*
+ * Java Script from my Random WEapon Generator that I made. Could Possibly implement something
+ * similar into this program. Although That wouldn't be until at least Version 2
+*/
+
 function onInstall(e) {onOpen(e);}
 
 function onOpen(e) {

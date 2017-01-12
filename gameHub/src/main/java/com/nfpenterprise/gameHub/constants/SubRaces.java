@@ -6,7 +6,8 @@ import java.util.Set;
 
 public enum SubRaces {
 	//@formatter:off
-	
+
+	NO_SUBRACE				(0, 							"", 					new HashSet<Integer>()),
 	HILL_DWARF				(Races.DWARF.getRaceId(), 		"Hill Dwarf", 			new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))), 
 	MOUNTAIN_DWARF			(Races.DWARF.getRaceId(), 		"Mountain Dwarf",		new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
 	HIGH_ELF				(Races.ELF.getRaceId(), 		"High Elf",				new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),

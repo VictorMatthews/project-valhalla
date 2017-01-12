@@ -3,7 +3,8 @@ package com.nfpenterprise.gameHub.constants;
 public enum Flaws {
 	//@formatter:off
 
-	Flaw			(Backgrounds.ACOLYTE.getBackgroundId(), 	"test");
+	FLAW			(Backgrounds.ACOLYTE.getBackgroundId(), 	"test"),
+	CRIMINAL_1 		(Backgrounds.CRIMINAL.getBackgroundId(), 	"When I see something valuable, I can't think about anything but how to steal it.");
 
 	//@formatter:on
 

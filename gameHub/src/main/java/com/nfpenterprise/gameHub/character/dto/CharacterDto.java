@@ -5,6 +5,15 @@ import java.util.Set;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import com.nfpenterprise.gameHub.constants.Backgrounds;
+import com.nfpenterprise.gameHub.constants.Bonds;
+import com.nfpenterprise.gameHub.constants.Classes;
+import com.nfpenterprise.gameHub.constants.Flaws;
+import com.nfpenterprise.gameHub.constants.Ideals;
+import com.nfpenterprise.gameHub.constants.PersonalityTraits;
+import com.nfpenterprise.gameHub.constants.Races;
+import com.nfpenterprise.gameHub.constants.SubRaces;
+
 public class CharacterDto {
 
 	private Integer characterId;
@@ -64,32 +73,45 @@ public class CharacterDto {
 		return background;
 	}
 
-	public void setBackground(String background) {
-		this.background = background;
+	public void setBackground(Backgrounds background) {
+		if (background != null) {
+			this.background =  background.getBackgroundName();
+			addProfSkills(background.getProfSkills());
+		}
 	}
 
 	public String getRace() {
 		return race;
 	}
 
-	public void setRace(String race) {
-		this.race = race;
+	public void setRace(Races race) {
+		if (race != null) {
+			this.race = race.getRaceName();
+			setSpeed(race.getRaceSpeed());
+			addProfSkills(race.getProfSkills());
+		}
 	}
 
 	public String getSubRace() {
 		return subRace;
 	}
 
-	public void setSubRace(String subRace) {
-		this.subRace = subRace;
+	public void setSubRace(SubRaces subRace) {
+		if (subRace != null) {
+			this.subRace = subRace.getSubRaceName();
+			addProfSkills(subRace.getProfSkills());
+		}
 	}
 
 	public String getClassName() {
 		return className;
 	}
 
-	public void setClassName(String className) {
-		this.className = className;
+	public void setClassName(Classes classData) {
+		if (classData != null) {
+			this.className = classData.getClassName();
+			addProfSkills(classData.getProfSkills());
+		}
 	}
 
 	public Integer getClassLevel() {
@@ -160,39 +182,39 @@ public class CharacterDto {
 		return personalityTrait;
 	}
 
-	public void setPersonalityTrait(String personalityTrait) {
-		this.personalityTrait = personalityTrait;
+	public void setPersonalityTrait(PersonalityTraits personalityTrait) {
+		this.personalityTrait = personalityTrait != null ? personalityTrait.getPersonalityTraitText() : null;
 	}
 
 	public String getIdeals() {
 		return ideals;
 	}
 
-	public void setIdeals(String ideals) {
-		this.ideals = ideals;
+	public void setIdeals(Ideals ideals) {
+		this.ideals = ideals != null ? ideals.getIdealText() : null;
 	}
 
 	public String getBonds() {
 		return bonds;
 	}
 
-	public void setBonds(String bonds) {
-		this.bonds = bonds;
+	public void setBonds(Bonds bonds) {
+		this.bonds = bonds != null ? bonds.getBondText() : null;
 	}
 
 	public String getFlaws() {
 		return flaws;
 	}
 
-	public void setFlaws(String flaws) {
-		this.flaws = flaws;
+	public void setFlaws(Flaws flaws) {
+		this.flaws = flaws != null ? flaws.getFlawText() : null;
 	}
 
 	public Integer getSpeed() {
 		return speed;
 	}
 
-	public void setSpeed(Integer speed) {
+	private void setSpeed(Integer speed) {
 		this.speed = speed;
 	}
 
@@ -201,18 +223,18 @@ public class CharacterDto {
 		return profSkills;
 	}
 
-	public void setProfSkills(Set<Integer> profSkills) {
+	private void setProfSkills(Set<Integer> profSkills) {
 		this.profSkills = profSkills;
 	}
 
-	public void addProfSkill(Integer profSkillId) {
+	private void addProfSkill(Integer profSkillId) {
 		if (profSkills == null) {
 			setProfSkills(new HashSet<Integer>());
 		}
 		profSkills.add(profSkillId);
 	}
 
-	public void addProfSkills(Set<Integer> profSkillIds) {
+	private void addProfSkills(Set<Integer> profSkillIds) {
 		for (Integer profSkillId : profSkillIds) {
 			addProfSkill(profSkillId);
 		}

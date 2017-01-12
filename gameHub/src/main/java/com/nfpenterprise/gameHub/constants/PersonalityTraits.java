@@ -3,7 +3,8 @@ package com.nfpenterprise.gameHub.constants;
 public enum PersonalityTraits {
 	//@formatter:off
 
-	PERSONALITY			(Backgrounds.ACOLYTE.getBackgroundId(), 	"test");
+	PERSONALITY			(Backgrounds.ACOLYTE.getBackgroundId(), 	"test"),
+	CRIMINAL_3			(Backgrounds.CRIMINAL.getBackgroundId(), 	"The first thing I do in a new place is note the locations of everything valuable - or where such things could be hidden.");
 
 	//@formatter:on
 

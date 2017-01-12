@@ -4,6 +4,14 @@ import java.io.File;
 
 import com.nfpenterprise.gameHub.Main;
 import com.nfpenterprise.gameHub.character.dto.CharacterDto;
+import com.nfpenterprise.gameHub.constants.Backgrounds;
+import com.nfpenterprise.gameHub.constants.Bonds;
+import com.nfpenterprise.gameHub.constants.Classes;
+import com.nfpenterprise.gameHub.constants.Flaws;
+import com.nfpenterprise.gameHub.constants.Ideals;
+import com.nfpenterprise.gameHub.constants.PersonalityTraits;
+import com.nfpenterprise.gameHub.constants.Races;
+import com.nfpenterprise.gameHub.constants.SubRaces;
 
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
@@ -21,7 +29,6 @@ public class RootLayoutController {
             handleSaveAs();
         }
     }
-
 
     @FXML
     private void handleSaveAs() {
@@ -49,9 +56,10 @@ public class RootLayoutController {
     	newCharacter.setCharacterId(123456789);
     	newCharacter.setCharacterName("Aifur Gott");
     	newCharacter.setAlignment("Neutral Good");
-    	newCharacter.setBackground("Criminal");
-    	newCharacter.setRace("Forest Gnome");
-    	newCharacter.setClassName("Bard");
+    	newCharacter.setBackground(Backgrounds.CRIMINAL);
+    	newCharacter.setRace(Races.GNOME);
+    	newCharacter.setSubRace(SubRaces.FOREST_GNOME);
+    	newCharacter.setClassName(Classes.BARD);
     	newCharacter.setClassLevel(1);
     	newCharacter.setExperience(0);
     	newCharacter.setStrength(8);
@@ -60,14 +68,10 @@ public class RootLayoutController {
     	newCharacter.setIntelligence(14);
     	newCharacter.setWisdom(12);
     	newCharacter.setCharisma(14);
-    	newCharacter.setPersonalityTrait("I do whatever I can to help the group over everything else.");
-    	newCharacter.setIdeals("People. I'm loyal to my friends, not to any ideals, and everyone else can take a trip down the Styx for all I care. (Neutral)");
-    	newCharacter.setBonds("My ill-gotten gains go to support my family.");
-    	newCharacter.setFlaws("When I see something valuable, I can't think about anything but how to steal it.");
-    	newCharacter.addProfSkill(1);
-    	newCharacter.addProfSkill(3);
-    	newCharacter.addProfSkill(5);
-    	newCharacter.addProfSkill(7);
+    	newCharacter.setPersonalityTrait(PersonalityTraits.CRIMINAL_3);
+    	newCharacter.setIdeals(Ideals.CRIMINAL_5);
+    	newCharacter.setBonds(Bonds.CRIMINAL_2);
+    	newCharacter.setFlaws(Flaws.CRIMINAL_1);
 
     	return newCharacter;
     }
