@@ -1,14 +1,13 @@
 package com.nfpenterprise.gameHub.util;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import com.nfpenterprise.gameHub.characterClass.dto.ClassDto;
+import com.nfpenterprise.gameHub.constants.Backgrounds;
+import com.nfpenterprise.gameHub.constants.Bonds;
 import com.nfpenterprise.gameHub.constants.Classes;
+import com.nfpenterprise.gameHub.constants.Flaws;
+import com.nfpenterprise.gameHub.constants.Ideals;
+import com.nfpenterprise.gameHub.constants.PersonalityTraits;
 import com.nfpenterprise.gameHub.constants.Races;
 import com.nfpenterprise.gameHub.constants.SubRaces;
-import com.nfpenterprise.gameHub.race.dto.RaceDto;
-import com.nfpenterprise.gameHub.race.dto.SubRaceDto;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,24 +17,17 @@ public class DataController {
 		
 	}
 
-	public ObservableList<RaceDto> populateRaceData() {
-		ObservableList<RaceDto> races = FXCollections.observableArrayList();
-		races.add(new RaceDto(Races.DWARF));
-		races.add(new RaceDto(Races.ELF));
-		races.add(new RaceDto(Races.HALFLING));
-		races.add(new RaceDto(Races.HUMAN));
-		races.add(new RaceDto(Races.DRAGONBORN));
-		races.add(new RaceDto(Races.GNOME));
-		races.add(new RaceDto(Races.HALF_ELF));
-		races.add(new RaceDto(Races.HALF_ORC));
-		races.add(new RaceDto(Races.TIEFLING));
+	public ObservableList<Races> populateRaceData() {
+		ObservableList<Races> races = FXCollections.observableArrayList();
+		for (Races race : Races.getRaces()) {
+			races.add(race);
+		}
 		return races;		
 	}
 
-	public ObservableList<SubRaceDto> populateSubRaceData(RaceDto selectedRace) {
-		Set<SubRaceDto> subRaceSet = populateSubRaceData();
-		ObservableList<SubRaceDto> subRaces = FXCollections.observableArrayList();
-		for(SubRaceDto subRace : subRaceSet) {
+	public ObservableList<SubRaces> populateSubRaceData(Races selectedRace) {
+		ObservableList<SubRaces> subRaces = FXCollections.observableArrayList();
+		for(SubRaces subRace : SubRaces.getSubRaces()) {
 			if (subRace.getRaceId().equals(selectedRace.getRaceId())) {
 				subRaces.add(subRace);
 			}
@@ -43,33 +35,59 @@ public class DataController {
 		return subRaces;
 	}
 
-	public Set<SubRaceDto> populateSubRaceData() {
-		Set<SubRaceDto> subRaceSet = new HashSet<SubRaceDto>();
-		subRaceSet.add(new SubRaceDto(SubRaces.FOREST_GNOME));
-		subRaceSet.add(new SubRaceDto(SubRaces.ROCK_GNOME));
-		subRaceSet.add(new SubRaceDto(SubRaces.HIGH_ELF));
-		subRaceSet.add(new SubRaceDto(SubRaces.WOOD_ELF));
-		subRaceSet.add(new SubRaceDto(SubRaces.DARK_ELF));
-		subRaceSet.add(new SubRaceDto(SubRaces.LIGHT_FOOT_HALFLING));
-		subRaceSet.add(new SubRaceDto(SubRaces.STOUT_HALFLING));
-		subRaceSet.add(new SubRaceDto(SubRaces.HILL_DWARF));
-		subRaceSet.add(new SubRaceDto(SubRaces.MOUNTAIN_DWARF));
-		return subRaceSet;
+	public ObservableList<Classes> populateClassData() {
+		ObservableList<Classes> classes = FXCollections.observableArrayList();
+		for (Classes classData : Classes.getClasses()) {
+			classes.add(classData);
+		}
+		return classes;		
 	}
 
-	public ObservableList<ClassDto> populateClassData() {
-		ObservableList<ClassDto> classes = FXCollections.observableArrayList();
-		classes.add(new ClassDto(Classes.BARBARIAN));
-		classes.add(new ClassDto(Classes.BARD));
-		classes.add(new ClassDto(Classes.CLERIC));
-		classes.add(new ClassDto(Classes.DRUID));
-		classes.add(new ClassDto(Classes.FIGHTER));
-		classes.add(new ClassDto(Classes.MONK));
-		classes.add(new ClassDto(Classes.PALADIN));
-		classes.add(new ClassDto(Classes.RANGER));
-		classes.add(new ClassDto(Classes.ROGUE));
-		classes.add(new ClassDto(Classes.SORCERER));
-		classes.add(new ClassDto(Classes.WIZARD));
-		return classes;		
+	public ObservableList<Backgrounds> populateBackgroundData() {
+		ObservableList<Backgrounds> backgrounds = FXCollections.observableArrayList();
+		for (Backgrounds background : Backgrounds.getBackgrounds()) {
+			backgrounds.add(background);
+		}
+		return backgrounds;		
+	}
+
+	public ObservableList<PersonalityTraits> populatePersonalityTraitData(Backgrounds background) {
+		ObservableList<PersonalityTraits> personalityTraits = FXCollections.observableArrayList();
+		for (PersonalityTraits personalityTrait : PersonalityTraits.getPersonalityTraits()) {
+			if (personalityTrait.getBackgroundId().equals(background.getBackgroundId())) {
+				personalityTraits.add(personalityTrait);
+			}
+		}
+		return personalityTraits;		
+	}
+
+	public ObservableList<Ideals> populateIdealData(Backgrounds background) {
+		ObservableList<Ideals> ideals = FXCollections.observableArrayList();
+		for (Ideals ideal : Ideals.getIdeals()) {
+			if (ideal.getBackgroundId().equals(background.getBackgroundId())) {
+				ideals.add(ideal);
+			}
+		}
+		return ideals;		
+	}
+
+	public ObservableList<Bonds> populateBondData(Backgrounds background) {
+		ObservableList<Bonds> bonds = FXCollections.observableArrayList();
+		for (Bonds bond : Bonds.getBonds()) {
+			if (bond.getBackgroundId().equals(background.getBackgroundId())) {
+				bonds.add(bond);
+			}
+		}
+		return bonds;		
+	}
+
+	public ObservableList<Flaws> populateFlawData(Backgrounds background) {
+		ObservableList<Flaws> flaws = FXCollections.observableArrayList();
+		for (Flaws flaw : Flaws.getFlaws()) {
+			if (flaw.getBackgroundId().equals(background.getBackgroundId())) {
+				flaws.add(flaw);
+			}
+		}
+		return flaws;		
 	}
 }

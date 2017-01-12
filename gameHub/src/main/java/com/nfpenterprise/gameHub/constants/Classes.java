@@ -38,4 +38,13 @@ public enum Classes {
 		return profSkills;
 	}
 
+	public static Classes[] getClasses() {
+		return Classes.values();
+	}
+
+	@Override
+	public String toString() {
+		return this.className;
+	}
+
 }

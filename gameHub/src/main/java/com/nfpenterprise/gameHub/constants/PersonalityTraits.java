@@ -23,4 +23,13 @@ public enum PersonalityTraits {
 		return personalityTraitText;
 	}
 
+	public static PersonalityTraits[] getPersonalityTraits() {
+		return PersonalityTraits.values();
+	}
+
+	@Override
+	public String toString() {
+		return this.personalityTraitText;
+	}
+
 }

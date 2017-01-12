@@ -23,4 +23,13 @@ public enum Bonds {
 		return bondText;
 	}
 
+	public static Bonds[] getBonds() {
+		return Bonds.values();
+	}
+
+	@Override
+	public String toString() {
+		return this.bondText;
+	}
+
 }

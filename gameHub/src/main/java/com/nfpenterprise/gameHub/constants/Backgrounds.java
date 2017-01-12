@@ -44,4 +44,13 @@ public enum Backgrounds {
 		return profSkills;
 	}
 
+	public static Backgrounds[] getBackgrounds() {
+		return Backgrounds.values();
+	}
+
+	@Override
+	public String toString() {
+		return this.backgroundName;
+	}
+
 }

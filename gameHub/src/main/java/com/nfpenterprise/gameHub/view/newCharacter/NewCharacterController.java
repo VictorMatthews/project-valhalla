@@ -2,15 +2,15 @@ package com.nfpenterprise.gameHub.view.newCharacter;
 
 import com.nfpenterprise.gameHub.Main;
 import com.nfpenterprise.gameHub.character.dto.CharacterDto;
-import com.nfpenterprise.gameHub.characterClass.dto.ClassDto;
 import com.nfpenterprise.gameHub.constants.Backgrounds;
 import com.nfpenterprise.gameHub.constants.Bonds;
+import com.nfpenterprise.gameHub.constants.Classes;
 import com.nfpenterprise.gameHub.constants.Flaws;
 import com.nfpenterprise.gameHub.constants.Ideals;
 import com.nfpenterprise.gameHub.constants.Message;
 import com.nfpenterprise.gameHub.constants.PersonalityTraits;
-import com.nfpenterprise.gameHub.race.dto.RaceDto;
-import com.nfpenterprise.gameHub.race.dto.SubRaceDto;
+import com.nfpenterprise.gameHub.constants.Races;
+import com.nfpenterprise.gameHub.constants.SubRaces;
 import com.nfpenterprise.gameHub.util.DataController;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -31,9 +31,9 @@ public class NewCharacterController {
 	private CharacterDto newCharacter;
 	private SingleSelectionModel<Tab> tabSelectionModel;
 	private DataController dataController;
-	ObservableList<RaceDto> raceData;
-	ObservableList<SubRaceDto> subRaceData;
-	ObservableList<ClassDto> classData;
+	ObservableList<Races> raceData;
+	ObservableList<SubRaces> subRaceData;
+	ObservableList<Classes> classData;
 
 	@FXML private TabPane tabs;
 	@FXML private Tab raceTab;
@@ -43,12 +43,12 @@ public class NewCharacterController {
 	@FXML private Tab attributesTab;
 	@FXML private Tab skillsTab;
 	@FXML private Tab spellsTab;
-	@FXML private TableView<RaceDto> racesTable;
-    @FXML private TableColumn<RaceDto, String> racesColumn;
-	@FXML private TableView<SubRaceDto> subRacesTable;
-    @FXML private TableColumn<SubRaceDto, String> subRacesColumn;
-	@FXML private TableView<ClassDto> classesTable;
-    @FXML private TableColumn<ClassDto, String> classesColumn;
+	@FXML private TableView<Races> racesTable;
+    @FXML private TableColumn<Races, String> racesColumn;
+	@FXML private TableView<SubRaces> subRacesTable;
+    @FXML private TableColumn<SubRaces, String> subRacesColumn;
+	@FXML private TableView<Classes> classesTable;
+    @FXML private TableColumn<Classes, String> classesColumn;
 	@FXML private ComboBox<Backgrounds> cmbBackground;
 	@FXML private ComboBox<PersonalityTraits> cmbPersonalityTraits;
 	@FXML private ComboBox<Ideals> cmbIdeals;
@@ -64,6 +64,7 @@ public class NewCharacterController {
 		newCharacter = new CharacterDto();
 		newCharacter.setCharacterId(getUniqueId());
 		tabSelectionModel = tabs.getSelectionModel();
+		dataController = new DataController();
 
 		racesColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getRaceName()));
 		racesTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showRaceDetails(oldValue, newValue));
@@ -72,23 +73,29 @@ public class NewCharacterController {
 		classesColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getClassName()));
 		classesTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showClassDetails(newValue));
 
-		dataController = new DataController();
 		racesTable.setItems(dataController.populateRaceData());
+		racesTable.getSelectionModel().selectFirst();
+
 		classesTable.setItems(dataController.populateClassData());
+		classesTable.getSelectionModel().selectFirst();
+
+		cmbBackground.setItems(dataController.populateBackgroundData());
+		cmbBackground.getSelectionModel().selectFirst();
+		refreshBackground(); 
 	}
 
-	private void showRaceDetails(RaceDto oldRace, RaceDto newRace) {
+	private void showRaceDetails(Races oldRace, Races newRace) {
 		// TODO Incomplete
 		if (oldRace != null && !oldRace.equals(newRace) && !subRaceTab.isDisabled()) {
 			disableTabs();
 		}
 	}
 
-	private void showSubRaceDetails(SubRaceDto newValue) {
+	private void showSubRaceDetails(SubRaces newSubRace) {
 		// TODO Auto-generated method stub
 	}
 
-	private void showClassDetails(ClassDto newValue) {
+	private void showClassDetails(Classes newClass) {
 		// TODO Auto-generated method stub
 	}
 
@@ -135,16 +142,19 @@ public class NewCharacterController {
     private void handleTabSelection() {
 		// TODO Not Finished
 		if (tabSelectionModel != null) {
-			RaceDto selectedRace = racesTable.getSelectionModel().selectedItemProperty().getValue();
-			SubRaceDto selectedSubRace = subRacesTable.getSelectionModel().selectedItemProperty().getValue();
-			ClassDto selectedClass = classesTable.getSelectionModel().selectedItemProperty().getValue();
+			Races selectedRace = racesTable.getSelectionModel().selectedItemProperty().getValue();
+			SubRaces selectedSubRace = subRacesTable.getSelectionModel().selectedItemProperty().getValue();
+			Classes selectedClass = classesTable.getSelectionModel().selectedItemProperty().getValue();
 
 			if (tabSelectionModel.getSelectedItem().equals(subRaceTab)) {
 				subRacesTable.setItems(dataController.populateSubRaceData(selectedRace));
+				subRacesTable.getSelectionModel().selectFirst();
 			}
 
-			newCharacter.setRace(selectedRace != null ? selectedRace.getRaceName() : null);
-			newCharacter.setSpeed(selectedRace != null ? selectedRace.getSpeed() : null);
+			if (selectedRace != null) {
+				newCharacter.setRace(selectedRace.getRaceName());
+			}
+			newCharacter.setSpeed(selectedRace != null ? selectedRace.getRaceSpeed() : null);
 			newCharacter.setSubRace(selectedSubRace != null ? selectedSubRace.getSubRaceName() : null);
 			newCharacter.setClassName(selectedClass != null ? selectedClass.getClassName() : null);
 		}
@@ -164,7 +174,24 @@ public class NewCharacterController {
 
     @FXML
     private void refreshBackground() {
-		// TODO Auto-generated method stub
+    	Backgrounds background = cmbBackground.getSelectionModel().getSelectedItem();
+    	if (background != null) {
+    		cmbPersonalityTraits.setItems(dataController.populatePersonalityTraitData(background));
+    		cmbPersonalityTraits.getSelectionModel().selectFirst();
+    		cmbPersonalityTraits.setDisable(false);
+
+    		cmbIdeals.setItems(dataController.populateIdealData(background));
+    		cmbIdeals.getSelectionModel().selectFirst();
+    		cmbIdeals.setDisable(false);
+
+    		cmbBonds.setItems(dataController.populateBondData(background));
+    		cmbBonds.getSelectionModel().selectFirst();
+    		cmbBonds.setDisable(false);
+
+    		cmbFlaws.setItems(dataController.populateFlawData(background));
+    		cmbFlaws.getSelectionModel().selectFirst();
+    		cmbFlaws.setDisable(false);
+    	}
     }
 
     private void screenNotCompleteError(Message message) {

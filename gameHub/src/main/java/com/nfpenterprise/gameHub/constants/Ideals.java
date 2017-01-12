@@ -23,4 +23,13 @@ public enum Ideals {
 		return idealText;
 	}
 
+	public static Ideals[] getIdeals() {
+		return Ideals.values();
+	}
+
+	@Override
+	public String toString() {
+		return this.idealText;
+	}
+
 }

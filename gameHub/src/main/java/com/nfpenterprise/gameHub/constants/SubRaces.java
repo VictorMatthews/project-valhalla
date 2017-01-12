@@ -15,22 +15,24 @@ public enum SubRaces {
 	LIGHT_FOOT_HALFLING		(Races.HALFLING.getRaceId(), 	"Lightfoot Halfling",	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
 	STOUT_HALFLING			(Races.HALFLING.getRaceId(), 	"Stout Halfling",		new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
 	ROCK_GNOME				(Races.GNOME.getRaceId(),		"Rock Gnome",			new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
-	FOREST_GNOME			(Races.GNOME.getRaceId(),		"Forest Gnome",			new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId())));
+	FOREST_GNOME			(Races.GNOME.getRaceId(),		"Forest Gnome",			new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
+	HUMAN					(Races.HUMAN.getRaceId(),		"Human",				new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
+	VARIANT_HUMAN			(Races.HUMAN.getRaceId(),		"Variant Human",		new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId())));
 	
 	//@formatter:on
 
 	private final Integer raceId;
-	private final String raceName;
+	private final String subRaceName;
 	private final Set<Integer> profSkills;
 
 	SubRaces(Integer raceId, String raceName, Set<Integer> profSkills) {
 		this.raceId = raceId;
-		this.raceName = raceName;
+		this.subRaceName = raceName;
 		this.profSkills = profSkills;
 	}
 
 	public String getSubRaceName() {
-		return raceName;
+		return subRaceName;
 	}
 
 	public Integer getRaceId() {
@@ -39,6 +41,15 @@ public enum SubRaces {
 
 	public Set<Integer> getProfSkills() {
 		return profSkills;
+	}
+
+	public static SubRaces[] getSubRaces() {
+		return SubRaces.values();
+	}
+
+	@Override
+	public String toString() {
+		return this.subRaceName;
 	}
 
 }

@@ -23,4 +23,13 @@ public enum Flaws {
 		return flawText;
 	}
 
+	public static Flaws[] getFlaws() {
+		return Flaws.values();
+	}
+
+	@Override
+	public String toString() {
+		return this.flawText;
+	}
+
 }

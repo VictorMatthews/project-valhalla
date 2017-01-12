@@ -40,4 +40,8 @@ public enum Skills {
 		return skillName;
 	}
 
+	public static Skills[] getSkills() {
+		return Skills.values();
+	}
+
 }
