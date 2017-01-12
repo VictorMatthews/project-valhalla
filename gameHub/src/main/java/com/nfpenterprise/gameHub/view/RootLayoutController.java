@@ -64,6 +64,10 @@ public class RootLayoutController {
     	newCharacter.setIdeals("People. I'm loyal to my friends, not to any ideals, and everyone else can take a trip down the Styx for all I care. (Neutral)");
     	newCharacter.setBonds("My ill-gotten gains go to support my family.");
     	newCharacter.setFlaws("When I see something valuable, I can't think about anything but how to steal it.");
+    	newCharacter.addProfSkill(1);
+    	newCharacter.addProfSkill(3);
+    	newCharacter.addProfSkill(5);
+    	newCharacter.addProfSkill(7);
 
     	return newCharacter;
     }

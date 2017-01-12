@@ -16,8 +16,9 @@
         <ideals>People. I'm loyal to my friends, not to any ideals, and everyone else can take a trip down the Styx for all I care. (Neutral)</ideals>
         <intelligence>14</intelligence>
         <personalityTrait>I do whatever I can to help the group over everything else.</personalityTrait>
-        <race>Forest Gnome</race>
+        <race>Gnome</race>
         <strength>8</strength>
         <wisdom>12</wisdom>
-    </character>
+        <subRace>Forest Gnome</subRace>
+	</character>
 </characters>

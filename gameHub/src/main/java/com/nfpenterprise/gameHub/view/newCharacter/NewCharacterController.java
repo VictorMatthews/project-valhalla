@@ -66,7 +66,7 @@ public class NewCharacterController {
 		tabSelectionModel = tabs.getSelectionModel();
 
 		racesColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getRaceName()));
-		racesTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showRaceDetails(newValue));
+		racesTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showRaceDetails(oldValue, newValue));
 		subRacesColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getSubRaceName()));
 		subRacesTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showSubRaceDetails(newValue));
 		classesColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getClassName()));
@@ -77,19 +77,19 @@ public class NewCharacterController {
 		classesTable.setItems(dataController.populateClassData());
 	}
 
-	private Object showRaceDetails(RaceDto newValue) {
-		// TODO Auto-generated method stub
-		return null;
+	private void showRaceDetails(RaceDto oldRace, RaceDto newRace) {
+		// TODO Incomplete
+		if (oldRace != null && !oldRace.equals(newRace) && !subRaceTab.isDisabled()) {
+			disableTabs();
+		}
 	}
 
-	private Object showSubRaceDetails(SubRaceDto newValue) {
+	private void showSubRaceDetails(SubRaceDto newValue) {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
-	private Object showClassDetails(ClassDto newValue) {
+	private void showClassDetails(ClassDto newValue) {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	private Integer getUniqueId() {
@@ -143,8 +143,9 @@ public class NewCharacterController {
 				subRacesTable.setItems(dataController.populateSubRaceData(selectedRace));
 			}
 
+			newCharacter.setRace(selectedRace != null ? selectedRace.getRaceName() : null);
 			newCharacter.setSpeed(selectedRace != null ? selectedRace.getSpeed() : null);
-			newCharacter.setRace(selectedSubRace != null ? selectedSubRace.getSubRaceName() : null);
+			newCharacter.setSubRace(selectedSubRace != null ? selectedSubRace.getSubRaceName() : null);
 			newCharacter.setClassName(selectedClass != null ? selectedClass.getClassName() : null);
 		}
 	}
@@ -167,10 +168,20 @@ public class NewCharacterController {
     }
 
     private void screenNotCompleteError(Message message) {
+    	//TODO this should go in a util class!
     	Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("ERROR");
-        alert.setHeaderText("Can not continue!");
-        alert.setContentText("Before continuing " + message.toString());
+        alert.setHeaderText("Can not continue, screen is not complete");
+        alert.setContentText(message.toString());
         alert.showAndWait();
     }
+
+	private void disableTabs() {
+		subRaceTab.setDisable(true);
+		classTab.setDisable(true);
+		backgorundTab.setDisable(true);
+		attributesTab.setDisable(true);
+		skillsTab.setDisable(true);
+		spellsTab.setDisable(true);
+	}
 }

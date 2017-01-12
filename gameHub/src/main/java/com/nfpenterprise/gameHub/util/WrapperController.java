@@ -31,7 +31,6 @@ public class WrapperController {
 
             characterData.clear();
             characterData.addAll(wrapper.getCharacters());
-
             // Save the file path to the registry.
             setCharacterFilePath(file);
 

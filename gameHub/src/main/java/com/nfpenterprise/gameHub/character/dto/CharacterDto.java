@@ -1,5 +1,10 @@
 package com.nfpenterprise.gameHub.character.dto;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.xml.bind.annotation.XmlElement;
+
 public class CharacterDto {
 
 	private Integer characterId;
@@ -7,6 +12,7 @@ public class CharacterDto {
 	private String alignment;
 	private String background;
 	private String race;
+	private String subRace;
 	private String className;
 	private Integer classLevel;
 	private Integer experience;
@@ -23,6 +29,8 @@ public class CharacterDto {
 	private String ideals;
 	private String bonds;
 	private String flaws;
+
+	private Set<Integer> profSkills;
 
 
 	public CharacterDto() {
@@ -66,6 +74,14 @@ public class CharacterDto {
 
 	public void setRace(String race) {
 		this.race = race;
+	}
+
+	public String getSubRace() {
+		return subRace;
+	}
+
+	public void setSubRace(String subRace) {
+		this.subRace = subRace;
 	}
 
 	public String getClassName() {
@@ -178,5 +194,27 @@ public class CharacterDto {
 
 	public void setSpeed(Integer speed) {
 		this.speed = speed;
+	}
+
+    @XmlElement(name = "profSkills")
+	public Set<Integer> getProfSkills() {
+		return profSkills;
+	}
+
+	public void setProfSkills(Set<Integer> profSkills) {
+		this.profSkills = profSkills;
+	}
+
+	public void addProfSkill(Integer profSkillId) {
+		if (profSkills == null) {
+			setProfSkills(new HashSet<Integer>());
+		}
+		profSkills.add(profSkillId);
+	}
+
+	public void addProfSkills(Set<Integer> profSkillIds) {
+		for (Integer profSkillId : profSkillIds) {
+			addProfSkill(profSkillId);
+		}
 	}
 }
