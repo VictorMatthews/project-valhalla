@@ -9,25 +9,25 @@ import com.nfpenterprise.gameHub.character.dto.AttributeDto;
 public enum SubRaces {
 	//@formatter:off
 
-	NO_SUBRACE				(0, 							"", 					Paths.HTML_TEST.getPath(),	new HashSet<AttributeDto>()),
+	NO_SUBRACE				(0, 							"", 					null,	new HashSet<AttributeDto>()),
 
-	HILL_DWARF				(Races.DWARF.getRaceId(), 		"Hill Dwarf", 			Paths.HTML_TEST.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
+	HILL_DWARF				(Races.DWARF.getRaceId(), 		"Hill Dwarf", 			Paths.HILL_DWARF_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
 	
-	MOUNTAIN_DWARF			(Races.DWARF.getRaceId(), 		"Mountain Dwarf",		Paths.HTML_TEST.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
+	MOUNTAIN_DWARF			(Races.DWARF.getRaceId(), 		"Mountain Dwarf",		Paths.MOUNTAIN_DWARF_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
 	
-	HIGH_ELF				(Races.ELF.getRaceId(), 		"High Elf",				Paths.HTML_TEST.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
+	HIGH_ELF				(Races.ELF.getRaceId(), 		"High Elf",				Paths.HIGH_ELF_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
 	
-	WOOD_ELF				(Races.ELF.getRaceId(), 		"Wood Elf",				Paths.HTML_TEST.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
+	WOOD_ELF				(Races.ELF.getRaceId(), 		"Wood Elf",				Paths.WOOD_ELF_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
 	
-	DARK_ELF				(Races.ELF.getRaceId(), 		"Dark Elf (Drow)",		Paths.HTML_TEST.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
+	DARK_ELF				(Races.ELF.getRaceId(), 		"Dark Elf (Drow)",		Paths.DARK_ELF_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
 	
-	LIGHT_FOOT_HALFLING		(Races.HALFLING.getRaceId(), 	"Lightfoot Halfling",	Paths.HTML_TEST.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
+	LIGHT_FOOT_HALFLING		(Races.HALFLING.getRaceId(), 	"Lightfoot Halfling",	Paths.LIGHT_FOOT_HALFLING_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
 	
-	STOUT_HALFLING			(Races.HALFLING.getRaceId(), 	"Stout Halfling",		Paths.HTML_TEST.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
+	STOUT_HALFLING			(Races.HALFLING.getRaceId(), 	"Stout Halfling",		Paths.STOUT_HALFLING_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
 	
-	ROCK_GNOME				(Races.GNOME.getRaceId(),		"Rock Gnome",			Paths.HTML_TEST.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
+	ROCK_GNOME				(Races.GNOME.getRaceId(),		"Rock Gnome",			Paths.ROCK_GNOME_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
 	
-	FOREST_GNOME			(Races.GNOME.getRaceId(),		"Forest Gnome",			Paths.HTML_TEST.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2))));
+	FOREST_GNOME			(Races.GNOME.getRaceId(),		"Forest Gnome",			Paths.FOREST_GNOME_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2))));
 	
 	//@formatter:on
 

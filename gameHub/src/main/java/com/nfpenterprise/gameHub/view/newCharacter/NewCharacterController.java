@@ -115,6 +115,8 @@ public class NewCharacterController {
 				subRaceTab.setDisable(false);
 			} else {
 				subRaceTab.setDisable(true);
+				subRacesTable.setItems(null);
+				subRaceWebView.getEngine().load("");
 			}
 		}
 	}
