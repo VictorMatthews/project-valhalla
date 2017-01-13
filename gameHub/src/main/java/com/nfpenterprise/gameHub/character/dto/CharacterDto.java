@@ -14,6 +14,7 @@ import com.nfpenterprise.gameHub.constants.PersonalityTraits;
 import com.nfpenterprise.gameHub.constants.Races;
 import com.nfpenterprise.gameHub.constants.SubRaces;
 
+
 public class CharacterDto {
 
 	private Integer characterId;
@@ -26,6 +27,7 @@ public class CharacterDto {
 	private Integer classLevel;
 	private Integer experience;
 	private Integer speed;
+	private Integer hitPoints;
 
 	private Integer strength;
 	private Integer dexterity;
@@ -40,6 +42,8 @@ public class CharacterDto {
 	private String flaws;
 
 	private Set<Integer> profSkills;
+	private Set<AttributeDto> increaseAttributes;
+	private Set<Integer> savingThrows;
 
 
 	public CharacterDto() {
@@ -88,7 +92,7 @@ public class CharacterDto {
 		if (race != null) {
 			this.race = race.getRaceName();
 			setSpeed(race.getRaceSpeed());
-			addProfSkills(race.getProfSkills());
+			addIncreaseAttributes(race.getIncreaseAttribute());
 		}
 	}
 
@@ -99,7 +103,7 @@ public class CharacterDto {
 	public void setSubRace(SubRaces subRace) {
 		if (subRace != null) {
 			this.subRace = subRace.getSubRaceName();
-			addProfSkills(subRace.getProfSkills());
+			addIncreaseAttributes(subRace.getIncreaseAttribute());
 		}
 	}
 
@@ -110,7 +114,7 @@ public class CharacterDto {
 	public void setClassName(Classes classData) {
 		if (classData != null) {
 			this.className = classData.getClassName();
-			addProfSkills(classData.getProfSkills());
+			this.setSavingThrows(classData.getSavingThrows());
 		}
 	}
 
@@ -238,5 +242,31 @@ public class CharacterDto {
 		for (Integer profSkillId : profSkillIds) {
 			addProfSkill(profSkillId);
 		}
+	}
+
+	public Set<AttributeDto> getIncreaseAttributes() {
+		return increaseAttributes;
+	}
+
+	private void setIncreaseAttributes(Set<AttributeDto> increaseAttributes) {
+		this.increaseAttributes = increaseAttributes;
+	}
+
+	private void addIncreaseAttributes(Set<AttributeDto> increaseAttributes) {
+		if (increaseAttributes == null) {
+			setIncreaseAttributes(new HashSet<AttributeDto>());
+		}
+		for (AttributeDto attribute : increaseAttributes) {
+			increaseAttributes.add(attribute);
+		}
+	}
+
+    @XmlElement(name = "savingThrows")
+	public Set<Integer> getSavingThrows() {
+		return savingThrows;
+	}
+
+	public void setSavingThrows(Set<Integer> savingThrows) {
+		this.savingThrows = savingThrows;
 	}
 }

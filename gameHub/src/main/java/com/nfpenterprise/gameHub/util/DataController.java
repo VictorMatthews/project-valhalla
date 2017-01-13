@@ -32,6 +32,9 @@ public class DataController {
 				subRaces.add(subRace);
 			}
 		}
+		if (subRaces.isEmpty()) {
+			subRaces.add(SubRaces.NO_SUBRACE);
+		}
 		return subRaces;
 	}
 

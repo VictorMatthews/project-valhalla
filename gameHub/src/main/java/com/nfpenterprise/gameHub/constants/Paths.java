@@ -4,6 +4,7 @@ public enum Paths {
 	APPLICATION_ICON("file:src/main/resources/images/Project_Valhalla.png"),
 
 	MY_CHARACTER_DATA("file/Characters.xml"),
+	HTML_TEST("file/HtmlTest.html"),
 
 	ROOT_LAYOUT_FXML("view/RootLayout.fxml"),
 	NEW_CHARACTER_MAIN_FXML("view/newCharacter/NewCharacterMain.fxml"),

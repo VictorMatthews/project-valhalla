@@ -7,35 +7,53 @@ import java.util.Set;
 public enum Classes {
 	//@formatter:off
 	
-	BARBARIAN	("Barbarian", 	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
-	BARD		("Bard", 		new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
-	CLERIC		("Cleric", 		new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
-	DRUID		("Druid", 		new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
-	FIGHTER		("Fighter",		new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
-	MONK		("Monk", 		new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
-	PALADIN		("Paladin", 	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
-	RANGER		("Ranger", 		new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
-	ROGUE		("Rogue", 		new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
-	SORCERER	("Sorcerer", 	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
-	WARLOCK		("Warlock", 	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId()))),
-	WIZARD		("Wizard", 		new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId())));
+	BARBARIAN	("Barbarian", 	12,	Paths.HTML_TEST.getPath(),	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId())), new HashSet<Integer>(Arrays.asList(Attributes.STRENGTH.getAttributeId()))),
+	BARD		("Bard", 		12,	Paths.HTML_TEST.getPath(),	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId())), new HashSet<Integer>(Arrays.asList(Attributes.STRENGTH.getAttributeId()))),
+	CLERIC		("Cleric", 		12,	Paths.HTML_TEST.getPath(),	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId())), new HashSet<Integer>(Arrays.asList(Attributes.STRENGTH.getAttributeId()))),
+	DRUID		("Druid", 		12,	Paths.HTML_TEST.getPath(),	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId())), new HashSet<Integer>(Arrays.asList(Attributes.STRENGTH.getAttributeId()))),
+	FIGHTER		("Fighter",		12,	Paths.HTML_TEST.getPath(),	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId())), new HashSet<Integer>(Arrays.asList(Attributes.STRENGTH.getAttributeId()))),
+	MONK		("Monk", 		12,	Paths.HTML_TEST.getPath(),	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId())), new HashSet<Integer>(Arrays.asList(Attributes.STRENGTH.getAttributeId()))),
+	PALADIN		("Paladin", 	12,	Paths.HTML_TEST.getPath(),	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId())), new HashSet<Integer>(Arrays.asList(Attributes.STRENGTH.getAttributeId()))),
+	RANGER		("Ranger", 		12,	Paths.HTML_TEST.getPath(),	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId())), new HashSet<Integer>(Arrays.asList(Attributes.STRENGTH.getAttributeId()))),
+	ROGUE		("Rogue", 		12,	Paths.HTML_TEST.getPath(),	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId())), new HashSet<Integer>(Arrays.asList(Attributes.STRENGTH.getAttributeId()))),
+	SORCERER	("Sorcerer", 	12,	Paths.HTML_TEST.getPath(),	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId())), new HashSet<Integer>(Arrays.asList(Attributes.STRENGTH.getAttributeId()))),
+	WARLOCK		("Warlock", 	12,	Paths.HTML_TEST.getPath(),	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId())), new HashSet<Integer>(Arrays.asList(Attributes.STRENGTH.getAttributeId()))),
+	WIZARD		("Wizard", 		12,	Paths.HTML_TEST.getPath(),	new HashSet<Integer>(Arrays.asList(Skills.ACROBATICS.getSkillId())), new HashSet<Integer>(Arrays.asList(Attributes.STRENGTH.getAttributeId())));
 
 	//@formatter:on
 
 	private final String className;
-	private final Set<Integer> profSkills;
+	private final Integer hitDie;
+	private final String htmlPath;
+	private final Set<Integer> profSkillsChoices;
+	private final Set<Integer> savingThrows;
 
-	Classes(String className, Set<Integer> profSkills) {
+	Classes(String className, Integer hitDie, String htmlPath, Set<Integer> profSkillsChoices, Set<Integer> savingThrows) {
 		this.className = className;
-		this.profSkills = profSkills;
+		this.hitDie = hitDie;
+		this.htmlPath = htmlPath;
+		this.profSkillsChoices = profSkillsChoices;
+		this.savingThrows = savingThrows;
 	}
 
 	public String getClassName() {
 		return className;
 	}
 
-	public Set<Integer> getProfSkills() {
-		return profSkills;
+	public Integer getHitDie() {
+		return hitDie;
+	}
+
+	public String getHtmlPath() {
+		return htmlPath;
+	}
+
+	public Set<Integer> getProfSkillsChoices() {
+		return profSkillsChoices;
+	}
+
+	public Set<Integer> getSavingThrows() {
+		return savingThrows;
 	}
 
 	public static Classes[] getClasses() {

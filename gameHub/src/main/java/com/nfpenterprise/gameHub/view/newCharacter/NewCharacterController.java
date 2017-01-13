@@ -1,5 +1,6 @@
 package com.nfpenterprise.gameHub.view.newCharacter;
 
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,6 +28,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.web.WebView;
 
 public class NewCharacterController {
 
@@ -57,6 +59,9 @@ public class NewCharacterController {
 	@FXML private ComboBox<Ideals> cmbIdeals;
 	@FXML private ComboBox<Bonds> cmbBonds;
 	@FXML private ComboBox<Flaws> cmbFlaws;
+	@FXML private WebView raceWebView;
+	@FXML private WebView subRaceWebView;
+	@FXML private WebView classWebView;
 
 	public NewCharacterController() {
 		
@@ -81,6 +86,7 @@ public class NewCharacterController {
 
 		classesTable.setItems(dataController.populateClassData());
 		classesTable.getSelectionModel().selectFirst();
+		loadHtmlIntoWebView(classesTable.getSelectionModel().getSelectedItem().getHtmlPath(), classWebView);
 
 		cmbBackground.setItems(dataController.populateBackgroundData());
 		cmbBackground.getSelectionModel().selectFirst();
@@ -95,26 +101,43 @@ public class NewCharacterController {
 		}
 
 		if (!oldRace.equals(newRace)) {
+			loadHtmlIntoWebView(newRace.getHtmlPath(), raceWebView);
 			populateSubRaces(newRace);
 		}
-
-		//Populate Side Text
 	}
 
 	private void populateSubRaces(Races race) {
 		ObservableList<SubRaces> subRacesFromRaces = dataController.populateSubRaceData(race);
-		if (subRacesFromRaces != null && !subRacesFromRaces.isEmpty() && subRacesFromRaces.contains(SubRaces.NO_SUBRACE)) {
-			subRacesTable.setItems(subRacesFromRaces);
-			subRacesTable.getSelectionModel().selectFirst();
+		if (subRacesFromRaces != null && !subRacesFromRaces.isEmpty()) {
+			if  (!subRacesFromRaces.contains(SubRaces.NO_SUBRACE)) {
+				subRacesTable.setItems(subRacesFromRaces);
+				subRacesTable.getSelectionModel().selectFirst();
+				subRaceTab.setDisable(false);
+			} else {
+				subRaceTab.setDisable(true);
+			}
 		}
 	}
 
 	private void showSubRaceDetails(SubRaces newSubRace) {
-		// TODO Auto-generated method stub
+		if (newSubRace != null) { 
+			loadHtmlIntoWebView(newSubRace.getHtmlPath(), subRaceWebView);
+		}
 	}
 
 	private void showClassDetails(Classes newClass) {
-		// TODO Auto-generated method stub
+		if (newClass != null) {
+			loadHtmlIntoWebView(newClass.getHtmlPath(), classWebView);
+		}
+	}
+
+	private void loadHtmlIntoWebView(String htmlPath, WebView webView) {
+		if (mainApp != null) {
+	        URL url = mainApp.getClass().getClassLoader().getResource(htmlPath);
+			if (url != null) {
+				webView.getEngine().load(url.toExternalForm());
+			}
+		}
 	}
 
 	private Integer getUniqueId() {
@@ -124,6 +147,15 @@ public class NewCharacterController {
 
 	public void setMainApp(Main main) {
 		this.mainApp = main;
+		if (racesTable.getSelectionModel().getSelectedItem() != null) {
+			loadHtmlIntoWebView(racesTable.getSelectionModel().getSelectedItem().getHtmlPath(), raceWebView);
+		}
+		if (subRacesTable.getSelectionModel().getSelectedItem() != null) {
+			loadHtmlIntoWebView(subRacesTable.getSelectionModel().getSelectedItem().getHtmlPath(), subRaceWebView);
+		}
+		if (classesTable.getSelectionModel().getSelectedItem() != null) {
+			loadHtmlIntoWebView(classesTable.getSelectionModel().getSelectedItem().getHtmlPath(), classWebView);
+		}
 	}
 
     @FXML
@@ -140,8 +172,7 @@ public class NewCharacterController {
 		tabSelectionModel.getSelectedItem().setDisable(false);
     }
 
-	@FXML
-    private void handleTabSelection() {
+    private void updateCharacterData() {
 		// TODO Not Finished
 		if (tabSelectionModel != null) {
 			Races selectedRace = racesTable.getSelectionModel().selectedItemProperty().getValue();
@@ -152,11 +183,6 @@ public class NewCharacterController {
 			Ideals selectedIdeal = cmbIdeals.getSelectionModel().getSelectedItem();
 			Bonds selectedBond = cmbBonds.getSelectionModel().getSelectedItem();
 			Flaws selectedFlaw = cmbFlaws.getSelectionModel().getSelectedItem();
-
-			if (tabSelectionModel.getSelectedItem().equals(subRaceTab)) {
-				subRacesTable.setItems(dataController.populateSubRaceData(selectedRace));
-				subRacesTable.getSelectionModel().selectFirst();
-			}
 
 			newCharacter.setRace(selectedRace);
 			newCharacter.setSubRace(selectedSubRace);
@@ -169,10 +195,22 @@ public class NewCharacterController {
 		}
 	}
 
+	@FXML
+	private void handleAttributes() {
+		// TODO  
+	}
+
+	@FXML
+	private void handleSkills() {
+		// TODO
+		
+	}
+
     @FXML
     private void handleFinish() {
 		// TODO Not Finished
     	if (verifyFinished()) {
+//    		updateCharacterData();
 //    		mainApp.getMyCharacterData().add(newCharacter);
     		mainApp.showMyCharacters();
     	}
