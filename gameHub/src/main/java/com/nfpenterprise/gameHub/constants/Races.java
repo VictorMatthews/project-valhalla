@@ -9,23 +9,42 @@ import com.nfpenterprise.gameHub.character.dto.AttributeDto;
 public enum Races {
 	//@formatter:off
 	
-	DWARF		(1, 	"Dwarf",		25, Paths.DWARF_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))), 
+	DWARF		(1, 	"Dwarf",		25, Paths.DWARF_HTML.getPath(),	
+				new HashSet<AttributeDto>(Arrays.asList(
+						new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))), 
 	
-	ELF			(2, 	"Elf",			30, Paths.ELF_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))), 
+	ELF			(2, 	"Elf",			30, Paths.ELF_HTML.getPath(),	
+				new HashSet<AttributeDto>(Arrays.asList(
+						new AttributeDto(Attributes.DEXTERITY.getAttributeId(), 2)))), 
 	
-	HALFLING	(3, 	"Halfling",		25, Paths.HALFLING_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
+	HALFLING	(3, 	"Halfling",		25, Paths.HALFLING_HTML.getPath(),	
+				new HashSet<AttributeDto>(Arrays.asList(
+						new AttributeDto(Attributes.DEXTERITY.getAttributeId(), 2)))),
 	
-	HUMAN		(4, 	"Human",		30, Paths.HUMAN_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))), //There are no proficient skills from the base human race. They will be on the human sub race, becuase of variant human
+	HUMAN		(4, 	"Human",		30, Paths.HUMAN_HTML.getPath(),	PopulateHumanAttributes()),
 	
-	DRAGONBORN	(5, 	"Dragonborn",   30, Paths.DRAGONBORN_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))), 
+	DRAGONBORN	(5, 	"Dragonborn",   30, Paths.DRAGONBORN_HTML.getPath(),
+				new HashSet<AttributeDto>(Arrays.asList(
+						new AttributeDto(Attributes.STRENGTH.getAttributeId(), 2),
+						new AttributeDto(Attributes.CHARISMA.getAttributeId(), 1)))), 
 	
-	GNOME		(6, 	"Gnome",		25, Paths.GNOME_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))), 
+	GNOME		(6, 	"Gnome",		25, Paths.GNOME_HTML.getPath(),	
+				new HashSet<AttributeDto>(Arrays.asList(
+						new AttributeDto(Attributes.INTELLIGENCE.getAttributeId(), 2)))), 
 	
-	HALF_ELF	(7, 	"Half-Elf",		30, Paths.HALF_ELF_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))), 
+	HALF_ELF	(7, 	"Half-Elf",		30, Paths.HALF_ELF_HTML.getPath(),
+				new HashSet<AttributeDto>(Arrays.asList(
+						new AttributeDto(Attributes.CHARISMA.getAttributeId(), 2)))), 
 	
-	HALF_ORC	(8, 	"Half-Orc",		30, Paths.HALF_ORC_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))), 
+	HALF_ORC	(8, 	"Half-Orc",		30, Paths.HALF_ORC_HTML.getPath(),
+				new HashSet<AttributeDto>(Arrays.asList(
+						new AttributeDto(Attributes.STRENGTH.getAttributeId(), 2),
+						new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 1)))), 
 	
-	TIEFLING	(9, 	"Tiefling",		30, Paths.TIEFLING_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2))));
+	TIEFLING	(9, 	"Tiefling",		30, Paths.TIEFLING_HTML.getPath(),
+				new HashSet<AttributeDto>(Arrays.asList(
+						new AttributeDto(Attributes.INTELLIGENCE.getAttributeId(), 1),
+						new AttributeDto(Attributes.CHARISMA.getAttributeId(), 2))));
 	
 	//@formatter:on
 
@@ -70,5 +89,13 @@ public enum Races {
 	@Override
 	public String toString() {
 		return this.raceName;
+	}
+
+	private static Set<AttributeDto> PopulateHumanAttributes() {
+		Set<AttributeDto> humanAttributes = new HashSet<AttributeDto>();
+		for (Attributes attribute : Attributes.getAttributes()) {
+			humanAttributes.add(new AttributeDto(attribute.getAttributeId(), 1));
+		}
+		return humanAttributes;
 	}
 }

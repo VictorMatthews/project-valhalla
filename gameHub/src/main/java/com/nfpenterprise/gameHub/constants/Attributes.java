@@ -30,4 +30,8 @@ public enum Attributes {
 	public static Integer getDefaultValue() {
 		return DEFAULT_VALUE;
 	}
+
+	public static Attributes[] getAttributes() {
+		return Attributes.values();
+	}
 }

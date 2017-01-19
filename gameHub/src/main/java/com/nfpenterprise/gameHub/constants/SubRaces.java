@@ -11,23 +11,23 @@ public enum SubRaces {
 
 	NO_SUBRACE				(0, 							"", 					null,	new HashSet<AttributeDto>()),
 
-	HILL_DWARF				(Races.DWARF.getRaceId(), 		"Hill Dwarf", 			Paths.HILL_DWARF_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
-	
-	MOUNTAIN_DWARF			(Races.DWARF.getRaceId(), 		"Mountain Dwarf",		Paths.MOUNTAIN_DWARF_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
-	
-	HIGH_ELF				(Races.ELF.getRaceId(), 		"High Elf",				Paths.HIGH_ELF_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
-	
-	WOOD_ELF				(Races.ELF.getRaceId(), 		"Wood Elf",				Paths.WOOD_ELF_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
-	
-	DARK_ELF				(Races.ELF.getRaceId(), 		"Dark Elf (Drow)",		Paths.DARK_ELF_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
-	
-	LIGHT_FOOT_HALFLING		(Races.HALFLING.getRaceId(), 	"Lightfoot Halfling",	Paths.LIGHT_FOOT_HALFLING_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
-	
-	STOUT_HALFLING			(Races.HALFLING.getRaceId(), 	"Stout Halfling",		Paths.STOUT_HALFLING_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
-	
-	ROCK_GNOME				(Races.GNOME.getRaceId(),		"Rock Gnome",			Paths.ROCK_GNOME_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2)))),
-	
-	FOREST_GNOME			(Races.GNOME.getRaceId(),		"Forest Gnome",			Paths.FOREST_GNOME_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 2))));
+	HILL_DWARF				(Races.DWARF.getRaceId(), 		"Hill Dwarf", 			Paths.HILL_DWARF_HTML.getPath(),			new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.WISDOM.getAttributeId(), 1)))),
+
+	MOUNTAIN_DWARF			(Races.DWARF.getRaceId(), 		"Mountain Dwarf",		Paths.MOUNTAIN_DWARF_HTML.getPath(),		new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.STRENGTH.getAttributeId(), 2)))),
+
+	HIGH_ELF				(Races.ELF.getRaceId(), 		"High Elf",				Paths.HIGH_ELF_HTML.getPath(),				new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.INTELLIGENCE.getAttributeId(), 1)))),
+
+	WOOD_ELF				(Races.ELF.getRaceId(), 		"Wood Elf",				Paths.WOOD_ELF_HTML.getPath(),				new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.WISDOM.getAttributeId(), 1)))),
+
+	DARK_ELF				(Races.ELF.getRaceId(), 		"Dark Elf (Drow)",		Paths.DARK_ELF_HTML.getPath(),				new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CHARISMA.getAttributeId(), 1)))),
+
+	LIGHT_FOOT_HALFLING		(Races.HALFLING.getRaceId(), 	"Lightfoot Halfling",	Paths.LIGHT_FOOT_HALFLING_HTML.getPath(),	new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CHARISMA.getAttributeId(), 1)))),
+
+	STOUT_HALFLING			(Races.HALFLING.getRaceId(), 	"Stout Halfling",		Paths.STOUT_HALFLING_HTML.getPath(),		new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 1)))),
+
+	ROCK_GNOME				(Races.GNOME.getRaceId(),		"Rock Gnome",			Paths.ROCK_GNOME_HTML.getPath(),			new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.CONSTITUTION.getAttributeId(), 1)))),
+
+	FOREST_GNOME			(Races.GNOME.getRaceId(),		"Forest Gnome",			Paths.FOREST_GNOME_HTML.getPath(),			new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.DEXTERITY.getAttributeId(), 1))));
 	
 	//@formatter:on
 
