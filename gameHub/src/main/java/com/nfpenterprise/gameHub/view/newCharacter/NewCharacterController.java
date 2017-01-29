@@ -23,6 +23,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -45,8 +47,7 @@ public class NewCharacterController {
 	@FXML private Tab subRaceTab;
 	@FXML private Tab classTab;
 	@FXML private Tab backgorundTab;
-	@FXML private Tab attributesTab;
-	@FXML private Tab skillsTab;
+	@FXML private Tab attributesSkillsTab;
 	@FXML private Tab spellsTab;
 	@FXML private TableView<Races> racesTable;
     @FXML private TableColumn<Races, String> racesColumn;
@@ -62,6 +63,45 @@ public class NewCharacterController {
 	@FXML private WebView raceWebView;
 	@FXML private WebView subRaceWebView;
 	@FXML private WebView classWebView;
+	@FXML private WebView spellWebView;
+	
+	@FXML private Label acrobaticsInc;
+	@FXML private Label animalHandlingInc;
+	@FXML private Label arcanaInc;
+	@FXML private Label athleticsInc;
+	@FXML private Label deceptionInc;
+	@FXML private Label historyInc;
+	@FXML private Label insightInc;
+	@FXML private Label intimidationInc;
+	@FXML private Label investigationInc;
+	@FXML private Label medicineInc;
+	@FXML private Label natureInc;
+	@FXML private Label perceptionInc;
+	@FXML private Label performanceInc;
+	@FXML private Label persuasionInc;
+	@FXML private Label religionInc;
+	@FXML private Label sleightOfHandInc;
+	@FXML private Label stealthInc;
+	@FXML private Label survivalInc;
+	
+	@FXML private RadioButton acrobaticsRadioButton;
+	@FXML private RadioButton animalHandlingRadioButton;
+	@FXML private RadioButton arcanaRadioButton;
+	@FXML private RadioButton athleticsRadioButton;
+	@FXML private RadioButton deceptionRadioButton;
+	@FXML private RadioButton historyRadioButton;
+	@FXML private RadioButton insightRadioButton;
+	@FXML private RadioButton intimidationRadioButton;
+	@FXML private RadioButton investigationRadioButton;
+	@FXML private RadioButton medicineRadioButton;
+	@FXML private RadioButton natureRadioButton;
+	@FXML private RadioButton perceptionRadioButton;
+	@FXML private RadioButton performanceRadioButton;
+	@FXML private RadioButton persuasionRadioButton;
+	@FXML private RadioButton religionRadioButton;
+	@FXML private RadioButton sleightOfHandRadioButton;
+	@FXML private RadioButton stealthRadioButton;
+	@FXML private RadioButton survivalRadioButton;
 
 	public NewCharacterController() {
 		
@@ -198,14 +238,8 @@ public class NewCharacterController {
 	}
 
 	@FXML
-	private void handleAttributes() {
+	private void handleAttributesAndSkills() {
 		// TODO  
-	}
-
-	@FXML
-	private void handleSkills() {
-		// TODO
-		
 	}
 
     @FXML

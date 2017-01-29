@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.nfpenterprise.gameHub.character.dto.AttributeDto;
-
 public enum Spells {
 /*Acid Splash
 Blade Ward
@@ -100,18 +98,24 @@ Wrathful Smite*/
 
 	//@formatter:off
 
-	ACID_SPLASH("Acid Splash", Paths.ACID_SPLASH_HTML.getPath(), new HashSet<Classes>(Arrays.asList(Classes.SORCERER, Classes.WIZARD))),
+	ACID_SPLASH(	0, "Acid Splash", Paths.ACID_SPLASH_HTML.getPath(), new HashSet<Classes>(Arrays.asList(Classes.SORCERER, Classes.WIZARD))),
 ;
 	//@formatter:on
 	
+	private final Integer spellLevel;
 	private final String spellName;
 	private final String spellHTMLPath;
 	private final Set<Classes> classThatCanUseSpell;
 
-	Spells(String spellName, String spellHTMLPath, Set<Classes> classThatCanUseSpell) {
+	Spells(Integer spellLevel, String spellName, String spellHTMLPath, Set<Classes> classThatCanUseSpell) {
+		this.spellLevel = spellLevel;
 		this.spellName = spellName;
 		this.spellHTMLPath = spellHTMLPath;
 		this.classThatCanUseSpell = classThatCanUseSpell;
+	}
+
+	public Integer getSpellLevel() {
+		return spellLevel;
 	}
 
 	public String getSpellName() {

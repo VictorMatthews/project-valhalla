@@ -5,13 +5,16 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
 <AnchorPane prefHeight="750.0" prefWidth="1200.0" stylesheets="@ProjectValhallaFormatter.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nfpenterprise.gameHub.view.newCharacter.NewCharacterController">
@@ -134,19 +137,112 @@
                            </children></AnchorPane>
                     </content>
                   </Tab>
-                  <Tab fx:id="attributesTab" disable="true" onSelectionChanged="#handleAttributes" text="Attributes">
+                  <Tab fx:id="attributesTab" disable="true" onSelectionChanged="#handleAttributesAndSkills" text="Attributes/Skills">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                  </Tab>
-                  <Tab fx:id="skillsTab" disable="true" onSelectionChanged="#handleSkills" text="Skills">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="54.0" layoutY="50.0" text="STRENGTH" />
+                              <TextField alignment="CENTER" editable="false" layoutX="62.0" layoutY="74.0" prefHeight="43.0" prefWidth="54.0" text="8">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="54.0" layoutY="150.0" text="DEXTERITY" />
+                              <Label layoutX="43.0" layoutY="250.0" text="CONSTITUTION" />
+                              <Label layoutX="43.0" layoutY="350.0" text="INTELLIGENCE" />
+                              <Label layoutX="61.0" layoutY="450.0" text="WISDOM" />
+                              <Label layoutX="55.0" layoutY="550.0" text="CHARISMA" />
+                              <TextField alignment="CENTER" editable="false" layoutX="62.0" layoutY="174.0" prefHeight="43.0" prefWidth="54.0" text="8">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </TextField>
+                              <TextField alignment="CENTER" editable="false" layoutX="62.0" layoutY="274.0" prefHeight="43.0" prefWidth="54.0" text="8">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </TextField>
+                              <TextField alignment="CENTER" editable="false" layoutX="62.0" layoutY="374.0" prefHeight="43.0" prefWidth="54.0" text="8">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </TextField>
+                              <TextField alignment="CENTER" editable="false" layoutX="62.0" layoutY="474.0" prefHeight="43.0" prefWidth="54.0" text="8">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </TextField>
+                              <TextField alignment="CENTER" editable="false" layoutX="62.0" layoutY="574.0" prefHeight="43.0" prefWidth="54.0" text="8">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </TextField>
+                              <Button layoutX="129.0" layoutY="83.0" mnemonicParsing="false" text="+" />
+                              <Button layoutX="129.0" layoutY="183.0" mnemonicParsing="false" text="+" />
+                              <Button layoutX="129.0" layoutY="283.0" mnemonicParsing="false" text="+" />
+                              <Button layoutX="129.0" layoutY="383.0" mnemonicParsing="false" text="+" />
+                              <Button layoutX="129.0" layoutY="483.0" mnemonicParsing="false" text="+" />
+                              <Button layoutX="129.0" layoutY="583.0" mnemonicParsing="false" text="+" />
+                              <Button layoutX="22.0" layoutY="83.0" mnemonicParsing="false" text="-" />
+                              <Button layoutX="22.0" layoutY="183.0" mnemonicParsing="false" text="-" />
+                              <Button layoutX="22.0" layoutY="283.0" mnemonicParsing="false" text="-" />
+                              <Button layoutX="22.0" layoutY="383.0" mnemonicParsing="false" text="-" />
+                              <Button layoutX="22.0" layoutY="483.0" mnemonicParsing="false" text="-" />
+                              <Button layoutX="22.0" layoutY="583.0" mnemonicParsing="false" text="-" />
+                              <RadioButton fx:id="acrobaticsRadioButton" layoutX="730.0" layoutY="74.0" mnemonicParsing="false" text="Acrobatics (Dex)" />
+                              <RadioButton fx:id="animalHandlingRadioButton" layoutX="730.0" layoutY="104.0" mnemonicParsing="false" text="Animal Handling (Wis)" />
+                              <RadioButton fx:id="arcanaRadioButton" layoutX="730.0" layoutY="134.0" mnemonicParsing="false" text="Arcana (Int)" />
+                              <RadioButton fx:id="deceptionRadioButton" layoutX="730.0" layoutY="194.0" mnemonicParsing="false" text="Deception (Cha)" />
+                              <RadioButton fx:id="athleticsRadioButton" layoutX="730.0" layoutY="164.0" mnemonicParsing="false" text="Athletics (Str)" />
+                              <RadioButton fx:id="historyRadioButton" layoutX="730.0" layoutY="224.0" mnemonicParsing="false" text="History (Int)" />
+                              <RadioButton fx:id="insightRadioButton" layoutX="730.0" layoutY="254.0" mnemonicParsing="false" text="Insight (Wis)" />
+                              <RadioButton fx:id="intimidationRadioButton" layoutX="730.0" layoutY="284.0" mnemonicParsing="false" text="Intimidation (Cha)" />
+                              <RadioButton fx:id="investigationRadioButton" layoutX="730.0" layoutY="314.0" mnemonicParsing="false" text="Investigation (Int)" />
+                              <RadioButton fx:id="medicineRadioButton" layoutX="730.0" layoutY="344.0" mnemonicParsing="false" text="Medicine (Wis)" />
+                              <RadioButton fx:id="natureRadioButton" layoutX="730.0" layoutY="374.0" mnemonicParsing="false" text="Nature (Int)" />
+                              <RadioButton fx:id="perceptionRadioButton" layoutX="730.0" layoutY="404.0" mnemonicParsing="false" text="Perception (Wis)" />
+                              <RadioButton fx:id="performanceRadioButton" layoutX="730.0" layoutY="434.0" mnemonicParsing="false" text="Performance (Cha)" />
+                              <RadioButton fx:id="persuasionRadioButton" layoutX="730.0" layoutY="464.0" mnemonicParsing="false" text="Persuasion (Cha)" />
+                              <RadioButton fx:id="religionRadioButton" layoutX="730.0" layoutY="494.0" mnemonicParsing="false" text="Religion (Int)" />
+                              <RadioButton fx:id="sleightOfHandRadioButton" layoutX="730.0" layoutY="524.0" mnemonicParsing="false" text="Sleight of Hand (Dex)" />
+                              <RadioButton fx:id="stealthRadioButton" layoutX="730.0" layoutY="554.0" mnemonicParsing="false" text="Stealth (Dex)" />
+                              <RadioButton fx:id="survivalRadioButton" layoutX="730.0" layoutY="584.0" mnemonicParsing="false" text="Survival (Wis)" />
+                              <Label fx:id="acrobaticsInc" contentDisplay="CENTER" layoutX="700.0" layoutY="75.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="animalHandlingInc" contentDisplay="CENTER" layoutX="700.0" layoutY="104.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="arcanaInc" contentDisplay="CENTER" layoutX="700.0" layoutY="134.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="athleticsInc" contentDisplay="CENTER" layoutX="700.0" layoutY="164.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="deceptionInc" contentDisplay="CENTER" layoutX="700.0" layoutY="194.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="historyInc" contentDisplay="CENTER" layoutX="700.0" layoutY="224.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="insightInc" contentDisplay="CENTER" layoutX="700.0" layoutY="254.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="intimidationInc" contentDisplay="CENTER" layoutX="700.0" layoutY="284.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="investigationInc" contentDisplay="CENTER" layoutX="700.0" layoutY="314.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="medicineInc" contentDisplay="CENTER" layoutX="700.0" layoutY="344.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="natureInc" contentDisplay="CENTER" layoutX="700.0" layoutY="374.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="perceptionInc" contentDisplay="CENTER" layoutX="700.0" layoutY="404.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="performanceInc" contentDisplay="CENTER" layoutX="700.0" layoutY="434.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="persuasionInc" contentDisplay="CENTER" layoutX="700.0" layoutY="464.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="religionInc" contentDisplay="CENTER" layoutX="700.0" layoutY="494.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="sleightOfHandInc" contentDisplay="CENTER" layoutX="700.0" layoutY="524.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="stealthInc" contentDisplay="CENTER" layoutX="700.0" layoutY="554.0" textAlignment="CENTER" underline="true" />
+                              <Label fx:id="survivalInc" contentDisplay="CENTER" layoutX="700.0" layoutY="584.0" textAlignment="CENTER" underline="true" />
+                           </children></AnchorPane>
                     </content>
                   </Tab>
                   <Tab fx:id="spellsTab" disable="true" text="Spells">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <SplitPane dividerPositions="0.25" layoutX="202.0" layoutY="153.0" prefHeight="710.0" prefWidth="1071.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <WebView fx:id="raceWebView1" prefHeight="708.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </children></AnchorPane>
                     </content>
                   </Tab>
               </tabs>
