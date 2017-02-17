@@ -253,11 +253,11 @@ public class CharacterDto {
 	}
 
 	private void addIncreaseAttributes(Set<AttributeDto> increaseAttributes) {
-		if (increaseAttributes == null) {
+		if (increaseAttributes == null || this.increaseAttributes == null) {
 			setIncreaseAttributes(new HashSet<AttributeDto>());
 		}
 		for (AttributeDto attribute : increaseAttributes) {
-			increaseAttributes.add(attribute);
+			this.increaseAttributes.add(attribute);
 		}
 	}
 
