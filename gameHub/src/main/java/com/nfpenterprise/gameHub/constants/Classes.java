@@ -37,36 +37,36 @@ public enum Classes {
 													Skills.INSIGHT.getSkillId(), Skills.RELIGION.getSkillId(), Skills.STEALTH.getSkillId())), 
 				new HashSet<Integer>(Arrays.asList(Attributes.STRENGTH.getAttributeId(), Attributes.DEXTERITY.getAttributeId()))),
 
-	PALADIN		("Paladin", 	12,	Paths.PALADIN_HTML.getPath(),		1 /*# of skills to choose*/,
+	PALADIN		("Paladin", 	12,	Paths.PALADIN_HTML.getPath(),		2 /*# of skills to choose*/,
 				new HashSet<Integer>(Arrays.asList( Skills.ATHLETICS.getSkillId(), Skills.INSIGHT.getSkillId(), Skills.INTIMIDATION.getSkillId(),
 													Skills.MEDICINE.getSkillId(), Skills.PERSUASION.getSkillId(), Skills.RELIGION.getSkillId())), 
 				new HashSet<Integer>(Arrays.asList(Attributes.WISDOM.getAttributeId(), Attributes.CHARISMA.getAttributeId()))),
 
-	RANGER		("Ranger", 		12,	Paths.RANGER_HTML.getPath(),		1 /*# of skills to choose*/,
+	RANGER		("Ranger", 		12,	Paths.RANGER_HTML.getPath(),		3 /*# of skills to choose*/,
 				new HashSet<Integer>(Arrays.asList(	Skills.ANIMAL_HANDLING.getSkillId(), Skills.ATHLETICS.getSkillId(), Skills.INSIGHT.getSkillId(),
 													Skills.INVESTIGATION.getSkillId(), Skills.NATURE.getSkillId(), Skills.PERCEPTION.getSkillId(),
 													Skills.STEALTH.getSkillId(), Skills.SURVIVAL.getSkillId())), 
 				new HashSet<Integer>(Arrays.asList(Attributes.STRENGTH.getAttributeId(), Attributes.DEXTERITY.getAttributeId()))),
 
-	ROGUE		("Rogue", 		12,	Paths.ROGUE_HTML.getPath(),			1 /*# of skills to choose*/,
+	ROGUE		("Rogue", 		12,	Paths.ROGUE_HTML.getPath(),			4 /*# of skills to choose*/,
 				new HashSet<Integer>(Arrays.asList( Skills.ACROBATICS.getSkillId(), Skills.ATHLETICS.getSkillId(), Skills.DECEPTION.getSkillId(),
 													Skills.INSIGHT.getSkillId(), Skills.INTIMIDATION.getSkillId(), Skills.INVESTIGATION.getSkillId(),
 													Skills.PERCEPTION.getSkillId(), Skills.PERFORMANCE.getSkillId(), Skills.PERSUASION.getSkillId(),
 													Skills.SLEIGHT_OF_HAND.getSkillId(), Skills.STEALTH.getSkillId())), 
 				new HashSet<Integer>(Arrays.asList(Attributes.DEXTERITY.getAttributeId(), Attributes.INTELLIGENCE.getAttributeId()))),
 
-	SORCERER	("Sorcerer", 	12,	Paths.SORCERER_HTML.getPath(),		1 /*# of skills to choose*/,
+	SORCERER	("Sorcerer", 	12,	Paths.SORCERER_HTML.getPath(),		2 /*# of skills to choose*/,
 				new HashSet<Integer>(Arrays.asList( Skills.ARCANA.getSkillId(), Skills.DECEPTION.getSkillId(), Skills.INSIGHT.getSkillId(),
 													Skills.INTIMIDATION.getSkillId(), Skills.PERSUASION.getSkillId(), Skills.RELIGION.getSkillId())), 
 				new HashSet<Integer>(Arrays.asList(Attributes.CONSTITUTION.getAttributeId(), Attributes.CHARISMA.getAttributeId()))),
 
-	WARLOCK		("Warlock", 	12,	Paths.WARLOCK_HTML.getPath(),		1 /*# of skills to choose*/,
+	WARLOCK		("Warlock", 	12,	Paths.WARLOCK_HTML.getPath(),		2 /*# of skills to choose*/,
 				new HashSet<Integer>(Arrays.asList( Skills.ARCANA.getSkillId(), Skills.DECEPTION.getSkillId(), Skills.HISTORY.getSkillId(),
 													Skills.INTIMIDATION.getSkillId(), Skills.INVESTIGATION.getSkillId(), Skills.NATURE.getSkillId(),
 													Skills.RELIGION.getSkillId())), 
 				new HashSet<Integer>(Arrays.asList(Attributes.WISDOM.getAttributeId(), Attributes.CHARISMA.getAttributeId()))),
 
-	WIZARD		("Wizard", 		12,	Paths.WIZARD_HTML.getPath(),		1 /*# of skills to choose*/,
+	WIZARD		("Wizard", 		12,	Paths.WIZARD_HTML.getPath(),		2 /*# of skills to choose*/,
 				new HashSet<Integer>(Arrays.asList( Skills.ARCANA.getSkillId(), Skills.HISTORY.getSkillId(), Skills.INSIGHT.getSkillId(),
 													Skills.INVESTIGATION.getSkillId(), Skills.MEDICINE.getSkillId(), Skills.RELIGION.getSkillId())), 
 				new HashSet<Integer>(Arrays.asList(Attributes.INTELLIGENCE.getAttributeId(), Attributes.WISDOM.getAttributeId())));

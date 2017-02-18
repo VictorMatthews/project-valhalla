@@ -1,6 +1,7 @@
 package com.nfpenterprise.gameHub.view.newCharacter;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import com.nfpenterprise.gameHub.constants.Ideals;
 import com.nfpenterprise.gameHub.constants.Message;
 import com.nfpenterprise.gameHub.constants.PersonalityTraits;
 import com.nfpenterprise.gameHub.constants.Races;
+import com.nfpenterprise.gameHub.constants.Skills;
 import com.nfpenterprise.gameHub.constants.SubRaces;
 import com.nfpenterprise.gameHub.util.DataController;
 
@@ -45,10 +47,13 @@ public class NewCharacterController {
 	ObservableList<Races> raceData;
 	ObservableList<SubRaces> subRaceData;
 	ObservableList<Classes> classData;
-	final static Integer BASE_PROF_BONUS = 2;
-	final static Integer BASE_ATTRIBUTE_INCREASE = 27;
-	final static Integer MIN_ATTRIBUTE_VALUE = 8;
-	final static Integer MAX_ATTRIBUTE_VALUE = 15;
+	private final static Integer PROF_BONUS = 2;
+	private final static Integer BASE_SKILL = -1;
+	private final static Integer BASE_ATTRIBUTE_INCREASE = 27;
+	private final static Integer MIN_ATTRIBUTE_VALUE = 8;
+	private final static Integer MAX_ATTRIBUTE_VALUE = 15;
+	private Set<Integer> profSkillChoices = new HashSet<Integer>();
+	private Integer profSkillsToChoose = 0;
 
 	@FXML private TabPane tabs;
 	@FXML private Tab raceTab;
@@ -110,6 +115,9 @@ public class NewCharacterController {
 	@FXML private RadioButton sleightOfHandRadioButton;
 	@FXML private RadioButton stealthRadioButton;
 	@FXML private RadioButton survivalRadioButton;
+	private Set<RadioButton> skillRadioButtons = new HashSet<RadioButton>(Arrays.asList(acrobaticsRadioButton, animalHandlingRadioButton, arcanaRadioButton, athleticsRadioButton,
+			deceptionRadioButton, historyRadioButton, insightRadioButton, intimidationRadioButton, investigationRadioButton, medicineRadioButton, natureRadioButton, perceptionRadioButton,
+			performanceRadioButton, persuasionRadioButton, religionRadioButton, sleightOfHandRadioButton, stealthRadioButton, survivalRadioButton));
 	
 	@FXML private Button strengthAdd;
 	@FXML private Button strengthSub;
@@ -132,6 +140,7 @@ public class NewCharacterController {
 	@FXML private TextField charismaTxt;
 
 	@FXML private Label remainingAttributeIncrease;
+	@FXML private Label remainingSkillChoices;
 
 	public NewCharacterController() {
 		
@@ -247,6 +256,7 @@ public class NewCharacterController {
     private void updateCharacterData() {
 		// TODO Not Finished
 		if (tabSelectionModel != null) {
+			newCharacter.resetSetLists();
 			Races selectedRace = racesTable.getSelectionModel().selectedItemProperty().getValue();
 			SubRaces selectedSubRace = subRacesTable.getSelectionModel().selectedItemProperty().getValue();
 			Classes selectedClass = classesTable.getSelectionModel().selectedItemProperty().getValue();
@@ -255,6 +265,8 @@ public class NewCharacterController {
 			Ideals selectedIdeal = cmbIdeals.getSelectionModel().getSelectedItem();
 			Bonds selectedBond = cmbBonds.getSelectionModel().getSelectedItem();
 			Flaws selectedFlaw = cmbFlaws.getSelectionModel().getSelectedItem();
+			profSkillChoices = classesTable.getSelectionModel().selectedItemProperty().getValue().getProfSkillsChoices();
+			profSkillsToChoose = classesTable.getSelectionModel().selectedItemProperty().getValue().getProfSkillsToChoose();
 
 			newCharacter.setRace(selectedRace);
 			newCharacter.setSubRace(selectedSubRace);
@@ -270,6 +282,12 @@ public class NewCharacterController {
 	@FXML
 	private void handleAttributesAndSkills() {
 		updateCharacterData();
+		handleAttributes();
+		handleSkills();
+	}
+
+	private void handleAttributes() {
+		remainingAttributeIncrease.setText(BASE_ATTRIBUTE_INCREASE.toString());
 
 		Integer strengthVal = MIN_ATTRIBUTE_VALUE;
 		Integer dexterityVal = MIN_ATTRIBUTE_VALUE;
@@ -306,33 +324,23 @@ public class NewCharacterController {
 		wisdomTxt.setText(wisdomVal.toString());
 		charismaTxt.setText(charismaVal.toString());
 
+		updateSkills(Attributes.STRENGTH);
+		updateSkills(Attributes.DEXTERITY);
+		updateSkills(Attributes.INTELLIGENCE);
+		updateSkills(Attributes.WISDOM);
+		updateSkills(Attributes.CHARISMA);
+
 		strengthSub.setDisable(true);
 		dexteritySub.setDisable(true);
 		constitutionSub.setDisable(true);
 		intelligenceSub.setDisable(true);
 		wisdomSub.setDisable(true);
-		charismaSub.setDisable(true);
+		charismaSub.setDisable(true);		
+	}
 
-		remainingAttributeIncrease.setText(BASE_ATTRIBUTE_INCREASE.toString());
+	private void handleSkills() {
+		remainingSkillChoices.setText(profSkillsToChoose.toString());
 
-		acrobaticsIncrease.setText(BASE_PROF_BONUS.toString());
-		animalHandlingIncrease.setText(BASE_PROF_BONUS.toString());
-		arcanaIncrease.setText(BASE_PROF_BONUS.toString());
-		athleticsIncrease.setText(BASE_PROF_BONUS.toString());
-		deceptionIncrease.setText(BASE_PROF_BONUS.toString());
-		historyIncrease.setText(BASE_PROF_BONUS.toString());
-		insightIncrease.setText(BASE_PROF_BONUS.toString());
-		intimidationIncrease.setText(BASE_PROF_BONUS.toString());
-		investigationIncrease.setText(BASE_PROF_BONUS.toString());
-		medicineIncrease.setText(BASE_PROF_BONUS.toString());
-		natureIncrease.setText(BASE_PROF_BONUS.toString());
-		perceptionIncrease.setText(BASE_PROF_BONUS.toString());
-		performanceIncrease.setText(BASE_PROF_BONUS.toString());
-		persuasionIncrease.setText(BASE_PROF_BONUS.toString());
-		religionIncrease.setText(BASE_PROF_BONUS.toString());
-		sleightOfHandIncrease.setText(BASE_PROF_BONUS.toString());
-		stealthIncrease.setText(BASE_PROF_BONUS.toString());
-		survivalIncrease.setText(BASE_PROF_BONUS.toString());
 	}
 
 	private void handleIncreaseAttribute(TextField attributeValue, Button btnAdd, Button btnSub, Attributes attribute, boolean isAddition) {
@@ -344,6 +352,7 @@ public class NewCharacterController {
 		Integer higherDisableValue = higherValue;
 		
 		Integer remainingAttributePoints = Integer.parseInt(remainingAttributeIncrease.getText());
+		Integer currentAttributePoints = remainingAttributePoints;
 			
 		for (AttributeDto attributeDto : newCharacter.getIncreaseAttributes()) {
 			if (attributeDto.getAttributeId().equals(attribute.getAttributeId())) {
@@ -354,7 +363,7 @@ public class NewCharacterController {
 		
 		if (isAddition) {
 			attributeValue.setText((higherValue).toString());
-			
+
 			if (!MIN_ATTRIBUTE_VALUE.equals(lowerDisableValue) && btnSub.isDisabled()) {
 				btnSub.setDisable(false);
 			}
@@ -363,9 +372,9 @@ public class NewCharacterController {
 			}
 
 			if (higherDisableValue - MIN_ATTRIBUTE_VALUE > 5) {
-				remainingAttributePoints = remainingAttributePoints - 2;				
+				remainingAttributePoints = remainingAttributePoints - 2;
 			} else {
-				remainingAttributePoints = remainingAttributePoints - 1;				
+				remainingAttributePoints = remainingAttributePoints - 1;
 			}
 		} else {
 			attributeValue.setText((lowerValue).toString());
@@ -378,16 +387,127 @@ public class NewCharacterController {
 			}
 
 			if (lowerDisableValue - MIN_ATTRIBUTE_VALUE > 4) {
-				remainingAttributePoints = remainingAttributePoints + 2;				
+				remainingAttributePoints = remainingAttributePoints + 2;
 			} else {
-				remainingAttributePoints = remainingAttributePoints + 1;				
+				remainingAttributePoints = remainingAttributePoints + 1;
 			}
 		}
 
 		remainingAttributeIncrease.setText(remainingAttributePoints.toString());
+
+		if (remainingAttributePoints.equals(0)) {
+			diasableAddButtons();
+		}
+		if (currentAttributePoints.equals(0) && remainingAttributePoints.intValue() > 0) {
+			enableAddButtons();
+		}
+
+		updateSkills(attribute);
 	}
 
-    @FXML
+    private void updateSkills(Attributes attribute) {
+    	if (attribute.equals(Attributes.STRENGTH)) {
+        	Integer strengthInc = getAttributeIncease(Integer.parseInt(strengthTxt.getText()));
+    		athleticsIncrease.setText(strengthInc.toString());
+    	}
+    	if (attribute.equals(Attributes.DEXTERITY)) {
+        	Integer dexterityInc = getAttributeIncease(Integer.parseInt(dexterityTxt.getText()));
+    	    acrobaticsIncrease.setText(dexterityInc.toString());
+    		sleightOfHandIncrease.setText(dexterityInc.toString());
+    		stealthIncrease.setText(dexterityInc.toString());
+    	}
+    	if (attribute.equals(Attributes.INTELLIGENCE)) {
+        	Integer intelligenceInc = getAttributeIncease(Integer.parseInt(intelligenceTxt.getText()));
+    		arcanaIncrease.setText(intelligenceInc.toString());
+    		historyIncrease.setText(intelligenceInc.toString());
+    		investigationIncrease.setText(intelligenceInc.toString());
+    		natureIncrease.setText(intelligenceInc.toString());
+    		religionIncrease.setText(intelligenceInc.toString());
+    	}
+    	if (attribute.equals(Attributes.WISDOM)) {
+        	Integer wisdomInc = getAttributeIncease(Integer.parseInt(wisdomTxt.getText()));
+    		animalHandlingIncrease.setText(wisdomInc.toString());
+    		insightIncrease.setText(wisdomInc.toString());
+    		medicineIncrease.setText(wisdomInc.toString());
+    		perceptionIncrease.setText(wisdomInc.toString());
+    		survivalIncrease.setText(wisdomInc.toString());
+    	}
+    	if (attribute.equals(Attributes.CHARISMA)) {
+        	Integer charismaInc = getAttributeIncease(Integer.parseInt(charismaTxt.getText()));
+    		deceptionIncrease.setText(charismaInc.toString());
+    		intimidationIncrease.setText(charismaInc.toString());
+    		performanceIncrease.setText(charismaInc.toString());
+    		persuasionIncrease.setText(charismaInc.toString());
+    	}
+	}
+
+	private Integer getAttributeIncease(Integer attributeValue) {
+		if (attributeValue.equals(8) || attributeValue.equals(9)) {
+			return -1;
+		}
+		if (attributeValue.equals(10) || attributeValue.equals(11)) {
+			return 0;
+		}
+		if (attributeValue.equals(12) || attributeValue.equals(13)) {
+			return +1;
+		}
+		if (attributeValue.equals(14) || attributeValue.equals(15)) {
+			return +2;
+		}
+		if (attributeValue.equals(16) || attributeValue.equals(17)) {
+			return +3;
+		}
+		if (attributeValue.equals(18) || attributeValue.equals(19)) {
+			return +4;
+		}
+		return -2;
+	}
+
+	private void diasableAddButtons() {
+		strengthAdd.setDisable(true);
+		dexterityAdd.setDisable(true);
+		constitutionAdd.setDisable(true);
+		intelligenceAdd.setDisable(true);
+		wisdomAdd.setDisable(true);
+		charismaAdd.setDisable(true);
+	}
+
+	private void enableAddButtons() {
+		Integer str = Integer.parseInt(strengthTxt.getText());
+		Integer dex = Integer.parseInt(dexterityTxt.getText());
+		Integer con = Integer.parseInt(constitutionTxt.getText());
+		Integer intel = Integer.parseInt(intelligenceTxt.getText());
+		Integer wis = Integer.parseInt(wisdomTxt.getText());
+		Integer cha = Integer.parseInt(charismaTxt.getText());
+
+		strengthAdd.setDisable(false);
+		dexterityAdd.setDisable(false);
+		constitutionAdd.setDisable(false);
+		intelligenceAdd.setDisable(false);
+		wisdomAdd.setDisable(false);
+		charismaAdd.setDisable(false);
+
+		if (str.intValue() >= 15) {
+			strengthAdd.setDisable(true);
+		}
+		if (dex.intValue() >= 15) {
+			dexterityAdd.setDisable(true);
+		}
+		if (con.intValue() >= 15) {
+			constitutionAdd.setDisable(true);
+		}
+		if (intel.intValue() >= 15) {
+			intelligenceAdd.setDisable(true);
+		}
+		if (wis.intValue() >= 15) {
+			wisdomAdd.setDisable(true);
+		}
+		if (cha.intValue() >= 15) {
+			charismaAdd.setDisable(true);
+		}	
+	}
+
+	@FXML
     private void handleFinish() {
 		// TODO Not Finished
     	if (verifyFinished()) {

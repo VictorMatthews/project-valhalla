@@ -269,4 +269,10 @@ public class CharacterDto {
 	public void setSavingThrows(Set<Integer> savingThrows) {
 		this.savingThrows = savingThrows;
 	}
+
+	public void resetSetLists() {
+		setProfSkills(new HashSet<Integer>());
+		setIncreaseAttributes(new HashSet<AttributeDto>());
+		setSavingThrows(new HashSet<Integer>());
+	}
 }
