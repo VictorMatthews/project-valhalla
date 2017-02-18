@@ -17,7 +17,6 @@ import com.nfpenterprise.gameHub.constants.Ideals;
 import com.nfpenterprise.gameHub.constants.Message;
 import com.nfpenterprise.gameHub.constants.PersonalityTraits;
 import com.nfpenterprise.gameHub.constants.Races;
-import com.nfpenterprise.gameHub.constants.Skills;
 import com.nfpenterprise.gameHub.constants.SubRaces;
 import com.nfpenterprise.gameHub.util.DataController;
 
@@ -405,6 +404,25 @@ public class NewCharacterController {
 		updateSkills(attribute);
 	}
 
+	private void handleSkillSelected(RadioButton skill, Label skillIncrease) {
+		Integer currentSkillValue = Integer.parseInt(skillIncrease.getText());
+		if (skill.isSelected()) {
+			Integer newSkillValue = currentSkillValue + PROF_BONUS;
+			skillIncrease.setText(newSkillValue.toString());
+
+			Integer skillsLeft = Integer.parseInt(remainingSkillChoices.getText()) - 1;
+			remainingSkillChoices.setText(skillsLeft.toString());
+		} else {
+			Integer newSkillValue = currentSkillValue - PROF_BONUS;
+			skillIncrease.setText(newSkillValue.toString());
+
+			Integer skillsLeft = Integer.parseInt(remainingSkillChoices.getText()) + 1;
+			remainingSkillChoices.setText(skillsLeft.toString());
+		}
+
+
+	}
+
     private void updateSkills(Attributes attribute) {
     	if (attribute.equals(Attributes.STRENGTH)) {
         	Integer strengthInc = getAttributeIncease(Integer.parseInt(strengthTxt.getText()));
@@ -574,6 +592,96 @@ public class NewCharacterController {
         }
         alert.setContentText(content.toString());
         alert.showAndWait();
+    }
+
+    @FXML
+    private void handleSkillAcrobatics() {
+    	handleSkillSelected(acrobaticsRadioButton, acrobaticsIncrease);
+    }
+
+    @FXML
+    private void handleSkillAnimalHandling() {
+    	handleSkillSelected(animalHandlingRadioButton, animalHandlingIncrease);
+    }
+
+    @FXML
+    private void handleSkillArcana() {
+    	handleSkillSelected(arcanaRadioButton, arcanaIncrease);
+    }
+
+    @FXML
+    private void handleSkillAthletics() {
+    	handleSkillSelected(athleticsRadioButton, athleticsIncrease);
+    }
+
+    @FXML
+    private void handleSkillDeception() {
+    	handleSkillSelected(deceptionRadioButton, deceptionIncrease);
+    }
+
+    @FXML
+    private void handleSkillHistory() {
+    	handleSkillSelected(historyRadioButton, historyIncrease);
+    }
+
+    @FXML
+    private void handleSkillInsight() {
+    	handleSkillSelected(insightRadioButton, insightIncrease);
+    }
+
+    @FXML
+    private void handleSkillIntimidation() {
+    	handleSkillSelected(intimidationRadioButton, intimidationIncrease);
+    }
+
+    @FXML
+    private void handleSkillInvestigation() {
+    	handleSkillSelected(investigationRadioButton, investigationIncrease);
+    }
+
+    @FXML
+    private void handleSkillMedicine() {
+    	handleSkillSelected(medicineRadioButton, medicineIncrease);
+    }
+
+    @FXML
+    private void handleSkillNature() {
+    	handleSkillSelected(natureRadioButton, natureIncrease);
+    }
+
+    @FXML
+    private void handleSkillPerception() {
+    	handleSkillSelected(perceptionRadioButton, perceptionIncrease);
+    }
+
+    @FXML
+    private void handleSkillPerformance() {
+    	handleSkillSelected(performanceRadioButton, performanceIncrease);
+    }
+
+    @FXML
+    private void handleSkillPersuasion() {
+    	handleSkillSelected(persuasionRadioButton, persuasionIncrease);
+    }
+
+    @FXML
+    private void handleSkillReligion() {
+    	handleSkillSelected(religionRadioButton, religionIncrease);
+    }
+
+    @FXML
+    private void handleSkillSleightOfHand() {
+    	handleSkillSelected(sleightOfHandRadioButton, sleightOfHandIncrease);
+    }
+
+    @FXML
+    private void handleSkillStealth() {
+    	handleSkillSelected(stealthRadioButton, stealthIncrease);
+    }
+
+    @FXML
+    private void handleSkillSurvival() {
+    	handleSkillSelected(survivalRadioButton, survivalIncrease);
     }
 
 	@FXML

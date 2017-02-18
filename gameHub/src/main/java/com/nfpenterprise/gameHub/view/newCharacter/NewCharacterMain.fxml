@@ -189,24 +189,24 @@
                               <Button fx:id="intelligenceSub" layoutX="21.0" layoutY="401.0" mnemonicParsing="false" onAction="#handleSubInt" text="-" />
                               <Button fx:id="wisdomSub" layoutX="21.0" layoutY="501.0" mnemonicParsing="false" onAction="#handleSubWis" text="-" />
                               <Button fx:id="charismaSub" layoutX="21.0" layoutY="601.0" mnemonicParsing="false" onAction="#handleSubCha" text="-" />
-                              <RadioButton fx:id="acrobaticsRadioButton" layoutX="293.0" layoutY="91.0" mnemonicParsing="false" text="Acrobatics (Dex)" />
-                              <RadioButton fx:id="animalHandlingRadioButton" layoutX="293.0" layoutY="121.0" mnemonicParsing="false" text="Animal Handling (Wis)" />
-                              <RadioButton fx:id="arcanaRadioButton" layoutX="293.0" layoutY="151.0" mnemonicParsing="false" text="Arcana (Int)" />
-                              <RadioButton fx:id="deceptionRadioButton" layoutX="293.0" layoutY="211.0" mnemonicParsing="false" text="Deception (Cha)" />
-                              <RadioButton fx:id="athleticsRadioButton" layoutX="293.0" layoutY="181.0" mnemonicParsing="false" text="Athletics (Str)" />
-                              <RadioButton fx:id="historyRadioButton" layoutX="293.0" layoutY="241.0" mnemonicParsing="false" text="History (Int)" />
-                              <RadioButton fx:id="insightRadioButton" layoutX="293.0" layoutY="271.0" mnemonicParsing="false" text="Insight (Wis)" />
-                              <RadioButton fx:id="intimidationRadioButton" layoutX="293.0" layoutY="301.0" mnemonicParsing="false" text="Intimidation (Cha)" />
-                              <RadioButton fx:id="investigationRadioButton" layoutX="293.0" layoutY="331.0" mnemonicParsing="false" text="Investigation (Int)" />
-                              <RadioButton fx:id="medicineRadioButton" layoutX="293.0" layoutY="361.0" mnemonicParsing="false" text="Medicine (Wis)" />
-                              <RadioButton fx:id="natureRadioButton" layoutX="293.0" layoutY="391.0" mnemonicParsing="false" text="Nature (Int)" />
-                              <RadioButton fx:id="perceptionRadioButton" layoutX="293.0" layoutY="421.0" mnemonicParsing="false" text="Perception (Wis)" />
-                              <RadioButton fx:id="performanceRadioButton" layoutX="293.0" layoutY="451.0" mnemonicParsing="false" text="Performance (Cha)" />
-                              <RadioButton fx:id="persuasionRadioButton" layoutX="293.0" layoutY="481.0" mnemonicParsing="false" text="Persuasion (Cha)" />
-                              <RadioButton fx:id="religionRadioButton" layoutX="293.0" layoutY="511.0" mnemonicParsing="false" text="Religion (Int)" />
-                              <RadioButton fx:id="sleightOfHandRadioButton" layoutX="293.0" layoutY="541.0" mnemonicParsing="false" text="Sleight of Hand (Dex)" />
-                              <RadioButton fx:id="stealthRadioButton" layoutX="293.0" layoutY="571.0" mnemonicParsing="false" text="Stealth (Dex)" />
-                              <RadioButton fx:id="survivalRadioButton" layoutX="293.0" layoutY="601.0" mnemonicParsing="false" text="Survival (Wis)" />
+                              <RadioButton fx:id="acrobaticsRadioButton" layoutX="293.0" layoutY="91.0" mnemonicParsing="false" onAction="#handleSkillAcrobatics" text="Acrobatics (Dex)" />
+                              <RadioButton fx:id="animalHandlingRadioButton" layoutX="293.0" layoutY="121.0" mnemonicParsing="false" onAction="#handleSkillAnimalHandling" text="Animal Handling (Wis)" />
+                              <RadioButton fx:id="arcanaRadioButton" layoutX="293.0" layoutY="151.0" mnemonicParsing="false" onAction="#handleSkillArcana" text="Arcana (Int)" />
+                              <RadioButton fx:id="deceptionRadioButton" layoutX="293.0" layoutY="211.0" mnemonicParsing="false" onAction="#handleSkillDeception" text="Deception (Cha)" />
+                              <RadioButton fx:id="athleticsRadioButton" layoutX="293.0" layoutY="181.0" mnemonicParsing="false" onAction="#handleSkillAthletics" text="Athletics (Str)" />
+                              <RadioButton fx:id="historyRadioButton" layoutX="293.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleSkillHistory" text="History (Int)" />
+                              <RadioButton fx:id="insightRadioButton" layoutX="293.0" layoutY="271.0" mnemonicParsing="false" onAction="#handleSkillInsight" text="Insight (Wis)" />
+                              <RadioButton fx:id="intimidationRadioButton" layoutX="293.0" layoutY="301.0" mnemonicParsing="false" onAction="#handleSkillIntimidation" text="Intimidation (Cha)" />
+                              <RadioButton fx:id="investigationRadioButton" layoutX="293.0" layoutY="331.0" mnemonicParsing="false" onAction="#handleSkillInvestigation" text="Investigation (Int)" />
+                              <RadioButton fx:id="medicineRadioButton" layoutX="293.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleSkillMedicine" text="Medicine (Wis)" />
+                              <RadioButton fx:id="natureRadioButton" layoutX="293.0" layoutY="391.0" mnemonicParsing="false" onAction="#handleSkillNature" text="Nature (Int)" />
+                              <RadioButton fx:id="perceptionRadioButton" layoutX="293.0" layoutY="421.0" mnemonicParsing="false" onAction="#handleSkillPerception" text="Perception (Wis)" />
+                              <RadioButton fx:id="performanceRadioButton" layoutX="293.0" layoutY="451.0" mnemonicParsing="false" onAction="#handleSkillPerformance" text="Performance (Cha)" />
+                              <RadioButton fx:id="persuasionRadioButton" layoutX="293.0" layoutY="481.0" mnemonicParsing="false" onAction="#handleSkillPersuasion" text="Persuasion (Cha)" />
+                              <RadioButton fx:id="religionRadioButton" layoutX="293.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleSkillReligion" text="Religion (Int)" />
+                              <RadioButton fx:id="sleightOfHandRadioButton" layoutX="293.0" layoutY="541.0" mnemonicParsing="false" onAction="#handleSkillSleightOfHand" text="Sleight of Hand (Dex)" />
+                              <RadioButton fx:id="stealthRadioButton" layoutX="293.0" layoutY="571.0" mnemonicParsing="false" onAction="#handleSkillStealth" text="Stealth (Dex)" />
+                              <RadioButton fx:id="survivalRadioButton" layoutX="293.0" layoutY="601.0" mnemonicParsing="false" onAction="#handleSkillSurvival" text="Survival (Wis)" />
                               <Label fx:id="acrobaticsIncrease" contentDisplay="CENTER" layoutX="263.0" layoutY="92.0" textAlignment="CENTER" underline="true" />
                               <Label fx:id="animalHandlingIncrease" contentDisplay="CENTER" layoutX="263.0" layoutY="121.0" textAlignment="CENTER" underline="true" />
                               <Label fx:id="arcanaIncrease" contentDisplay="CENTER" layoutX="263.0" layoutY="151.0" textAlignment="CENTER" underline="true" />
