@@ -49,7 +49,6 @@ public class NewCharacterController {
 	ObservableList<SubRaces> subRaceData;
 	ObservableList<Classes> classData;
 	private final static Integer PROF_BONUS = 2;
-	private final static Integer BASE_SKILL = -1;
 	private final static Integer BASE_ATTRIBUTE_INCREASE = 27;
 	private final static Integer MIN_ATTRIBUTE_VALUE = 8;
 	private final static Integer MAX_ATTRIBUTE_VALUE = 15;
@@ -267,8 +266,8 @@ public class NewCharacterController {
 			Ideals selectedIdeal = cmbIdeals.getSelectionModel().getSelectedItem();
 			Bonds selectedBond = cmbBonds.getSelectionModel().getSelectedItem();
 			Flaws selectedFlaw = cmbFlaws.getSelectionModel().getSelectedItem();
-			profSkillChoices = classesTable.getSelectionModel().selectedItemProperty().getValue().getProfSkillsChoices();
-			profSkillsToChoose = classesTable.getSelectionModel().selectedItemProperty().getValue().getProfSkillsToChoose();
+			profSkillChoices = selectedClass.getProfSkillsChoices();
+			profSkillsToChoose = selectedClass.getProfSkillsToChoose();
 
 			newCharacter.setRace(selectedRace);
 			newCharacter.setSubRace(selectedSubRace);
@@ -285,7 +284,7 @@ public class NewCharacterController {
 	private void handleAttributesAndSkills() {
 		updateCharacterData();
 		handleAttributes();
-		handleSkills();
+		handleSkills(profSkillsToChoose);
 	}
 
 	private void handleAttributes() {
@@ -370,6 +369,9 @@ public class NewCharacterController {
 		if (newAttributePoints.equals(0)) {
 			diasableAddButtons(true);
 		}
+		if ((oldAttributePoints.equals(2) || oldAttributePoints.equals(3)) && newAttributePoints.equals(1)) {
+			enableAddButtons(newAttributePoints);
+		}
 
 		updateSkills(attribute);
 	}
@@ -406,10 +408,18 @@ public class NewCharacterController {
 		return cost;
 	}
 
-	private void handleSkills() {
-		remainingSkillChoices.setText(profSkillsToChoose.toString());
+	private void handleSkills(Integer skillsRemaining) {
+		for (KeyValue<Integer, KeyValue<RadioButton, Label>> skillKV : skillRadioButtons) {
+			skillKV.getValue().getKey().setSelected(false);
+		}
+
+		remainingSkillChoices.setText(skillsRemaining.toString());
+		disableAllUnselectedSkillChoices(false);
 		for (Integer skill : newCharacter.getProfSkills()) {
 			for (KeyValue<Integer, KeyValue<RadioButton, Label>> skillKV : skillRadioButtons) {
+				if (!profSkillChoices.contains(skillKV.getKey())) {
+					skillKV.getValue().getKey().setDisable(true);
+				}
 				if (skillKV.getKey().equals(skill)) {
 					skillKV.getValue().getKey().setSelected(true);
 					handleSkillSelected(skillKV.getValue().getKey(), skillKV.getValue().getValue(), false /*fromUserClick*/);
@@ -420,60 +430,119 @@ public class NewCharacterController {
 
 	private void handleSkillSelected(RadioButton skill, Label skillIncrease, boolean fromUserClick) {
 		Integer oldSkillValue = Integer.parseInt(skillIncrease.getText());
+		Integer oldSkillsRemaining = Integer.parseInt(remainingSkillChoices.getText());
+		Integer newSkillsRemaining = oldSkillsRemaining;
 		if (skill.isSelected()) {
 			Integer newSkillValue = oldSkillValue + PROF_BONUS;
 			skillIncrease.setText(newSkillValue.toString());
 
 			if (fromUserClick) {
-				Integer skillsLeft = Integer.parseInt(remainingSkillChoices.getText()) - 1;
-				remainingSkillChoices.setText(skillsLeft.toString());
+				newSkillsRemaining = Math.subtractExact(oldSkillsRemaining, 1);
+				remainingSkillChoices.setText(newSkillsRemaining.toString());
+			} else {
+				skill.setDisable(true);
 			}
 		} else {
 			Integer newSkillValue = oldSkillValue - PROF_BONUS;
 			skillIncrease.setText(newSkillValue.toString());
 
 			if (fromUserClick) {
-				Integer skillsLeft = Integer.parseInt(remainingSkillChoices.getText()) + 1;
-				remainingSkillChoices.setText(skillsLeft.toString());
+				newSkillsRemaining = Math.addExact(oldSkillsRemaining, 1);
+				remainingSkillChoices.setText(newSkillsRemaining.toString());
 			}
 		}
-
-
+		if (newSkillsRemaining.equals(0)) {
+			disableAllUnselectedSkillChoices(true);
+		}
+		if (oldSkillsRemaining.equals(0) && newSkillsRemaining.equals(1)) {
+			disableAllUnselectedSkillChoices(false);
+		}
 	}
 
-    private void updateSkills(Attributes attribute) {
+    private void disableAllUnselectedSkillChoices(boolean disable) {
+    	for (KeyValue<Integer, KeyValue<RadioButton, Label>> skillKV : skillRadioButtons) {
+			skillKV.getValue().getKey().setDisable(disable);
+			if (skillKV.getValue().getKey().isSelected()) {
+				skillKV.getValue().getKey().setDisable(false);
+			}
+			if (!profSkillChoices.contains(skillKV.getKey())) {
+				skillKV.getValue().getKey().setDisable(true);
+			}
+			if (newCharacter.getProfSkills().contains(skillKV.getKey())) {
+				skillKV.getValue().getKey().setDisable(true);				
+			}
+    	}
+	}
+
+	private void updateSkills(Attributes attribute) {
     	if (attribute.equals(Attributes.STRENGTH)) {
         	Integer strengthInc = getAttributeIncease(Integer.parseInt(strengthTxt.getText()));
-    		athleticsIncrease.setText(strengthInc.toString());
+
+        	Integer athletics = athleticsRadioButton.isSelected() ? Math.addExact(strengthInc, PROF_BONUS) : strengthInc;
+    		athleticsIncrease.setText(athletics.toString());
     	}
     	if (attribute.equals(Attributes.DEXTERITY)) {
         	Integer dexterityInc = getAttributeIncease(Integer.parseInt(dexterityTxt.getText()));
-    	    acrobaticsIncrease.setText(dexterityInc.toString());
-    		sleightOfHandIncrease.setText(dexterityInc.toString());
-    		stealthIncrease.setText(dexterityInc.toString());
+
+        	Integer acrobatics = acrobaticsRadioButton.isSelected() ? Math.addExact(dexterityInc, PROF_BONUS) : dexterityInc;
+    	    acrobaticsIncrease.setText(acrobatics.toString());
+
+        	Integer sleightOfHand = sleightOfHandRadioButton.isSelected() ? Math.addExact(dexterityInc, PROF_BONUS) : dexterityInc;
+    		sleightOfHandIncrease.setText(sleightOfHand.toString());
+
+        	Integer stealth = stealthRadioButton.isSelected() ? Math.addExact(dexterityInc, PROF_BONUS) : dexterityInc;
+    		stealthIncrease.setText(stealth.toString());
     	}
     	if (attribute.equals(Attributes.INTELLIGENCE)) {
         	Integer intelligenceInc = getAttributeIncease(Integer.parseInt(intelligenceTxt.getText()));
-    		arcanaIncrease.setText(intelligenceInc.toString());
-    		historyIncrease.setText(intelligenceInc.toString());
-    		investigationIncrease.setText(intelligenceInc.toString());
-    		natureIncrease.setText(intelligenceInc.toString());
-    		religionIncrease.setText(intelligenceInc.toString());
+
+        	Integer arcana = arcanaRadioButton.isSelected() ? Math.addExact(intelligenceInc, PROF_BONUS) : intelligenceInc;
+    		arcanaIncrease.setText(arcana.toString());
+
+        	Integer history = historyRadioButton.isSelected() ? Math.addExact(intelligenceInc, PROF_BONUS) : intelligenceInc;
+    		historyIncrease.setText(history.toString());
+
+    		Integer investigation = investigationRadioButton.isSelected() ? Math.addExact(intelligenceInc, PROF_BONUS) : intelligenceInc;
+    		investigationIncrease.setText(investigation.toString());
+
+        	Integer nature = natureRadioButton.isSelected() ? Math.addExact(intelligenceInc, PROF_BONUS) : intelligenceInc;
+    		natureIncrease.setText(nature.toString());
+
+        	Integer religion = religionRadioButton.isSelected() ? Math.addExact(intelligenceInc, PROF_BONUS) : intelligenceInc;
+    		religionIncrease.setText(religion.toString());
     	}
     	if (attribute.equals(Attributes.WISDOM)) {
         	Integer wisdomInc = getAttributeIncease(Integer.parseInt(wisdomTxt.getText()));
-    		animalHandlingIncrease.setText(wisdomInc.toString());
-    		insightIncrease.setText(wisdomInc.toString());
-    		medicineIncrease.setText(wisdomInc.toString());
-    		perceptionIncrease.setText(wisdomInc.toString());
-    		survivalIncrease.setText(wisdomInc.toString());
+        	
+        	Integer animalHandling = animalHandlingRadioButton.isSelected() ? Math.addExact(wisdomInc, PROF_BONUS) : wisdomInc;
+    		animalHandlingIncrease.setText(animalHandling.toString());
+    		
+        	Integer insight = insightRadioButton.isSelected() ? Math.addExact(wisdomInc, PROF_BONUS) : wisdomInc;
+    		insightIncrease.setText(insight.toString());
+    		
+        	Integer medicine = medicineRadioButton.isSelected() ? Math.addExact(wisdomInc, PROF_BONUS) : wisdomInc;
+    		medicineIncrease.setText(medicine.toString());
+    		
+        	Integer perception = perceptionRadioButton.isSelected() ? Math.addExact(wisdomInc, PROF_BONUS) : wisdomInc;
+    		perceptionIncrease.setText(perception.toString());
+
+        	Integer survival = survivalRadioButton.isSelected() ? Math.addExact(wisdomInc, PROF_BONUS) : wisdomInc;
+    		survivalIncrease.setText(survival.toString());
     	}
     	if (attribute.equals(Attributes.CHARISMA)) {
         	Integer charismaInc = getAttributeIncease(Integer.parseInt(charismaTxt.getText()));
-    		deceptionIncrease.setText(charismaInc.toString());
-    		intimidationIncrease.setText(charismaInc.toString());
-    		performanceIncrease.setText(charismaInc.toString());
-    		persuasionIncrease.setText(charismaInc.toString());
+        	
+        	Integer deception = deceptionRadioButton.isSelected() ? Math.addExact(charismaInc, PROF_BONUS) : charismaInc;
+    		deceptionIncrease.setText(deception.toString());
+    		
+        	Integer intimidation = intimidationRadioButton.isSelected() ? Math.addExact(charismaInc, PROF_BONUS) : charismaInc;
+    		intimidationIncrease.setText(intimidation.toString());
+    		
+        	Integer performance = performanceRadioButton.isSelected() ? Math.addExact(charismaInc, PROF_BONUS) : charismaInc;
+    		performanceIncrease.setText(performance.toString());
+    		
+        	Integer persuasion = persuasionRadioButton.isSelected() ? Math.addExact(charismaInc, PROF_BONUS) : charismaInc;
+    		persuasionIncrease.setText(persuasion.toString());
     	}
 	}
 
