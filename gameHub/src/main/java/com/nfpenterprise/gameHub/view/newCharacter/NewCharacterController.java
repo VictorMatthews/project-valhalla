@@ -174,7 +174,6 @@ public class NewCharacterController {
 	}
 
 	private void showRaceDetails(Races oldRace, Races newRace) {
-		// TODO Incomplete
 		if (oldRace == null) {
 			oldRace = newRace;
 			populateSubRaces(newRace);
