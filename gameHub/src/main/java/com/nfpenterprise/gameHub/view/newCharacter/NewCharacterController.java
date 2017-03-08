@@ -254,9 +254,18 @@ public class NewCharacterController {
 		tabSelectionModel.getSelectedItem().setDisable(false);
     }
 
-    private void updateCharacterData() {
+    private boolean updateCharacterData() {
 		// TODO Not Finished
+    	boolean dataChanged = false;
 		if (tabSelectionModel != null) {
+			String oldRace = newCharacter.getRace();
+			String oldSubRace = newCharacter.getSubRace();
+			String oldClass = newCharacter.getClassName();
+			String oldBackground = newCharacter.getBackground();
+			if (oldRace == null || oldSubRace == null || oldClass == null || oldBackground.equals(null)) {
+				dataChanged = true;
+			}
+
 			newCharacter.resetSetLists();
 			Races selectedRace = racesTable.getSelectionModel().selectedItemProperty().getValue();
 			SubRaces selectedSubRace = subRacesTable.getSelectionModel().selectedItemProperty().getValue();
@@ -269,6 +278,13 @@ public class NewCharacterController {
 			profSkillChoices = selectedClass.getProfSkillsChoices();
 			profSkillsToChoose = selectedClass.getProfSkillsToChoose();
 
+			if ((oldRace != null && !oldRace.equals(selectedRace.getRaceName())) || 
+					(oldSubRace != null &&  !oldSubRace.equals(selectedSubRace.getSubRaceName())) ||
+					(oldClass != null &&  !oldClass.equals(selectedClass.getClassName())) || 
+					(oldBackground != null &&  !oldBackground.equals(selectedBackground.getBackgroundName()))) {
+				dataChanged = true;
+			}
+
 			newCharacter.setRace(selectedRace);
 			newCharacter.setSubRace(selectedSubRace);
 			newCharacter.setClassName(selectedClass);
@@ -278,13 +294,18 @@ public class NewCharacterController {
 			newCharacter.setBonds(selectedBond);
 			newCharacter.setFlaws(selectedFlaw);
 		}
+		return dataChanged;
 	}
 
 	@FXML
 	private void handleAttributesAndSkills() {
-		updateCharacterData();
-		handleAttributes();
-		handleSkills(profSkillsToChoose);
+		if (tabSelectionModel != null && tabSelectionModel.getSelectedItem().equals(attributesSkillsTab)) {
+			boolean dataChanged = updateCharacterData();
+			if (dataChanged) {
+				handleAttributes();
+				handleSkills(profSkillsToChoose);	
+			}		
+		}
 	}
 
 	private void handleAttributes() {
