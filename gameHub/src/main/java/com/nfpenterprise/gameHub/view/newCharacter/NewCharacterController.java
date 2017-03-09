@@ -45,15 +45,16 @@ public class NewCharacterController {
 	private CharacterDto newCharacter;
 	private SingleSelectionModel<Tab> tabSelectionModel;
 	private DataController dataController;
-	ObservableList<Races> raceData;
-	ObservableList<SubRaces> subRaceData;
-	ObservableList<Classes> classData;
+	public ObservableList<Races> raceData;
+	public ObservableList<SubRaces> subRaceData;
+	public ObservableList<Classes> classData;
 	private final static Integer PROF_BONUS = 2;
 	private final static Integer BASE_ATTRIBUTE_INCREASE = 27;
 	private final static Integer MIN_ATTRIBUTE_VALUE = 8;
 	private final static Integer MAX_ATTRIBUTE_VALUE = 15;
 	private Set<Integer> profSkillChoices = new HashSet<Integer>();
 	private Integer profSkillsToChoose = 0;
+	private ObservableList<SubRaces> subRacesFromRaces;
 
 	@FXML private TabPane tabs;
 	@FXML private Tab raceTab;
@@ -158,7 +159,6 @@ public class NewCharacterController {
 		subRacesTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showSubRaceDetails(newValue));
 		classesColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getClassName()));
 		classesTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showClassDetails(newValue));
-
 		racesTable.setItems(dataController.populateRaceData());
 		racesTable.getSelectionModel().selectFirst();
 
@@ -186,7 +186,7 @@ public class NewCharacterController {
 	}
 
 	private void populateSubRaces(Races race) {
-		ObservableList<SubRaces> subRacesFromRaces = dataController.populateSubRaceData(race);
+		subRacesFromRaces = dataController.populateSubRaceData(race);
 		if (subRacesFromRaces != null && !subRacesFromRaces.isEmpty()) {
 			if  (!subRacesFromRaces.contains(SubRaces.NO_SUBRACE)) {
 				subRacesTable.setItems(subRacesFromRaces);
@@ -241,14 +241,19 @@ public class NewCharacterController {
 
     @FXML
     private void handleBack() {
+		if (tabSelectionModel.getSelectedItem().equals(classTab) && subRacesFromRaces.contains(SubRaces.NO_SUBRACE)) {
+			tabSelectionModel.selectPrevious();
+			subRaceTab.setDisable(true);
+		}
     	tabSelectionModel.selectPrevious();
     }
 
 	@FXML
     private void handleNext() {
-//		if (subRacesFromRaces.contains(SubRaces.NO_SUBRACE)) {
-//			subRaceTab.isDisabled();
-//		}
+		if (tabSelectionModel.getSelectedItem().equals(raceTab) && subRacesFromRaces.contains(SubRaces.NO_SUBRACE)) {
+			tabSelectionModel.selectNext();
+			subRaceTab.setDisable(true);
+		}
 		tabSelectionModel.selectNext();
 		tabSelectionModel.getSelectedItem().setDisable(false);
     }
@@ -261,7 +266,7 @@ public class NewCharacterController {
 			String oldSubRace = newCharacter.getSubRace();
 			String oldClass = newCharacter.getClassName();
 			String oldBackground = newCharacter.getBackground();
-			if (oldRace == null || oldSubRace == null || oldClass == null || oldBackground.equals(null)) {
+			if (oldRace == null || (oldSubRace == null && !subRacesFromRaces.contains(SubRaces.NO_SUBRACE)) || oldClass == null || oldBackground.equals(null)) {
 				dataChanged = true;
 			}
 
