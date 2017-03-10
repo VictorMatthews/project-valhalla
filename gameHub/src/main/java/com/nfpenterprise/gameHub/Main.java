@@ -122,7 +122,7 @@ public class Main extends Application {
         }
 	}
 
-	public void showNewCharacterMain() {
+	public void showNewCharacterMain(boolean isEdit, CharacterDto characterToEdit) {
 		try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
@@ -135,6 +135,9 @@ public class Main extends Application {
             //Give the controller access to the main app.
             NewCharacterController controller = loader.getController();
             controller.setMainApp(this);
+            if (isEdit) {
+            	controller.loadCharacter(characterToEdit);
+            }
 
     		this.primaryStage.setTitle(Field.APPLICATION_NAME.toString() + " - " + Field.NEW_CHARACTER.toString());
         } catch (IOException e) {

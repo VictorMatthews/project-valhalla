@@ -16,8 +16,8 @@
             <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <buttons>
                 <Button mnemonicParsing="false" onAction="#handleNewCharacter" text="New..." textAlignment="CENTER" />
-                  <Button mnemonicParsing="false" text="Edit..." />
-                  <Button mnemonicParsing="false" text="Delete" />
+                  <Button mnemonicParsing="false" onAction="#handleEditCharacter" text="Edit..." />
+                  <Button mnemonicParsing="false" onAction="#handleDeleteCharacter" text="Delete" />
               </buttons>
                <padding>
                   <Insets right="15.0" />

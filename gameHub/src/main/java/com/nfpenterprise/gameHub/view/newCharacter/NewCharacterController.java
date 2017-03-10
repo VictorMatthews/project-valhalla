@@ -57,6 +57,7 @@ public class NewCharacterController {
 	private Set<Integer> profSkillChoices = new HashSet<Integer>();
 	private Integer profSkillsToChoose = 0;
 	private ObservableList<SubRaces> subRacesFromRaces;
+	private boolean isEdit = false;
 
 	@FXML private TabPane tabs;
 	@FXML private Tab raceTab;
@@ -150,6 +151,7 @@ public class NewCharacterController {
 
 	@FXML
 	private void initialize() {
+		isEdit = false;
 		newCharacter = new CharacterDto();
 		newCharacter.setCharacterId(getUniqueId());
 		tabSelectionModel = tabs.getSelectionModel();
@@ -175,13 +177,51 @@ public class NewCharacterController {
 		skillRadioButtons = setupSkillKeyValues();
 	}
 
+	public void loadCharacter(CharacterDto characterToEdit) {
+		// TODO
+		isEdit = true;
+		newCharacter = characterToEdit;
+		newCharacter.setRace(Races.GNOME);
+		newCharacter.setSubRace(SubRaces.FOREST_GNOME);
+		newCharacter.setClassName(Classes.BARD);
+		newCharacter.setBackground(Backgrounds.CRIMINAL);
+		newCharacter.setPersonalityTrait(PersonalityTraits.CRIMINAL_3);
+		newCharacter.setIdeals(Ideals.CRIMINAL_5);
+		newCharacter.setBonds(Bonds.CRIMINAL_2);
+		newCharacter.setFlaws(Flaws.CRIMINAL_1);
+
+		loadCharacterToEditTables(racesTable, dataController.populateRaceData(), newCharacter.getRace());
+		showRaceDetails(null, racesTable.getSelectionModel().getSelectedItem());
+		loadCharacterToEditTables(subRacesTable, dataController.populateSubRaceData(racesTable.getSelectionModel().getSelectedItem()), newCharacter.getSubRace());
+		showSubRaceDetails(subRacesTable.getSelectionModel().getSelectedItem());
+		loadCharacterToEditTables(classesTable, dataController.populateClassData(), newCharacter.getClassName());
+		showClassDetails(classesTable.getSelectionModel().getSelectedItem());
+		loadCharacterBackgroundData(cmbBackground, dataController.populateBackgroundData(), newCharacter.getBackground());
+		refreshBackground(cmbBackground.getSelectionModel().getSelectedItem(), newCharacter);
+		updateCharacterData();
+
+		handleAttributes();
+		handleSkills(profSkillsToChoose);	
+	}
+
+	private <T> void loadCharacterToEditTables(TableView<T> table, ObservableList<T> dataList, String newCharacterData) {
+		if (table != null && table.getSelectionModel() != null) {
+			for (T data : dataList) {
+				if (newCharacterData.equals(data.toString())) {
+					table.getSelectionModel().select(data);
+					break;
+				}
+			}
+		}
+	}
+
 	private void showRaceDetails(Races oldRace, Races newRace) {
 		if (oldRace == null) {
 			oldRace = newRace;
 			populateSubRaces(newRace);
 		}
 
-		if (!oldRace.equals(newRace)) {
+		if (!oldRace.equals(newRace) && !racesTable.getSelectionModel().getSelectedIndices().isEmpty()) {
 			loadHtmlIntoWebView(newRace.getHtmlPath(), raceWebView);
 			populateSubRaces(newRace);
 		}
@@ -225,18 +265,18 @@ public class NewCharacterController {
 
 	private Integer getUniqueId() {
 		// TODO Auto-generated method stub
-		return null;
+		return 123456789;
 	}
 
 	public void setMainApp(Main main) {
 		this.mainApp = main;
-		if (racesTable.getSelectionModel().getSelectedItem() != null) {
+		if (racesTable != null && raceWebView != null && racesTable.getSelectionModel().getSelectedItem() != null) {
 			loadHtmlIntoWebView(racesTable.getSelectionModel().getSelectedItem().getHtmlPath(), raceWebView);
 		}
-		if (subRacesTable.getSelectionModel().getSelectedItem() != null) {
+		if (racesTable != null && subRaceWebView != null && subRacesTable.getSelectionModel().getSelectedItem() != null) {
 			loadHtmlIntoWebView(subRacesTable.getSelectionModel().getSelectedItem().getHtmlPath(), subRaceWebView);
 		}
-		if (classesTable.getSelectionModel().getSelectedItem() != null) {
+		if (racesTable != null && classWebView != null && classesTable.getSelectionModel().getSelectedItem() != null) {
 			loadHtmlIntoWebView(classesTable.getSelectionModel().getSelectedItem().getHtmlPath(), classWebView);
 		}
 	}
@@ -322,7 +362,7 @@ public class NewCharacterController {
 			boolean dataChanged = updateCharacterData();
 			if (dataChanged) {
 				handleAttributes();
-				handleSkills(profSkillsToChoose);	
+				handleSkills(profSkillsToChoose);
 			}		
 		}
 	}
@@ -664,11 +704,14 @@ public class NewCharacterController {
 	@FXML
     private void handleFinish() {
 		// TODO Not Finished
-		updateCharacterData();
-		nameCharacter();
-		newCharacter.getCharacterName();
-		mainApp.getMyCharacterData().add(newCharacter);
-		mainApp.showMyCharacters();
+    	if (verifyFinished()) {
+    		updateCharacterData();
+    		nameCharacter();
+    		newCharacter.getCharacterName();
+    		mainApp.getMyCharacterData().add(newCharacter);
+    		mainApp.saveCharacterDataToFile(mainApp.getCharactersFilePath());
+    		mainApp.showMyCharacters();
+    	}
     }
 
 	private void nameCharacter() {
@@ -680,31 +723,82 @@ public class NewCharacterController {
 		result.ifPresent(characterName -> newCharacter.setCharacterName(characterName));
 	}
 
+	private boolean verifyFinished() {
+		// TODO Not Finished
+		Set<Message> messages = new HashSet<Message>();
+		if (racesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
+			messages.add(Message.MUST_COMPLETE_RACE);
+		}
+		if (subRacesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
+			messages.add(Message.MUST_COMPLETE_SUB_RACE);
+		}
+		if (classesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
+			messages.add(Message.MUST_COMPLETE_CLASS);
+		}
+		if (!remainingAttributeIncrease.equals(0)) {
+			messages.add(Message.MUST_COMPLETE_ATTRIBUTES);
+		}
+		if (!remainingSkillChoices.equals(0)) {
+			messages.add(Message.MUST_COMPLETE_SKILLS);
+		}
+		if (!messages.isEmpty()) {
+			screenNotCompleteError(messages);
+			return false;
+		}
+		return true;
+	}
+
     @FXML
     private void handleCancel() {
-        mainApp.showMyCharacters();
+//    	if (mainApp != null) {
+    		mainApp.showMyCharacters();
+//    	}
     }
 
     @FXML
     private void refreshBackground() {
     	Backgrounds background = cmbBackground.getSelectionModel().getSelectedItem();
     	if (background != null) {
-    		cmbPersonalityTraits.setItems(dataController.populatePersonalityTraitData(background));
-    		cmbPersonalityTraits.getSelectionModel().selectFirst();
-    		cmbPersonalityTraits.setDisable(false);
-
-    		cmbIdeals.setItems(dataController.populateIdealData(background));
-    		cmbIdeals.getSelectionModel().selectFirst();
-    		cmbIdeals.setDisable(false);
-
-    		cmbBonds.setItems(dataController.populateBondData(background));
-    		cmbBonds.getSelectionModel().selectFirst();
-    		cmbBonds.setDisable(false);
-
-    		cmbFlaws.setItems(dataController.populateFlawData(background));
-    		cmbFlaws.getSelectionModel().selectFirst();
-    		cmbFlaws.setDisable(false);
+    		refreshBackground(background, newCharacter);
     	}
+    }
+
+	private void refreshBackground(Backgrounds background, CharacterDto character) {
+		loadCharacterBackgroundData(cmbPersonalityTraits, dataController.populatePersonalityTraitData(background), isEdit == false ? null : character.getPersonalityTrait());
+		loadCharacterBackgroundData(cmbIdeals, dataController.populateIdealData(background), isEdit == false ? null : character.getIdeals());
+		loadCharacterBackgroundData(cmbBonds, dataController.populateBondData(background), isEdit == false ? null : character.getBonds());
+		loadCharacterBackgroundData(cmbFlaws, dataController.populateFlawData(background), isEdit == false ? null : character.getFlaws());
+	}
+
+	private <T> void loadCharacterBackgroundData(ComboBox<T> cmbBox, ObservableList<T> dataList, String characterData) {
+		if (cmbBox != null && cmbBox.getSelectionModel() != null) {
+			cmbBox.setItems(dataList);
+    		cmbBox.setDisable(false);
+
+    		if (characterData != null && !characterData.isEmpty()) {
+    			for (T data : dataList) {
+    				if (characterData.equals(data.toString())) {
+    					cmbBox.getSelectionModel().select(data);
+    					break;
+    				}
+    			}
+    		} else {
+    			cmbBox.getSelectionModel().selectFirst();
+    		}
+		}
+	}
+
+    private void screenNotCompleteError(Set<Message> messages) {
+    	//TODO this should go in a util class!
+    	Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("ERROR");
+        alert.setHeaderText("Character Not Finished.");
+        StringBuilder content = new StringBuilder();
+        for (Message message : messages) {
+        	content.append("\n" + message.toString());
+        }
+        alert.setContentText(content.toString());
+        alert.showAndWait();
     }
 
     @FXML

@@ -1,11 +1,5 @@
 package com.nfpenterprise.gameHub.view.myCharacters;
 
-import org.jpedal.PdfDecoderFX;
-import org.jpedal.examples.viewer.OpenViewerFX;
-import org.jpedal.examples.viewer.gui.generic.GUISearchWindow;
-import org.jpedal.examples.viewer.utils.PropertiesFile;
-import org.jpedal.exception.PdfException;
-
 import com.nfpenterprise.gameHub.Main;
 import com.nfpenterprise.gameHub.character.dto.CharacterDto;
 
@@ -13,7 +7,6 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
 
 public class MyCharactersController {
 
@@ -51,14 +44,29 @@ public class MyCharactersController {
      */
     @FXML
     private void handleNewCharacter() {
-        mainApp.showNewCharacterMain();
+        mainApp.showNewCharacterMain(false, null);
+    }
+
+    @FXML
+    private void handleEditCharacter() {
+    	CharacterDto selectedCharacter = null;
+    	if (myCharacterTable != null && myCharacterTable.getSelectionModel() != null) {
+    		selectedCharacter = myCharacterTable.getSelectionModel().getSelectedItem();
+    	}
+        mainApp.showNewCharacterMain(true, selectedCharacter);
+    }
+    @FXML
+    private void handleDeleteCharacter() {
+    	// TODO
     }
 
 	public void setMainApp(Main main) {
 		this.mainApp = main;
 
         // Add observable list data to the table
-		myCharacterTable.setItems(mainApp.getMyCharacterData());
+		if (myCharacterTable != null && mainApp != null) {
+			myCharacterTable.setItems(mainApp.getMyCharacterData());
+		}
 	}
 
 }
