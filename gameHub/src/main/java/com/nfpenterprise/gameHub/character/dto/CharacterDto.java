@@ -28,6 +28,7 @@ public class CharacterDto {
 	private Integer experience;
 	private Integer speed;
 	private Integer hitPoints;
+	private String characterSheetPath;
 
 	private Integer strength;
 	private Integer dexterity;
@@ -49,6 +50,7 @@ public class CharacterDto {
 	public CharacterDto() {
 	}
 
+    @XmlElement(name = "characterId")
 	public Integer getCharacterId() {
 		return characterId;
 	}
@@ -57,6 +59,7 @@ public class CharacterDto {
 		this.characterId = characterId;
 	}
 
+    @XmlElement(name = "characterName")
 	public String getCharacterName() {
 		return characterName;
 	}
@@ -65,6 +68,7 @@ public class CharacterDto {
 		this.characterName = characterName;
 	}
 
+    @XmlElement(name = "alignment")
 	public String getAlignment() {
 		return alignment;
 	}
@@ -73,6 +77,7 @@ public class CharacterDto {
 		this.alignment = alignmentId;
 	}
 
+    @XmlElement(name = "background")
 	public String getBackground() {
 		return background;
 	}
@@ -84,6 +89,7 @@ public class CharacterDto {
 		}
 	}
 
+    @XmlElement(name = "race")
 	public String getRace() {
 		return race;
 	}
@@ -96,6 +102,7 @@ public class CharacterDto {
 		}
 	}
 
+    @XmlElement(name = "subRace")
 	public String getSubRace() {
 		return subRace;
 	}
@@ -107,6 +114,7 @@ public class CharacterDto {
 		}
 	}
 
+    @XmlElement(name = "class")
 	public String getClassName() {
 		return className;
 	}
@@ -118,6 +126,7 @@ public class CharacterDto {
 		}
 	}
 
+    @XmlElement(name = "classLevel")
 	public Integer getClassLevel() {
 		return classLevel;
 	}
@@ -126,6 +135,7 @@ public class CharacterDto {
 		this.classLevel = classLevel;
 	}
 
+    @XmlElement(name = "experience")
 	public Integer getExperience() {
 		return experience;
 	}
@@ -134,6 +144,7 @@ public class CharacterDto {
 		this.experience = experience;
 	}
 
+    @XmlElement(name = "strength")
 	public Integer getStrength() {
 		return strength;
 	}
@@ -142,6 +153,7 @@ public class CharacterDto {
 		this.strength = strength;
 	}
 
+    @XmlElement(name = "dexterity")
 	public Integer getDexterity() {
 		return dexterity;
 	}
@@ -150,6 +162,7 @@ public class CharacterDto {
 		this.dexterity = dexterity;
 	}
 
+    @XmlElement(name = "constitution")
 	public Integer getConstitution() {
 		return constitution;
 	}
@@ -158,6 +171,7 @@ public class CharacterDto {
 		this.constitution = constitution;
 	}
 
+    @XmlElement(name = "intelligence")
 	public Integer getIntelligence() {
 		return intelligence;
 	}
@@ -166,6 +180,7 @@ public class CharacterDto {
 		this.intelligence = intelligence;
 	}
 
+    @XmlElement(name = "wisdom")
 	public Integer getWisdom() {
 		return wisdom;
 	}
@@ -174,6 +189,7 @@ public class CharacterDto {
 		this.wisdom = wisdom;
 	}
 
+    @XmlElement(name = "charisma")
 	public Integer getCharisma() {
 		return charisma;
 	}
@@ -182,6 +198,7 @@ public class CharacterDto {
 		this.charisma = charisma;
 	}
 
+    @XmlElement(name = "personalityTrait")
 	public String getPersonalityTrait() {
 		return personalityTrait;
 	}
@@ -190,6 +207,7 @@ public class CharacterDto {
 		this.personalityTrait = personalityTrait != null ? personalityTrait.getPersonalityTraitText() : null;
 	}
 
+    @XmlElement(name = "ideals")
 	public String getIdeals() {
 		return ideals;
 	}
@@ -198,6 +216,7 @@ public class CharacterDto {
 		this.ideals = ideals != null ? ideals.getIdealText() : null;
 	}
 
+    @XmlElement(name = "bonds")
 	public String getBonds() {
 		return bonds;
 	}
@@ -206,6 +225,7 @@ public class CharacterDto {
 		this.bonds = bonds != null ? bonds.getBondText() : null;
 	}
 
+    @XmlElement(name = "flaws")
 	public String getFlaws() {
 		return flaws;
 	}
@@ -214,6 +234,7 @@ public class CharacterDto {
 		this.flaws = flaws != null ? flaws.getFlawText() : null;
 	}
 
+    @XmlElement(name = "speed")
 	public Integer getSpeed() {
 		return speed;
 	}
@@ -231,7 +252,7 @@ public class CharacterDto {
 		this.profSkills = profSkills;
 	}
 
-	private void addProfSkill(Integer profSkillId) {
+	public void addProfSkill(Integer profSkillId) {
 		if (profSkills == null) {
 			setProfSkills(new HashSet<Integer>());
 		}
@@ -268,6 +289,14 @@ public class CharacterDto {
 
 	public void setSavingThrows(Set<Integer> savingThrows) {
 		this.savingThrows = savingThrows;
+	}
+
+	public String getCharacterSheetPath() {
+		return characterSheetPath;
+	}
+
+	public void setCharacterSheetPath(String characterSheetPath) {
+		this.characterSheetPath = characterSheetPath;
 	}
 
 	public void resetSetLists() {

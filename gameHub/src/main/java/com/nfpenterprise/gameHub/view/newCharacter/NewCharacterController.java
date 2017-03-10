@@ -3,6 +3,7 @@ package com.nfpenterprise.gameHub.view.newCharacter;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import com.nfpenterprise.gameHub.Main;
@@ -37,6 +38,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.web.WebView;
 
 public class NewCharacterController {
@@ -297,6 +299,19 @@ public class NewCharacterController {
 			newCharacter.setIdeals(selectedIdeal);
 			newCharacter.setBonds(selectedBond);
 			newCharacter.setFlaws(selectedFlaw);
+			newCharacter.setStrength(Integer.parseInt(strengthTxt.getText()));
+			newCharacter.setDexterity(Integer.parseInt(dexterityTxt.getText()));
+			newCharacter.setConstitution(Integer.parseInt(constitutionTxt.getText()));
+			newCharacter.setIntelligence(Integer.parseInt(intelligenceTxt.getText()));
+			newCharacter.setWisdom(Integer.parseInt(wisdomTxt.getText()));
+			newCharacter.setCharisma(Integer.parseInt(charismaTxt.getText()));
+			if (skillRadioButtons != null && !skillRadioButtons.isEmpty()) {
+				for (KeyValue<Integer, KeyValue<RadioButton, Label>> skill : skillRadioButtons) {
+					if (skill.getValue().getKey().isSelected()) {
+						newCharacter.addProfSkill(skill.getKey());
+					}
+				}
+			}
 		}
 		return dataChanged;
 	}
@@ -649,30 +664,20 @@ public class NewCharacterController {
 	@FXML
     private void handleFinish() {
 		// TODO Not Finished
-    	if (verifyFinished()) {
-//    		updateCharacterData();
-//    		mainApp.getMyCharacterData().add(newCharacter);
-    		mainApp.showMyCharacters();
-    	}
+		updateCharacterData();
+		nameCharacter();
+		newCharacter.getCharacterName();
+		mainApp.getMyCharacterData().add(newCharacter);
+		mainApp.showMyCharacters();
     }
 
-	private boolean verifyFinished() {
-		// TODO Not Finished
-		Set<Message> messages = new HashSet<Message>();
-		if (racesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
-			messages.add(Message.MUST_COMPLETE_RACE);
-		}
-		if (subRacesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
-			messages.add(Message.MUST_COMPLETE_SUB_RACE);
-		}
-		if (classesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
-			messages.add(Message.MUST_COMPLETE_CLASS);
-		}
-		if (!messages.isEmpty()) {
-			screenNotCompleteError(messages);
-			return false;
-		}
-		return true;
+	private void nameCharacter() {
+		TextInputDialog dialog = new TextInputDialog("");
+		dialog.setTitle("Character Name");
+		dialog.setHeaderText("What would you like to name your new character?");
+		dialog.setContentText("Please enter your characters name:");
+		Optional<String> result = dialog.showAndWait();
+		result.ifPresent(characterName -> newCharacter.setCharacterName(characterName));
 	}
 
     @FXML
@@ -700,19 +705,6 @@ public class NewCharacterController {
     		cmbFlaws.getSelectionModel().selectFirst();
     		cmbFlaws.setDisable(false);
     	}
-    }
-
-    private void screenNotCompleteError(Set<Message> messages) {
-    	//TODO this should go in a util class!
-    	Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("ERROR");
-        alert.setHeaderText("Character Not Finished.");
-        StringBuilder content = new StringBuilder();
-        for (Message message : messages) {
-        	content.append("\n" + message.toString());
-        }
-        alert.setContentText(content.toString());
-        alert.showAndWait();
     }
 
     @FXML

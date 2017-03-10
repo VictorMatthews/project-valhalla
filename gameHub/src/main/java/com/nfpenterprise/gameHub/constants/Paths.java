@@ -5,7 +5,7 @@ public enum Paths {
 
 	MY_CHARACTER_DATA("save/Characters.xml"),
 
-	DWARF_HTML("file/races/Dwarf.html"),
+	DWARF_HTML("file/races/DnDAdvLgLogsheet.pdf"),//Dwarf.html"),
 	ELF_HTML("file/races/Elf.html"),
 	HALFLING_HTML("file/races/Halfling.html"),
 	HUMAN_HTML("file/races/Human.html"),

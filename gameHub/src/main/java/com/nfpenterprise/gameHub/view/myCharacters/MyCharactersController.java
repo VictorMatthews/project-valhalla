@@ -1,5 +1,11 @@
 package com.nfpenterprise.gameHub.view.myCharacters;
 
+import org.jpedal.PdfDecoderFX;
+import org.jpedal.examples.viewer.OpenViewerFX;
+import org.jpedal.examples.viewer.gui.generic.GUISearchWindow;
+import org.jpedal.examples.viewer.utils.PropertiesFile;
+import org.jpedal.exception.PdfException;
+
 import com.nfpenterprise.gameHub.Main;
 import com.nfpenterprise.gameHub.character.dto.CharacterDto;
 
@@ -7,6 +13,7 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
 
 public class MyCharactersController {
 
@@ -18,7 +25,6 @@ public class MyCharactersController {
 	private Main mainApp;
 
 	public MyCharactersController() {
-		
 	}
 
 	@FXML
