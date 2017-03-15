@@ -65,7 +65,6 @@ public class NewCharacterController {
 	@FXML private Tab classTab;
 	@FXML private Tab backgorundTab;
 	@FXML private Tab attributesSkillsTab;
-	@FXML private Tab spellsTab;
 	@FXML private TableView<Races> racesTable;
     @FXML private TableColumn<Races, String> racesColumn;
 	@FXML private TableView<SubRaces> subRacesTable;

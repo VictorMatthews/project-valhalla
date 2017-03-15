@@ -34,9 +34,7 @@ public enum Paths {
 	ROGUE_HTML("file/classes/Rogue.html"),
 	SORCERER_HTML("file/classes/Sorcerer.html"),
 	WARLOCK_HTML("file/classes/Warlock.html"),
-	WIZARD_HTML("file/classes/Wizard.html"), 
-
-	ACID_SPLASH_HTML("file/spells/AcidSplash.html"),
+	WIZARD_HTML("file/classes/Wizard.html"),
 
 	ROOT_LAYOUT_FXML("view/RootLayout.fxml"),
 	NEW_CHARACTER_MAIN_FXML("view/newCharacter/NewCharacterMain.fxml"),
