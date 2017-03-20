@@ -189,21 +189,21 @@ public class NewCharacterController {
 		newCharacter.setBonds(Bonds.CRIMINAL_2);
 		newCharacter.setFlaws(Flaws.CRIMINAL_1);
 
-		loadCharacterToEditTables(racesTable, dataController.populateRaceData(), newCharacter.getRace());
+		loadTablesForEditableCharacter(racesTable, dataController.populateRaceData(), newCharacter.getRace());
 		showRaceDetails(null, racesTable.getSelectionModel().getSelectedItem());
-		loadCharacterToEditTables(subRacesTable, dataController.populateSubRaceData(racesTable.getSelectionModel().getSelectedItem()), newCharacter.getSubRace());
+		loadTablesForEditableCharacter(subRacesTable, dataController.populateSubRaceData(racesTable.getSelectionModel().getSelectedItem()), newCharacter.getSubRace());
 		showSubRaceDetails(subRacesTable.getSelectionModel().getSelectedItem());
-		loadCharacterToEditTables(classesTable, dataController.populateClassData(), newCharacter.getClassName());
+		loadTablesForEditableCharacter(classesTable, dataController.populateClassData(), newCharacter.getClassName());
 		showClassDetails(classesTable.getSelectionModel().getSelectedItem());
 		loadCharacterBackgroundData(cmbBackground, dataController.populateBackgroundData(), newCharacter.getBackground());
 		refreshBackground(cmbBackground.getSelectionModel().getSelectedItem(), newCharacter);
 		updateCharacterData();
 
 		handleAttributes();
-		handleSkills(profSkillsToChoose);	
+		handleSkills(profSkillsToChoose);
 	}
 
-	private <T> void loadCharacterToEditTables(TableView<T> table, ObservableList<T> dataList, String newCharacterData) {
+	private <T> void loadTablesForEditableCharacter(TableView<T> table, ObservableList<T> dataList, String newCharacterData) {
 		if (table != null && table.getSelectionModel() != null) {
 			for (T data : dataList) {
 				if (newCharacterData.equals(data.toString())) {
@@ -724,26 +724,26 @@ public class NewCharacterController {
 
 	private boolean verifyFinished() {
 		// TODO Not Finished
-		Set<Message> messages = new HashSet<Message>();
-		if (racesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
-			messages.add(Message.MUST_COMPLETE_RACE);
-		}
-		if (subRacesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
-			messages.add(Message.MUST_COMPLETE_SUB_RACE);
-		}
-		if (classesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
-			messages.add(Message.MUST_COMPLETE_CLASS);
-		}
-		if (!remainingAttributeIncrease.equals(0)) {
-			messages.add(Message.MUST_COMPLETE_ATTRIBUTES);
-		}
-		if (!remainingSkillChoices.equals(0)) {
-			messages.add(Message.MUST_COMPLETE_SKILLS);
-		}
-		if (!messages.isEmpty()) {
-			screenNotCompleteError(messages);
-			return false;
-		}
+//		Set<Message> messages = new HashSet<Message>();
+//		if (racesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
+//			messages.add(Message.MUST_COMPLETE_RACE);
+//		}
+//		if (subRacesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
+//			messages.add(Message.MUST_COMPLETE_SUB_RACE);
+//		}
+//		if (classesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
+//			messages.add(Message.MUST_COMPLETE_CLASS);
+//		}
+//		if (!remainingAttributeIncrease.equals(0)) {
+//			messages.add(Message.MUST_COMPLETE_ATTRIBUTES);
+//		}
+//		if (!remainingSkillChoices.equals(0)) {
+//			messages.add(Message.MUST_COMPLETE_SKILLS);
+//		}
+//		if (!messages.isEmpty()) {
+//			screenNotCompleteError(messages);
+//			return false;
+//		}
 		return true;
 	}
 
