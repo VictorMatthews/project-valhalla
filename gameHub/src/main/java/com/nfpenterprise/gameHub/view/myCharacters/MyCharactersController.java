@@ -73,6 +73,8 @@ public class MyCharactersController {
 	@FXML private RadioButton stealthRadioButton;
 	@FXML private RadioButton survivalRadioButton;
 
+	private Label remainingSkillChoices = new Label();
+
 	private Main mainApp;
 
 	public MyCharactersController() {
@@ -99,6 +101,24 @@ public class MyCharactersController {
 		intelligenceTxt.setDisable(true);
 		wisdomTxt.setDisable(true);
 		charismaTxt.setDisable(true);
+		acrobaticsRadioButton.setDisable(true);
+		animalHandlingRadioButton.setDisable(true);
+		arcanaRadioButton.setDisable(true);
+		athleticsRadioButton.setDisable(true);
+		deceptionRadioButton.setDisable(true);
+		historyRadioButton.setDisable(true);
+		insightRadioButton.setDisable(true);
+		intimidationRadioButton.setDisable(true);
+		investigationRadioButton.setDisable(true);
+		medicineRadioButton.setDisable(true);
+		natureRadioButton.setDisable(true);
+		perceptionRadioButton.setDisable(true);
+		performanceRadioButton.setDisable(true);
+		persuasionRadioButton.setDisable(true);
+		religionRadioButton.setDisable(true);
+		sleightOfHandRadioButton.setDisable(true);
+		stealthRadioButton.setDisable(true);
+		survivalRadioButton.setDisable(true);
 
 		attributesSkillsUtil = new AttributesSkillsUtil(acrobaticsIncrease, animalHandlingIncrease, arcanaIncrease, athleticsIncrease, deceptionIncrease, historyIncrease,
 				 insightIncrease, intimidationIncrease, investigationIncrease, medicineIncrease, natureIncrease, perceptionIncrease, performanceIncrease,
@@ -106,11 +126,10 @@ public class MyCharactersController {
 				 arcanaRadioButton, athleticsRadioButton, deceptionRadioButton, historyRadioButton, insightRadioButton, intimidationRadioButton,
 				 investigationRadioButton, medicineRadioButton, natureRadioButton, perceptionRadioButton, performanceRadioButton, persuasionRadioButton,
 				 religionRadioButton, sleightOfHandRadioButton, stealthRadioButton, survivalRadioButton, strengthTxt, dexterityTxt,
-				 intelligenceTxt, wisdomTxt, charismaTxt);
+				 intelligenceTxt, wisdomTxt, charismaTxt, remainingSkillChoices);
 	}
 
 	private void showCharacterDetails(CharacterDto character) {
-		// TODO Auto-generated method stub
 		if (character != null) {
 			raceTxt.setText(character.getSubRace() == null ? "" : character.getSubRace().equalsIgnoreCase(SubRaces.NO_SUBRACE.getSubRaceName()) ? character.getRace() : character.getSubRace());
 			classTxt.setText(character.getClassName() == null ? "" : character.getClassName());
@@ -124,18 +143,17 @@ public class MyCharactersController {
 			idealLabel.setText(character.getIdeals());
 			bondLabel.setText(character.getBonds());
 			flawLabel.setText(character.getFlaws());
-		}
 
-		attributesSkillsUtil.updateSkills(Attributes.STRENGTH);
-		attributesSkillsUtil.updateSkills(Attributes.DEXTERITY);
-		attributesSkillsUtil.updateSkills(Attributes.INTELLIGENCE);
-		attributesSkillsUtil.updateSkills(Attributes.WISDOM);
-		attributesSkillsUtil.updateSkills(Attributes.CHARISMA);
+			attributesSkillsUtil.updateSkills(Attributes.STRENGTH);
+			attributesSkillsUtil.updateSkills(Attributes.DEXTERITY);
+			attributesSkillsUtil.updateSkills(Attributes.INTELLIGENCE);
+			attributesSkillsUtil.updateSkills(Attributes.WISDOM);
+			attributesSkillsUtil.updateSkills(Attributes.CHARISMA);
+
+			attributesSkillsUtil.handleSkills(0, character);
+		}
 	}
 
-	/**
-     * Called when the user clicks the new button.
-     */
     @FXML
     private void handleNewCharacter() {
         mainApp.showNewCharacterMain(false, null);
@@ -152,7 +170,6 @@ public class MyCharactersController {
 
     @FXML
     private void handleDeleteCharacter() {
-    	// TODO
     	if (myCharacterTable != null && myCharacterTable.getSelectionModel() != null) {
             int selectedIndex = myCharacterTable.getSelectionModel().getSelectedIndex();
             myCharacterTable.getItems().remove(selectedIndex);

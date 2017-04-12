@@ -76,7 +76,7 @@ public class WrapperController {
     	Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Could not load data");
-        alert.setContentText("Could not load data to file:\n" + file.getPath());
+        alert.setContentText("Could not load data from file:\n" + file.getPath());
         return alert;
     }
 

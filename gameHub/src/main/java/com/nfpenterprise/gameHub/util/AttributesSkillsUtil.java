@@ -1,6 +1,12 @@
 package com.nfpenterprise.gameHub.util;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.nfpenterprise.gameHub.character.dto.CharacterDto;
 import com.nfpenterprise.gameHub.constants.Attributes;
+import com.nfpenterprise.gameHub.constants.Skills;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -8,6 +14,11 @@ import javafx.scene.control.TextField;
 
 public class AttributesSkillsUtil {
 	private final static Integer PROF_BONUS = 2;
+
+	private Set<KeyValue<Integer, KeyValue<RadioButton, Label>>> skillRadioButtons = null;
+	private Set<Integer> profSkillChoices = new HashSet<Integer>();
+
+	CharacterDto newCharacter;
 	
 	private Label acrobaticsIncrease;
 	private Label animalHandlingIncrease;
@@ -53,13 +64,15 @@ public class AttributesSkillsUtil {
 	private TextField wisdomTxt;
 	private TextField charismaTxt;
 
+	private Label remainingSkillChoices;
+
 	public AttributesSkillsUtil(Label acrobaticsIncrease, Label animalHandlingIncrease, Label arcanaIncrease, Label athleticsIncrease, Label deceptionIncrease, Label historyIncrease,
 			 Label insightIncrease, Label intimidationIncrease, Label investigationIncrease, Label medicineIncrease, Label natureIncrease, Label perceptionIncrease, Label performanceIncrease,
 			 Label persuasionIncrease, Label religionIncrease, Label sleightOfHandIncrease, Label stealthIncrease, Label survivalIncrease, RadioButton acrobaticsRadioButton, RadioButton animalHandlingRadioButton,
 			 RadioButton arcanaRadioButton, RadioButton athleticsRadioButton, RadioButton deceptionRadioButton, RadioButton historyRadioButton, RadioButton insightRadioButton, RadioButton intimidationRadioButton,
 			 RadioButton investigationRadioButton, RadioButton medicineRadioButton, RadioButton natureRadioButton, RadioButton perceptionRadioButton, RadioButton performanceRadioButton, RadioButton persuasionRadioButton,
 			 RadioButton religionRadioButton, RadioButton sleightOfHandRadioButton, RadioButton stealthRadioButton, RadioButton survivalRadioButton, TextField strengthTxt, TextField dexterityTxt,
-			 TextField intelligenceTxt, TextField wisdomTxt, TextField charismaTxt) {
+			 TextField intelligenceTxt, TextField wisdomTxt, TextField charismaTxt, Label remainingSkillChoices) {
 		
 		 this.acrobaticsIncrease = acrobaticsIncrease;
 		 this.animalHandlingIncrease = animalHandlingIncrease;
@@ -104,6 +117,10 @@ public class AttributesSkillsUtil {
 		 this.intelligenceTxt = intelligenceTxt;
 		 this.wisdomTxt = wisdomTxt;
 		 this.charismaTxt = charismaTxt;
+
+		 this.remainingSkillChoices = remainingSkillChoices;
+		 
+		 skillRadioButtons = setupSkillKeyValues();
 	}
 
 	public void updateSkills(Attributes attribute) {
@@ -198,5 +215,98 @@ public class AttributesSkillsUtil {
 			return +4;
 		}
 		return -2;
+	}
+
+	public void handleSkills(Integer skillsRemaining, CharacterDto newCharacter) {
+		this.newCharacter = newCharacter;
+		for (KeyValue<Integer, KeyValue<RadioButton, Label>> skillKV : skillRadioButtons) {
+			skillKV.getValue().getKey().setSelected(false);
+		}
+
+		remainingSkillChoices.setText(skillsRemaining.toString());
+		disableAllUnselectedSkillChoices(false);
+		for (Integer skill : newCharacter.getProfSkills()) {
+			for (KeyValue<Integer, KeyValue<RadioButton, Label>> skillKV : skillRadioButtons) {
+				if (!profSkillChoices.contains(skillKV.getKey())) {
+					skillKV.getValue().getKey().setDisable(true);
+				}
+				if (skillKV.getKey().equals(skill)) {
+					skillKV.getValue().getKey().setSelected(true);
+					handleSkillSelected(skillKV.getValue().getKey(), skillKV.getValue().getValue(), false /*fromUserClick*/);
+				}
+			}
+		}
+	}
+
+	public void handleSkillSelected(RadioButton skill, Label skillIncrease, boolean fromUserClick) {
+		Integer oldSkillValue = Integer.parseInt(skillIncrease.getText());
+		Integer oldSkillsRemaining = Integer.parseInt(remainingSkillChoices.getText());
+		Integer newSkillsRemaining = oldSkillsRemaining;
+		if (skill.isSelected()) {
+			Integer newSkillValue = oldSkillValue + PROF_BONUS;
+			skillIncrease.setText(newSkillValue.toString());
+
+			if (fromUserClick) {
+				newSkillsRemaining = Math.subtractExact(oldSkillsRemaining, 1);
+				remainingSkillChoices.setText(newSkillsRemaining.toString());
+			} else {
+				skill.setDisable(true);
+			}
+		} else {
+			Integer newSkillValue = oldSkillValue - PROF_BONUS;
+			skillIncrease.setText(newSkillValue.toString());
+
+			if (fromUserClick) {
+				newSkillsRemaining = Math.addExact(oldSkillsRemaining, 1);
+				remainingSkillChoices.setText(newSkillsRemaining.toString());
+			}
+		}
+		if (newSkillsRemaining.equals(0)) {
+			disableAllUnselectedSkillChoices(true);
+		}
+		if (oldSkillsRemaining.equals(0) && newSkillsRemaining.equals(1)) {
+			disableAllUnselectedSkillChoices(false);
+		}
+	}
+
+    private void disableAllUnselectedSkillChoices(boolean disable) {
+    	for (KeyValue<Integer, KeyValue<RadioButton, Label>> skillKV : skillRadioButtons) {
+			skillKV.getValue().getKey().setDisable(disable);
+			if (skillKV.getValue().getKey().isSelected()) {
+				skillKV.getValue().getKey().setDisable(false);
+			}
+			if (!profSkillChoices.contains(skillKV.getKey())) {
+				skillKV.getValue().getKey().setDisable(true);
+			}
+			if (newCharacter.getProfSkills().contains(skillKV.getKey())) {
+				skillKV.getValue().getKey().setDisable(true);				
+			}
+    	}
+	}
+
+	public HashSet<KeyValue<Integer, KeyValue<RadioButton, Label>>> setupSkillKeyValues() {
+		return new HashSet<KeyValue<Integer, KeyValue<RadioButton, Label>>>(Arrays.asList(
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.ACROBATICS.getSkillId(), new KeyValue<RadioButton, Label>(acrobaticsRadioButton, acrobaticsIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.ANIMAL_HANDLING.getSkillId(), new KeyValue<RadioButton, Label>(animalHandlingRadioButton, animalHandlingIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.ARCANA.getSkillId(), new KeyValue<RadioButton, Label>(arcanaRadioButton, arcanaIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.ATHLETICS.getSkillId(), new KeyValue<RadioButton, Label>(athleticsRadioButton, athleticsIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.DECEPTION.getSkillId(), new KeyValue<RadioButton, Label>(deceptionRadioButton, deceptionIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.HISTORY.getSkillId(), new KeyValue<RadioButton, Label>(historyRadioButton, historyIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.INSIGHT.getSkillId(), new KeyValue<RadioButton, Label>(insightRadioButton, insightIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.INTIMIDATION.getSkillId(), new KeyValue<RadioButton, Label>(intimidationRadioButton, intimidationIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.INVESTIGATION.getSkillId(), new KeyValue<RadioButton, Label>(investigationRadioButton, investigationIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.MEDICINE.getSkillId(), new KeyValue<RadioButton, Label>(medicineRadioButton, medicineIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.NATURE.getSkillId(), new KeyValue<RadioButton, Label>(natureRadioButton, natureIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.PERCEPTION.getSkillId(), new KeyValue<RadioButton, Label>(perceptionRadioButton, perceptionIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.PERFORMANCE.getSkillId(), new KeyValue<RadioButton, Label>(performanceRadioButton, performanceIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.PERSUASION.getSkillId(), new KeyValue<RadioButton, Label>(persuasionRadioButton, persuasionIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.RELIGION.getSkillId(), new KeyValue<RadioButton, Label>(religionRadioButton, religionIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.SLEIGHT_OF_HAND.getSkillId(), new KeyValue<RadioButton, Label>(sleightOfHandRadioButton, sleightOfHandIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.STEALTH.getSkillId(), new KeyValue<RadioButton, Label>(stealthRadioButton, stealthIncrease)),
+			new KeyValue<Integer, KeyValue<RadioButton, Label>>(Skills.SURVIVAL.getSkillId(), new KeyValue<RadioButton, Label>(survivalRadioButton, survivalIncrease))));
+	}
+
+	public void setProfSkillChoices(Set<Integer> profSkillChoices) {
+		this.profSkillChoices = profSkillChoices;
 	}
 }

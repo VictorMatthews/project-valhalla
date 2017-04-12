@@ -44,8 +44,6 @@ public class Main extends Application {
 
 		initRootLayout();
 
-//		myCharacters.add(mainController.createTestCharacterData());
-
 		showMyCharacters();
 		wrapperController = new WrapperController();
 		File file = getCharactersFilePath();

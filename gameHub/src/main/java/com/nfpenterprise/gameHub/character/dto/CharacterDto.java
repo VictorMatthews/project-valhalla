@@ -18,7 +18,6 @@ import com.nfpenterprise.gameHub.constants.SubRaces;
 public class CharacterDto {
 
 	private String characterName;
-	private String alignment;
 	private String background;
 	private String race;
 	private String subRace;
@@ -50,15 +49,6 @@ public class CharacterDto {
 
 	public void setCharacterName(String characterName) {
 		this.characterName = characterName;
-	}
-
-    @XmlElement(name = "alignment")
-	public String getAlignment() {
-		return alignment;
-	}
-
-	public void setAlignment(String alignmentId) {
-		this.alignment = alignmentId;
 	}
 
     @XmlElement(name = "background")
