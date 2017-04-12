@@ -166,13 +166,6 @@ public class NewCharacterController {
 		cmbBackground.setItems(dataController.populateBackgroundData());
 		cmbBackground.getSelectionModel().selectFirst();
 		refreshBackground();
-
-		strengthTxt.setDisable(true);
-		dexterityTxt.setDisable(true);
-		constitutionTxt.setDisable(true);
-		intelligenceTxt.setDisable(true);
-		wisdomTxt.setDisable(true);
-		charismaTxt.setDisable(true);
 		
 		attributesSkillsUtil = new AttributesSkillsUtil(acrobaticsIncrease, animalHandlingIncrease, arcanaIncrease, athleticsIncrease, deceptionIncrease, historyIncrease,
 				 insightIncrease, intimidationIncrease, investigationIncrease, medicineIncrease, natureIncrease, perceptionIncrease, performanceIncrease,

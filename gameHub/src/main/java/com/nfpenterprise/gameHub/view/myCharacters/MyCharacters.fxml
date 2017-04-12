@@ -62,38 +62,38 @@
                         <Label layoutX="289.0" layoutY="83.0" text="INTELLIGENCE" />
                         <Label layoutX="408.0" layoutY="83.0" text="WISDOM" />
                         <Label layoutX="502.0" layoutY="83.0" text="CHARISMA" />
-                        <TextField fx:id="strengthTxt" alignment="CENTER" layoutX="309.0" layoutY="36.0" prefHeight="43.0" prefWidth="54.0" text="8">
+                        <TextField fx:id="strengthTxt" alignment="CENTER" editable="false" layoutX="309.0" layoutY="36.0" prefHeight="43.0" prefWidth="54.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="dexterityTxt" alignment="CENTER" layoutX="409.0" layoutY="36.0" prefHeight="43.0" prefWidth="54.0" text="8">
+                        <TextField fx:id="dexterityTxt" alignment="CENTER" editable="false" layoutX="409.0" layoutY="36.0" prefHeight="43.0" prefWidth="54.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="constitutionTxt" alignment="CENTER" layoutX="509.0" layoutY="36.0" prefHeight="43.0" prefWidth="54.0" text="8">
+                        <TextField fx:id="constitutionTxt" alignment="CENTER" editable="false" layoutX="509.0" layoutY="36.0" prefHeight="43.0" prefWidth="54.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="intelligenceTxt" alignment="CENTER" layoutX="309.0" layoutY="107.0" prefHeight="43.0" prefWidth="54.0" text="8">
+                        <TextField fx:id="intelligenceTxt" alignment="CENTER" editable="false" layoutX="309.0" layoutY="107.0" prefHeight="43.0" prefWidth="54.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="wisdomTxt" alignment="CENTER" layoutX="409.0" layoutY="107.0" prefHeight="43.0" prefWidth="54.0" text="8">
+                        <TextField fx:id="wisdomTxt" alignment="CENTER" editable="false" layoutX="409.0" layoutY="107.0" prefHeight="43.0" prefWidth="54.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="charismaTxt" alignment="CENTER" layoutX="509.0" layoutY="107.0" prefHeight="43.0" prefWidth="54.0" text="8">
+                        <TextField fx:id="charismaTxt" alignment="CENTER" editable="false" layoutX="509.0" layoutY="107.0" prefHeight="43.0" prefWidth="54.0">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="raceTxt" layoutX="83.0" layoutY="45.0" prefHeight="27.0" prefWidth="185.0" />
-                        <TextField fx:id="classTxt" layoutX="83.0" layoutY="93.0" prefHeight="27.0" prefWidth="185.0" />
+                        <TextField fx:id="raceTxt" editable="false" layoutX="83.0" layoutY="45.0" prefHeight="27.0" prefWidth="185.0" />
+                        <TextField fx:id="classTxt" editable="false" layoutX="83.0" layoutY="93.0" prefHeight="27.0" prefWidth="185.0" />
                         <Label layoutX="14.0" layoutY="180.0" text="Personality Trait :" />
                         <Label layoutX="14.0" layoutY="240.0" text="Ideal :" />
                         <Label layoutX="14.0" layoutY="300.0" text="Bond :" />
@@ -102,24 +102,24 @@
                         <Label fx:id="idealLabel" layoutX="14.0" layoutY="260.0" />
                         <Label fx:id="bondLabel" layoutX="14.0" layoutY="320.0" />
                         <Label fx:id="flawLabel" layoutX="14.0" layoutY="380.0" />
-                        <RadioButton fx:id="acrobaticsRadioButton" layoutX="74.0" layoutY="426.0" mnemonicParsing="false" text="Acrobatics (Dex)" />
-                        <RadioButton fx:id="animalHandlingRadioButton" layoutX="74.0" layoutY="456.0" mnemonicParsing="false" text="Animal Handling (Wis)" />
-                        <RadioButton fx:id="arcanaRadioButton" layoutX="74.0" layoutY="486.0" mnemonicParsing="false" text="Arcana (Int)" />
-                        <RadioButton fx:id="deceptionRadioButton" layoutX="74.0" layoutY="546.0" mnemonicParsing="false" text="Deception (Cha)" />
-                        <RadioButton fx:id="athleticsRadioButton" layoutX="74.0" layoutY="516.0" mnemonicParsing="false" text="Athletics (Str)" />
-                        <RadioButton fx:id="historyRadioButton" layoutX="74.0" layoutY="576.0" mnemonicParsing="false" text="History (Int)" />
-                        <RadioButton fx:id="insightRadioButton" layoutX="74.0" layoutY="606.0" mnemonicParsing="false" text="Insight (Wis)" />
-                        <RadioButton fx:id="intimidationRadioButton" layoutX="74.0" layoutY="636.0" mnemonicParsing="false" text="Intimidation (Cha)" />
-                        <RadioButton fx:id="investigationRadioButton" layoutX="74.0" layoutY="666.0" mnemonicParsing="false" text="Investigation (Int)" />
-                        <RadioButton fx:id="medicineRadioButton" layoutX="308.0" layoutY="426.0" mnemonicParsing="false" text="Medicine (Wis)" />
-                        <RadioButton fx:id="natureRadioButton" layoutX="308.0" layoutY="456.0" mnemonicParsing="false" text="Nature (Int)" />
-                        <RadioButton fx:id="perceptionRadioButton" layoutX="308.0" layoutY="486.0" mnemonicParsing="false" text="Perception (Wis)" />
-                        <RadioButton fx:id="performanceRadioButton" layoutX="308.0" layoutY="516.0" mnemonicParsing="false" text="Performance (Cha)" />
-                        <RadioButton fx:id="persuasionRadioButton" layoutX="308.0" layoutY="546.0" mnemonicParsing="false" text="Persuasion (Cha)" />
-                        <RadioButton fx:id="religionRadioButton" layoutX="308.0" layoutY="576.0" mnemonicParsing="false" text="Religion (Int)" />
-                        <RadioButton fx:id="sleightOfHandRadioButton" layoutX="308.0" layoutY="606.0" mnemonicParsing="false" text="Sleight of Hand (Dex)" />
-                        <RadioButton fx:id="stealthRadioButton" layoutX="308.0" layoutY="636.0" mnemonicParsing="false" text="Stealth (Dex)" />
-                        <RadioButton fx:id="survivalRadioButton" layoutX="308.0" layoutY="666.0" mnemonicParsing="false" text="Survival (Wis)" />
+                        <RadioButton fx:id="acrobaticsRadioButton" disable="true" layoutX="74.0" layoutY="426.0" mnemonicParsing="false" text="Acrobatics (Dex)" />
+                        <RadioButton fx:id="animalHandlingRadioButton" disable="true" layoutX="74.0" layoutY="456.0" mnemonicParsing="false" text="Animal Handling (Wis)" />
+                        <RadioButton fx:id="arcanaRadioButton" disable="true" layoutX="74.0" layoutY="486.0" mnemonicParsing="false" text="Arcana (Int)" />
+                        <RadioButton fx:id="deceptionRadioButton" disable="true" layoutX="74.0" layoutY="546.0" mnemonicParsing="false" text="Deception (Cha)" />
+                        <RadioButton fx:id="athleticsRadioButton" disable="true" layoutX="74.0" layoutY="516.0" mnemonicParsing="false" text="Athletics (Str)" />
+                        <RadioButton fx:id="historyRadioButton" disable="true" layoutX="74.0" layoutY="576.0" mnemonicParsing="false" text="History (Int)" />
+                        <RadioButton fx:id="insightRadioButton" disable="true" layoutX="74.0" layoutY="606.0" mnemonicParsing="false" text="Insight (Wis)" />
+                        <RadioButton fx:id="intimidationRadioButton" disable="true" layoutX="74.0" layoutY="636.0" mnemonicParsing="false" text="Intimidation (Cha)" />
+                        <RadioButton fx:id="investigationRadioButton" disable="true" layoutX="74.0" layoutY="666.0" mnemonicParsing="false" text="Investigation (Int)" />
+                        <RadioButton fx:id="medicineRadioButton" disable="true" layoutX="308.0" layoutY="426.0" mnemonicParsing="false" text="Medicine (Wis)" />
+                        <RadioButton fx:id="natureRadioButton" disable="true" layoutX="308.0" layoutY="456.0" mnemonicParsing="false" text="Nature (Int)" />
+                        <RadioButton fx:id="perceptionRadioButton" disable="true" layoutX="308.0" layoutY="486.0" mnemonicParsing="false" text="Perception (Wis)" />
+                        <RadioButton fx:id="performanceRadioButton" disable="true" layoutX="308.0" layoutY="516.0" mnemonicParsing="false" text="Performance (Cha)" />
+                        <RadioButton fx:id="persuasionRadioButton" disable="true" layoutX="308.0" layoutY="546.0" mnemonicParsing="false" text="Persuasion (Cha)" />
+                        <RadioButton fx:id="religionRadioButton" disable="true" layoutX="308.0" layoutY="576.0" mnemonicParsing="false" text="Religion (Int)" />
+                        <RadioButton fx:id="sleightOfHandRadioButton" disable="true" layoutX="308.0" layoutY="606.0" mnemonicParsing="false" text="Sleight of Hand (Dex)" />
+                        <RadioButton fx:id="stealthRadioButton" disable="true" layoutX="308.0" layoutY="636.0" mnemonicParsing="false" text="Stealth (Dex)" />
+                        <RadioButton fx:id="survivalRadioButton" disable="true" layoutX="308.0" layoutY="666.0" mnemonicParsing="false" text="Survival (Wis)" />
                         <Label fx:id="acrobaticsIncrease" contentDisplay="CENTER" layoutX="44.0" layoutY="427.0" textAlignment="CENTER" underline="true" />
                         <Label fx:id="animalHandlingIncrease" contentDisplay="CENTER" layoutX="44.0" layoutY="456.0" textAlignment="CENTER" underline="true" />
                         <Label fx:id="arcanaIncrease" contentDisplay="CENTER" layoutX="44.0" layoutY="486.0" textAlignment="CENTER" underline="true" />

@@ -93,33 +93,6 @@ public class MyCharactersController {
 	    myCharacterTable.getSelectionModel().selectedItemProperty().addListener(
 	            (observable, oldValue, newValue) -> showCharacterDetails(newValue));
 
-	    raceTxt.setDisable(true);
-		classTxt.setDisable(true);
-		strengthTxt.setDisable(true);
-		dexterityTxt.setDisable(true);
-		constitutionTxt.setDisable(true);
-		intelligenceTxt.setDisable(true);
-		wisdomTxt.setDisable(true);
-		charismaTxt.setDisable(true);
-		acrobaticsRadioButton.setDisable(true);
-		animalHandlingRadioButton.setDisable(true);
-		arcanaRadioButton.setDisable(true);
-		athleticsRadioButton.setDisable(true);
-		deceptionRadioButton.setDisable(true);
-		historyRadioButton.setDisable(true);
-		insightRadioButton.setDisable(true);
-		intimidationRadioButton.setDisable(true);
-		investigationRadioButton.setDisable(true);
-		medicineRadioButton.setDisable(true);
-		natureRadioButton.setDisable(true);
-		perceptionRadioButton.setDisable(true);
-		performanceRadioButton.setDisable(true);
-		persuasionRadioButton.setDisable(true);
-		religionRadioButton.setDisable(true);
-		sleightOfHandRadioButton.setDisable(true);
-		stealthRadioButton.setDisable(true);
-		survivalRadioButton.setDisable(true);
-
 		attributesSkillsUtil = new AttributesSkillsUtil(acrobaticsIncrease, animalHandlingIncrease, arcanaIncrease, athleticsIncrease, deceptionIncrease, historyIncrease,
 				 insightIncrease, intimidationIncrease, investigationIncrease, medicineIncrease, natureIncrease, perceptionIncrease, performanceIncrease,
 				 persuasionIncrease, religionIncrease, sleightOfHandIncrease, stealthIncrease, survivalIncrease, acrobaticsRadioButton, animalHandlingRadioButton,
