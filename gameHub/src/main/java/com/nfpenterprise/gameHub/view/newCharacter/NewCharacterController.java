@@ -15,19 +15,17 @@ import com.nfpenterprise.gameHub.constants.Bonds;
 import com.nfpenterprise.gameHub.constants.Classes;
 import com.nfpenterprise.gameHub.constants.Flaws;
 import com.nfpenterprise.gameHub.constants.Ideals;
-import com.nfpenterprise.gameHub.constants.Message;
 import com.nfpenterprise.gameHub.constants.PersonalityTraits;
 import com.nfpenterprise.gameHub.constants.Races;
 import com.nfpenterprise.gameHub.constants.Skills;
 import com.nfpenterprise.gameHub.constants.SubRaces;
+import com.nfpenterprise.gameHub.util.AttributesSkillsUtil;
 import com.nfpenterprise.gameHub.util.DataController;
 import com.nfpenterprise.gameHub.util.KeyValue;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -44,7 +42,9 @@ import javafx.scene.web.WebView;
 public class NewCharacterController {
 
 	private Main mainApp;
+	private AttributesSkillsUtil attributesSkillsUtil;
 	private CharacterDto newCharacter;
+	private CharacterDto characterBeingEdited;
 	private SingleSelectionModel<Tab> tabSelectionModel;
 	private DataController dataController;
 	public ObservableList<Races> raceData;
@@ -152,7 +152,6 @@ public class NewCharacterController {
 	private void initialize() {
 		isEdit = false;
 		newCharacter = new CharacterDto();
-		newCharacter.setCharacterId(getUniqueId());
 		tabSelectionModel = tabs.getSelectionModel();
 		dataController = new DataController();
 
@@ -174,20 +173,28 @@ public class NewCharacterController {
 		refreshBackground();
 
 		skillRadioButtons = setupSkillKeyValues();
+
+		strengthTxt.setDisable(true);
+		dexterityTxt.setDisable(true);
+		constitutionTxt.setDisable(true);
+		intelligenceTxt.setDisable(true);
+		wisdomTxt.setDisable(true);
+		charismaTxt.setDisable(true);
+		
+		attributesSkillsUtil = new AttributesSkillsUtil(acrobaticsIncrease, animalHandlingIncrease, arcanaIncrease, athleticsIncrease, deceptionIncrease, historyIncrease,
+				 insightIncrease, intimidationIncrease, investigationIncrease, medicineIncrease, natureIncrease, perceptionIncrease, performanceIncrease,
+				 persuasionIncrease, religionIncrease, sleightOfHandIncrease, stealthIncrease, survivalIncrease, acrobaticsRadioButton, animalHandlingRadioButton,
+				 arcanaRadioButton, athleticsRadioButton, deceptionRadioButton, historyRadioButton, insightRadioButton, intimidationRadioButton,
+				 investigationRadioButton, medicineRadioButton, natureRadioButton, perceptionRadioButton, performanceRadioButton, persuasionRadioButton,
+				 religionRadioButton, sleightOfHandRadioButton, stealthRadioButton, survivalRadioButton, strengthTxt, dexterityTxt,
+				 intelligenceTxt, wisdomTxt, charismaTxt);
 	}
 
 	public void loadCharacter(CharacterDto characterToEdit) {
 		// TODO
 		isEdit = true;
+		characterBeingEdited = characterToEdit;
 		newCharacter = characterToEdit;
-		newCharacter.setRace(Races.GNOME);
-		newCharacter.setSubRace(SubRaces.FOREST_GNOME);
-		newCharacter.setClassName(Classes.BARD);
-		newCharacter.setBackground(Backgrounds.CRIMINAL);
-		newCharacter.setPersonalityTrait(PersonalityTraits.CRIMINAL_3);
-		newCharacter.setIdeals(Ideals.CRIMINAL_5);
-		newCharacter.setBonds(Bonds.CRIMINAL_2);
-		newCharacter.setFlaws(Flaws.CRIMINAL_1);
 
 		loadTablesForEditableCharacter(racesTable, dataController.populateRaceData(), newCharacter.getRace());
 		showRaceDetails(null, racesTable.getSelectionModel().getSelectedItem());
@@ -260,11 +267,6 @@ public class NewCharacterController {
 				webView.getEngine().load(url.toExternalForm());
 			}
 		}
-	}
-
-	private Integer getUniqueId() {
-		// TODO Auto-generated method stub
-		return 123456789;
 	}
 
 	public void setMainApp(Main main) {
@@ -404,11 +406,11 @@ public class NewCharacterController {
 		wisdomTxt.setText(wisdomVal.toString());
 		charismaTxt.setText(charismaVal.toString());
 
-		updateSkills(Attributes.STRENGTH);
-		updateSkills(Attributes.DEXTERITY);
-		updateSkills(Attributes.INTELLIGENCE);
-		updateSkills(Attributes.WISDOM);
-		updateSkills(Attributes.CHARISMA);
+		attributesSkillsUtil.updateSkills(Attributes.STRENGTH);
+		attributesSkillsUtil.updateSkills(Attributes.DEXTERITY);
+		attributesSkillsUtil.updateSkills(Attributes.INTELLIGENCE);
+		attributesSkillsUtil.updateSkills(Attributes.WISDOM);
+		attributesSkillsUtil.updateSkills(Attributes.CHARISMA);
 
 		strengthSub.setDisable(true);
 		dexteritySub.setDisable(true);
@@ -452,7 +454,7 @@ public class NewCharacterController {
 			enableAddButtons(newAttributePoints);
 		}
 
-		updateSkills(attribute);
+		attributesSkillsUtil.updateSkills(attribute);
 	}
 
 	private void enableAttributeBtn(Integer trueValue, Button btnAdd, Button btnSub, boolean isAddition) {
@@ -553,100 +555,6 @@ public class NewCharacterController {
     	}
 	}
 
-	private void updateSkills(Attributes attribute) {
-    	if (attribute.equals(Attributes.STRENGTH)) {
-        	Integer strengthInc = getAttributeIncease(Integer.parseInt(strengthTxt.getText()));
-
-        	Integer athletics = athleticsRadioButton.isSelected() ? Math.addExact(strengthInc, PROF_BONUS) : strengthInc;
-    		athleticsIncrease.setText(athletics.toString());
-    	}
-    	if (attribute.equals(Attributes.DEXTERITY)) {
-        	Integer dexterityInc = getAttributeIncease(Integer.parseInt(dexterityTxt.getText()));
-
-        	Integer acrobatics = acrobaticsRadioButton.isSelected() ? Math.addExact(dexterityInc, PROF_BONUS) : dexterityInc;
-    	    acrobaticsIncrease.setText(acrobatics.toString());
-
-        	Integer sleightOfHand = sleightOfHandRadioButton.isSelected() ? Math.addExact(dexterityInc, PROF_BONUS) : dexterityInc;
-    		sleightOfHandIncrease.setText(sleightOfHand.toString());
-
-        	Integer stealth = stealthRadioButton.isSelected() ? Math.addExact(dexterityInc, PROF_BONUS) : dexterityInc;
-    		stealthIncrease.setText(stealth.toString());
-    	}
-    	if (attribute.equals(Attributes.INTELLIGENCE)) {
-        	Integer intelligenceInc = getAttributeIncease(Integer.parseInt(intelligenceTxt.getText()));
-
-        	Integer arcana = arcanaRadioButton.isSelected() ? Math.addExact(intelligenceInc, PROF_BONUS) : intelligenceInc;
-    		arcanaIncrease.setText(arcana.toString());
-
-        	Integer history = historyRadioButton.isSelected() ? Math.addExact(intelligenceInc, PROF_BONUS) : intelligenceInc;
-    		historyIncrease.setText(history.toString());
-
-    		Integer investigation = investigationRadioButton.isSelected() ? Math.addExact(intelligenceInc, PROF_BONUS) : intelligenceInc;
-    		investigationIncrease.setText(investigation.toString());
-
-        	Integer nature = natureRadioButton.isSelected() ? Math.addExact(intelligenceInc, PROF_BONUS) : intelligenceInc;
-    		natureIncrease.setText(nature.toString());
-
-        	Integer religion = religionRadioButton.isSelected() ? Math.addExact(intelligenceInc, PROF_BONUS) : intelligenceInc;
-    		religionIncrease.setText(religion.toString());
-    	}
-    	if (attribute.equals(Attributes.WISDOM)) {
-        	Integer wisdomInc = getAttributeIncease(Integer.parseInt(wisdomTxt.getText()));
-        	
-        	Integer animalHandling = animalHandlingRadioButton.isSelected() ? Math.addExact(wisdomInc, PROF_BONUS) : wisdomInc;
-    		animalHandlingIncrease.setText(animalHandling.toString());
-    		
-        	Integer insight = insightRadioButton.isSelected() ? Math.addExact(wisdomInc, PROF_BONUS) : wisdomInc;
-    		insightIncrease.setText(insight.toString());
-    		
-        	Integer medicine = medicineRadioButton.isSelected() ? Math.addExact(wisdomInc, PROF_BONUS) : wisdomInc;
-    		medicineIncrease.setText(medicine.toString());
-    		
-        	Integer perception = perceptionRadioButton.isSelected() ? Math.addExact(wisdomInc, PROF_BONUS) : wisdomInc;
-    		perceptionIncrease.setText(perception.toString());
-
-        	Integer survival = survivalRadioButton.isSelected() ? Math.addExact(wisdomInc, PROF_BONUS) : wisdomInc;
-    		survivalIncrease.setText(survival.toString());
-    	}
-    	if (attribute.equals(Attributes.CHARISMA)) {
-        	Integer charismaInc = getAttributeIncease(Integer.parseInt(charismaTxt.getText()));
-        	
-        	Integer deception = deceptionRadioButton.isSelected() ? Math.addExact(charismaInc, PROF_BONUS) : charismaInc;
-    		deceptionIncrease.setText(deception.toString());
-    		
-        	Integer intimidation = intimidationRadioButton.isSelected() ? Math.addExact(charismaInc, PROF_BONUS) : charismaInc;
-    		intimidationIncrease.setText(intimidation.toString());
-    		
-        	Integer performance = performanceRadioButton.isSelected() ? Math.addExact(charismaInc, PROF_BONUS) : charismaInc;
-    		performanceIncrease.setText(performance.toString());
-    		
-        	Integer persuasion = persuasionRadioButton.isSelected() ? Math.addExact(charismaInc, PROF_BONUS) : charismaInc;
-    		persuasionIncrease.setText(persuasion.toString());
-    	}
-	}
-
-	private Integer getAttributeIncease(Integer attributeValue) {
-		if (attributeValue.equals(8) || attributeValue.equals(9)) {
-			return -1;
-		}
-		if (attributeValue.equals(10) || attributeValue.equals(11)) {
-			return 0;
-		}
-		if (attributeValue.equals(12) || attributeValue.equals(13)) {
-			return +1;
-		}
-		if (attributeValue.equals(14) || attributeValue.equals(15)) {
-			return +2;
-		}
-		if (attributeValue.equals(16) || attributeValue.equals(17)) {
-			return +3;
-		}
-		if (attributeValue.equals(18) || attributeValue.equals(19)) {
-			return +4;
-		}
-		return -2;
-	}
-
 	private void diasableAddButtons(boolean disable) {
 		strengthAdd.setDisable(disable);
 		dexterityAdd.setDisable(disable);
@@ -703,14 +611,12 @@ public class NewCharacterController {
 	@FXML
     private void handleFinish() {
 		// TODO Not Finished
-    	if (verifyFinished()) {
-    		updateCharacterData();
-    		nameCharacter();
-    		newCharacter.getCharacterName();
-    		mainApp.getMyCharacterData().add(newCharacter);
-    		mainApp.saveCharacterDataToFile(mainApp.getCharactersFilePath());
-    		mainApp.showMyCharacters();
-    	}
+    	updateCharacterData();
+    	nameCharacter();
+    	newCharacter.getCharacterName();
+    	mainApp.getMyCharacterData().add(newCharacter);
+    	mainApp.saveCharacterDataToFile(mainApp.getCharactersFilePath());
+    	mainApp.showMyCharacters();
     }
 
 	private void nameCharacter() {
@@ -722,36 +628,14 @@ public class NewCharacterController {
 		result.ifPresent(characterName -> newCharacter.setCharacterName(characterName));
 	}
 
-	private boolean verifyFinished() {
-		// TODO Not Finished
-//		Set<Message> messages = new HashSet<Message>();
-//		if (racesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
-//			messages.add(Message.MUST_COMPLETE_RACE);
-//		}
-//		if (subRacesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
-//			messages.add(Message.MUST_COMPLETE_SUB_RACE);
-//		}
-//		if (classesTable.getSelectionModel().selectedItemProperty().getValue() == null) {
-//			messages.add(Message.MUST_COMPLETE_CLASS);
-//		}
-//		if (!remainingAttributeIncrease.equals(0)) {
-//			messages.add(Message.MUST_COMPLETE_ATTRIBUTES);
-//		}
-//		if (!remainingSkillChoices.equals(0)) {
-//			messages.add(Message.MUST_COMPLETE_SKILLS);
-//		}
-//		if (!messages.isEmpty()) {
-//			screenNotCompleteError(messages);
-//			return false;
-//		}
-		return true;
-	}
-
     @FXML
     private void handleCancel() {
-//    	if (mainApp != null) {
+    	if (isEdit) {
+    		newCharacter = characterBeingEdited;
+    	}
+    	if (mainApp != null) {
     		mainApp.showMyCharacters();
-//    	}
+    	}
     }
 
     @FXML
@@ -786,19 +670,6 @@ public class NewCharacterController {
     		}
 		}
 	}
-
-    private void screenNotCompleteError(Set<Message> messages) {
-    	//TODO this should go in a util class!
-    	Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("ERROR");
-        alert.setHeaderText("Character Not Finished.");
-        StringBuilder content = new StringBuilder();
-        for (Message message : messages) {
-        	content.append("\n" + message.toString());
-        }
-        alert.setContentText(content.toString());
-        alert.showAndWait();
-    }
 
     @FXML
     private void handleSkillAcrobatics() {

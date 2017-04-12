@@ -9,7 +9,7 @@ import com.nfpenterprise.gameHub.character.dto.AttributeDto;
 public enum SubRaces {
 	//@formatter:off
 
-	NO_SUBRACE				(0, 							"", 					null,	new HashSet<AttributeDto>()),
+	NO_SUBRACE				(0, 							"No Sub Race", 				null,	new HashSet<AttributeDto>()),
 
 	HILL_DWARF				(Races.DWARF.getRaceId(), 		"Hill Dwarf", 			Paths.HILL_DWARF_HTML.getPath(),			new HashSet<AttributeDto>(Arrays.asList(new AttributeDto(Attributes.WISDOM.getAttributeId(), 1)))),
 

@@ -17,18 +17,12 @@ import com.nfpenterprise.gameHub.constants.SubRaces;
 
 public class CharacterDto {
 
-	private Integer characterId;
 	private String characterName;
 	private String alignment;
 	private String background;
 	private String race;
 	private String subRace;
 	private String className;
-	private Integer classLevel;
-	private Integer experience;
-	private Integer speed;
-	private Integer hitPoints;
-	private String characterSheetPath;
 
 	private Integer strength;
 	private Integer dexterity;
@@ -44,19 +38,9 @@ public class CharacterDto {
 
 	private Set<Integer> profSkills;
 	private Set<AttributeDto> increaseAttributes;
-	private Set<Integer> savingThrows;
 
 
 	public CharacterDto() {
-	}
-
-    @XmlElement(name = "characterId")
-	public Integer getCharacterId() {
-		return characterId;
-	}
-
-	public void setCharacterId(Integer characterId) {
-		this.characterId = characterId;
 	}
 
     @XmlElement(name = "characterName")
@@ -97,7 +81,6 @@ public class CharacterDto {
 	public void setRace(Races race) {
 		if (race != null) {
 			this.race = race.getRaceName();
-			setSpeed(race.getRaceSpeed());
 			addIncreaseAttributes(race.getIncreaseAttribute());
 		}
 	}
@@ -122,26 +105,7 @@ public class CharacterDto {
 	public void setClassName(Classes classData) {
 		if (classData != null) {
 			this.className = classData.getClassName();
-			this.setSavingThrows(classData.getSavingThrows());
 		}
-	}
-
-    @XmlElement(name = "classLevel")
-	public Integer getClassLevel() {
-		return classLevel;
-	}
-
-	public void setClassLevel(Integer classLevel) {
-		this.classLevel = classLevel;
-	}
-
-    @XmlElement(name = "experience")
-	public Integer getExperience() {
-		return experience;
-	}
-
-	public void setExperience(Integer experience) {
-		this.experience = experience;
 	}
 
     @XmlElement(name = "strength")
@@ -234,15 +198,6 @@ public class CharacterDto {
 		this.flaws = flaws != null ? flaws.getFlawText() : null;
 	}
 
-    @XmlElement(name = "speed")
-	public Integer getSpeed() {
-		return speed;
-	}
-
-	private void setSpeed(Integer speed) {
-		this.speed = speed;
-	}
-
     @XmlElement(name = "profSkills")
 	public Set<Integer> getProfSkills() {
 		return profSkills;
@@ -282,26 +237,8 @@ public class CharacterDto {
 		}
 	}
 
-    @XmlElement(name = "savingThrows")
-	public Set<Integer> getSavingThrows() {
-		return savingThrows;
-	}
-
-	public void setSavingThrows(Set<Integer> savingThrows) {
-		this.savingThrows = savingThrows;
-	}
-
-	public String getCharacterSheetPath() {
-		return characterSheetPath;
-	}
-
-	public void setCharacterSheetPath(String characterSheetPath) {
-		this.characterSheetPath = characterSheetPath;
-	}
-
 	public void resetSetLists() {
 		setProfSkills(new HashSet<Integer>());
 		setIncreaseAttributes(new HashSet<AttributeDto>());
-		setSavingThrows(new HashSet<Integer>());
 	}
 }
