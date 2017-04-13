@@ -1,10 +1,22 @@
 package com.nfpenterprise.gameHub.view.myCharacters;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+import com.google.api.services.drive.Drive;
 import com.nfpenterprise.gameHub.Main;
 import com.nfpenterprise.gameHub.character.dto.CharacterDto;
 import com.nfpenterprise.gameHub.constants.Attributes;
 import com.nfpenterprise.gameHub.constants.SubRaces;
 import com.nfpenterprise.gameHub.util.AttributesSkillsUtil;
+import com.nfpenterprise.gameHub.util.GoogleDriveExporter;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
@@ -82,29 +94,35 @@ public class MyCharactersController {
 
 	@FXML
 	private void initialize() {
-	    // Initialize the character table with the character name.
-		characterNameColumn.setCellValueFactory(
-	            cellData -> new ReadOnlyStringWrapper(cellData.getValue().getCharacterName()));
+		// Initialize the character table with the character name.
+		characterNameColumn
+				.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getCharacterName()));
 
-	    // Clear character details.
-	    showCharacterDetails(null);
+		// Clear character details.
+		showCharacterDetails(null);
 
-	    // Listen for selection changes and show the person details when changed.
-	    myCharacterTable.getSelectionModel().selectedItemProperty().addListener(
-	            (observable, oldValue, newValue) -> showCharacterDetails(newValue));
+		// Listen for selection changes and show the person details when
+		// changed.
+		myCharacterTable.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> showCharacterDetails(newValue));
 
-		attributesSkillsUtil = new AttributesSkillsUtil(acrobaticsIncrease, animalHandlingIncrease, arcanaIncrease, athleticsIncrease, deceptionIncrease, historyIncrease,
-				 insightIncrease, intimidationIncrease, investigationIncrease, medicineIncrease, natureIncrease, perceptionIncrease, performanceIncrease,
-				 persuasionIncrease, religionIncrease, sleightOfHandIncrease, stealthIncrease, survivalIncrease, acrobaticsRadioButton, animalHandlingRadioButton,
-				 arcanaRadioButton, athleticsRadioButton, deceptionRadioButton, historyRadioButton, insightRadioButton, intimidationRadioButton,
-				 investigationRadioButton, medicineRadioButton, natureRadioButton, perceptionRadioButton, performanceRadioButton, persuasionRadioButton,
-				 religionRadioButton, sleightOfHandRadioButton, stealthRadioButton, survivalRadioButton, strengthTxt, dexterityTxt,
-				 intelligenceTxt, wisdomTxt, charismaTxt, remainingSkillChoices);
+		attributesSkillsUtil = new AttributesSkillsUtil(acrobaticsIncrease, animalHandlingIncrease, arcanaIncrease,
+				athleticsIncrease, deceptionIncrease, historyIncrease, insightIncrease, intimidationIncrease,
+				investigationIncrease, medicineIncrease, natureIncrease, perceptionIncrease, performanceIncrease,
+				persuasionIncrease, religionIncrease, sleightOfHandIncrease, stealthIncrease, survivalIncrease,
+				acrobaticsRadioButton, animalHandlingRadioButton, arcanaRadioButton, athleticsRadioButton,
+				deceptionRadioButton, historyRadioButton, insightRadioButton, intimidationRadioButton,
+				investigationRadioButton, medicineRadioButton, natureRadioButton, perceptionRadioButton,
+				performanceRadioButton, persuasionRadioButton, religionRadioButton, sleightOfHandRadioButton,
+				stealthRadioButton, survivalRadioButton, strengthTxt, dexterityTxt, intelligenceTxt, wisdomTxt,
+				charismaTxt, remainingSkillChoices);
 	}
 
 	private void showCharacterDetails(CharacterDto character) {
 		if (character != null) {
-			raceTxt.setText(character.getSubRace() == null ? "" : character.getSubRace().equalsIgnoreCase(SubRaces.NO_SUBRACE.getSubRaceName()) ? character.getRace() : character.getSubRace());
+			raceTxt.setText(character.getSubRace() == null ? ""
+					: character.getSubRace().equalsIgnoreCase(SubRaces.NO_SUBRACE.getSubRaceName())
+							? character.getRace() : character.getSubRace());
 			classTxt.setText(character.getClassName() == null ? "" : character.getClassName());
 			strengthTxt.setText(character.getStrength().toString());
 			dexterityTxt.setText(character.getDexterity().toString());
@@ -127,37 +145,72 @@ public class MyCharactersController {
 		}
 	}
 
-    @FXML
-    private void handleNewCharacter() {
-        mainApp.showNewCharacterMain(false, null);
-    }
+	@FXML
+	private void handleNewCharacter() {
+		mainApp.showNewCharacterMain(false, null);
+	}
 
-    @FXML
-    private void handleEditCharacter() {
-    	CharacterDto selectedCharacter = null;
-    	if (myCharacterTable != null && myCharacterTable.getSelectionModel() != null) {
-    		selectedCharacter = myCharacterTable.getSelectionModel().getSelectedItem();
-    	}
-        mainApp.showNewCharacterMain(true, selectedCharacter);
-    }
+	@FXML
+	private void handleEditCharacter() {
+		CharacterDto selectedCharacter = null;
+		if (myCharacterTable != null && myCharacterTable.getSelectionModel() != null) {
+			selectedCharacter = myCharacterTable.getSelectionModel().getSelectedItem();
+		}
+		mainApp.showNewCharacterMain(true, selectedCharacter);
+	}
 
-    @FXML
-    private void handleDeleteCharacter() {
-    	if (myCharacterTable != null && myCharacterTable.getSelectionModel() != null) {
-            int selectedIndex = myCharacterTable.getSelectionModel().getSelectedIndex();
-            myCharacterTable.getItems().remove(selectedIndex);
-    	}
-    }
+	@FXML
+	private void handleDeleteCharacter() {
+		if (myCharacterTable != null && myCharacterTable.getSelectionModel() != null) {
+			int selectedIndex = myCharacterTable.getSelectionModel().getSelectedIndex();
+			myCharacterTable.getItems().remove(selectedIndex);
+		}
+	}
 
-    @FXML
-    private void handleExportCharacter() {
-    	// TODO
-    }
+	@FXML
+	private void handleExportCharacter() {
+		// TODO
+		if (mainApp != null && mainApp.getCharactersFile() != null) {
+			File characterXml = mainApp.getCharactersFile();
+
+			final ExecutorService executor = Executors.newFixedThreadPool(2);
+
+			Future<?> googleDriveService = executor.submit(new Callable<Drive>() {
+				@Override
+				public Drive call() throws IOException {
+					return GoogleDriveExporter.getDriveService();
+				}
+			});
+
+			try {
+	            final Drive drive = (Drive) googleDriveService.get(20, TimeUnit.MINUTES);
+	            
+				Future<?> upload = executor.submit(new Callable<String>() {
+					@Override
+					public String call() throws IOException, URISyntaxException {
+						GoogleDriveExporter.exportXmlFileToGoogleDrive(drive, characterXml);
+						return null;
+					}
+				});
+				upload.get();
+	            
+			} catch (TimeoutException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				googleDriveService.cancel(true);
+				executor.shutdown();
+			}
+		}
+	}
 
 	public void setMainApp(Main main) {
 		this.mainApp = main;
 
-        // Add observable list data to the table
+		// Add observable list data to the table
 		if (myCharacterTable != null && mainApp != null) {
 			myCharacterTable.setItems(mainApp.getMyCharacterData());
 		}

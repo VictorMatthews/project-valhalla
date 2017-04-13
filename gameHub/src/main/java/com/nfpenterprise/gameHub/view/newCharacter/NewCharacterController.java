@@ -535,7 +535,7 @@ public class NewCharacterController {
     	nameCharacter();
     	newCharacter.getCharacterName();
     	mainApp.getMyCharacterData().add(newCharacter);
-    	mainApp.saveCharacterDataToFile(mainApp.getCharactersFilePath());
+    	mainApp.saveCharacterDataToFile(mainApp.getCharactersFile());
     	mainApp.showMyCharacters();
     }
 

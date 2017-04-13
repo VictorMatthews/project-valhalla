@@ -13,7 +13,7 @@ public class RootLayoutController {
 
     @FXML
     public void handleSave() {
-        File charactersFile = mainApp.getCharactersFilePath();
+        File charactersFile = mainApp.getCharactersFile();
         if (charactersFile != null) {
             mainApp.saveCharacterDataToFile(charactersFile);
         } else {

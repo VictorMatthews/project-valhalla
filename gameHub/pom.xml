@@ -32,18 +32,36 @@
   </build>
   <dependencies>
 
+	<!-- Google DEPENDENCIES -->
 	<dependency>
-	<groupId>org.apache.pdfbox</groupId>
-	<artifactId>pdfbox</artifactId>
-	<version>2.0.4</version>
+		<groupId>com.google.api-client</groupId>
+		<artifactId>google-api-client</artifactId>
+    	<version>1.22.0</version>
 	</dependency>
-	
-	<!-- https://mvnrepository.com/artifact/org.jpedal/OpenViewerFX -->
 	<dependency>
-    <groupId>org.jpedal</groupId>
-    <artifactId>OpenViewerFX</artifactId>
-    <version>7.10.24</version>
+		<groupId>com.google.oauth-client</groupId>
+		<artifactId>google-oauth-client-jetty</artifactId>
+    	<version>1.22.0</version>
 	</dependency>
-	  
+	<dependency>
+		<groupId>com.google.apis</groupId>
+		<artifactId>google-api-services-drive</artifactId>
+    	<version>v3-rev69-1.22.0</version>
+	</dependency>
+
+	<!-- TEST DEPENDENCIES -->
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+    	<version>4.12</version>
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+	<dependency>
+	    <groupId>commons-lang</groupId>
+	    <artifactId>commons-lang</artifactId>
+	    <version>2.3</version>
+	</dependency>	
+
   </dependencies>
 </project>

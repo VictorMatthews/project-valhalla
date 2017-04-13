@@ -46,7 +46,7 @@ public class Main extends Application {
 
 		showMyCharacters();
 		wrapperController = new WrapperController();
-		File file = getCharactersFilePath();
+		File file = getCharactersFile();
         if (file != null) {
         	wrapperController.loadCharacterDataFromFile(file, myCharacters);
         }
@@ -71,7 +71,7 @@ public class Main extends Application {
 		}
 	}
 
-    public File getCharactersFilePath() {
+    public File getCharactersFile() {
         Preferences prefs = Preferences.userNodeForPackage(Main.class);
         String filePath = prefs.get("filePath", null);
     	URL characterUrlFromResources = Main.class.getClassLoader().getResource(Paths.MY_CHARACTER_DATA.getPath());
