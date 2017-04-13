@@ -183,7 +183,7 @@ public class MyCharactersController {
 			});
 
 			try {
-	            final Drive drive = (Drive) googleDriveService.get(20, TimeUnit.MINUTES);
+	            final Drive drive = (Drive) googleDriveService.get(20, TimeUnit.SECONDS);
 	            
 				Future<?> upload = executor.submit(new Callable<String>() {
 					@Override

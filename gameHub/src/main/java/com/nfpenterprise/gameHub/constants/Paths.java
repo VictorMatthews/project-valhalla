@@ -42,7 +42,7 @@ public enum Paths {
 	MY_CHARACTERS_FXML("view/myCharacters/MyCharacters.fxml"),
 
 	CLIENT_SECRET("/client_secret.json"),
-	OAUTH_TOKEN(".projectValhallaOauthToken"),
+	OAUTH_TOKEN(".projectValhallaOauthToken/drive-export.json"),
 	USER_HOME_DIR("user.home");
 	
 	
