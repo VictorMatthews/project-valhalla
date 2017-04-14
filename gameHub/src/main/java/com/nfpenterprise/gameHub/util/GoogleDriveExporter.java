@@ -56,7 +56,7 @@ public class GoogleDriveExporter {
 
 		// Load client secrets.
 		InputStream in = GoogleDriveExporter.class.getResourceAsStream(Paths.CLIENT_SECRET.getPath());
-		GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in, ISO_CHARACTER_ENCODING));
+		GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
 		// Build flow and trigger user authorization request.
 		GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
