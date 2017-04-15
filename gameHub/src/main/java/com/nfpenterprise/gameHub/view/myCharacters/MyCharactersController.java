@@ -30,129 +30,124 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class MyCharactersController {
-	private AttributesSkillsUtil attributesSkillsUtil;
+	protected AttributesSkillsUtil attributesSkillsUtil;
 
 	@FXML
-	private TableView<CharacterDto> myCharacterTable;
+	protected TableView<CharacterDto> myCharacterTable;
 	@FXML
-	private TableColumn<CharacterDto, String> characterNameColumn;
+	protected TableColumn<CharacterDto, String> characterNameColumn;
 
 	@FXML
-	private TextField strengthTxt;
+	protected TextField strengthTxt;
 	@FXML
-	private TextField dexterityTxt;
+	protected TextField dexterityTxt;
 	@FXML
-	private TextField constitutionTxt;
+	protected TextField constitutionTxt;
 	@FXML
-	private TextField intelligenceTxt;
+	protected TextField intelligenceTxt;
 	@FXML
-	private TextField wisdomTxt;
+	protected TextField wisdomTxt;
 	@FXML
-	private TextField charismaTxt;
+	protected TextField charismaTxt;
 
 	@FXML
-	private TextField raceTxt;
+	protected TextField raceTxt;
 	@FXML
-	private TextField classTxt;
+	protected TextField classTxt;
 
 	@FXML
-	private Label personalityTraitLabel;
+	protected Label personalityTraitLabel;
 	@FXML
-	private Label idealLabel;
+	protected Label idealLabel;
 	@FXML
-	private Label bondLabel;
+	protected Label bondLabel;
 	@FXML
-	private Label flawLabel;
+	protected Label flawLabel;
 
 	@FXML
-	private Label acrobaticsIncrease;
+	protected Label acrobaticsIncrease;
 	@FXML
-	private Label animalHandlingIncrease;
+	protected Label animalHandlingIncrease;
 	@FXML
-	private Label arcanaIncrease;
+	protected Label arcanaIncrease;
 	@FXML
-	private Label athleticsIncrease;
+	protected Label athleticsIncrease;
 	@FXML
-	private Label deceptionIncrease;
+	protected Label deceptionIncrease;
 	@FXML
-	private Label historyIncrease;
+	protected Label historyIncrease;
 	@FXML
-	private Label insightIncrease;
+	protected Label insightIncrease;
 	@FXML
-	private Label intimidationIncrease;
+	protected Label intimidationIncrease;
 	@FXML
-	private Label investigationIncrease;
+	protected Label investigationIncrease;
 	@FXML
-	private Label medicineIncrease;
+	protected Label medicineIncrease;
 	@FXML
-	private Label natureIncrease;
+	protected Label natureIncrease;
 	@FXML
-	private Label perceptionIncrease;
+	protected Label perceptionIncrease;
 	@FXML
-	private Label performanceIncrease;
+	protected Label performanceIncrease;
 	@FXML
-	private Label persuasionIncrease;
+	protected Label persuasionIncrease;
 	@FXML
-	private Label religionIncrease;
+	protected Label religionIncrease;
 	@FXML
-	private Label sleightOfHandIncrease;
+	protected Label sleightOfHandIncrease;
 	@FXML
-	private Label stealthIncrease;
+	protected Label stealthIncrease;
 	@FXML
-	private Label survivalIncrease;
+	protected Label survivalIncrease;
 
 	@FXML
-	private RadioButton acrobaticsRadioButton;
+	protected RadioButton acrobaticsRadioButton;
 	@FXML
-	private RadioButton animalHandlingRadioButton;
+	protected RadioButton animalHandlingRadioButton;
 	@FXML
-	private RadioButton arcanaRadioButton;
+	protected RadioButton arcanaRadioButton;
 	@FXML
-	private RadioButton athleticsRadioButton;
+	protected RadioButton athleticsRadioButton;
 	@FXML
-	private RadioButton deceptionRadioButton;
+	protected RadioButton deceptionRadioButton;
 	@FXML
-	private RadioButton historyRadioButton;
+	protected RadioButton historyRadioButton;
 	@FXML
-	private RadioButton insightRadioButton;
+	protected RadioButton insightRadioButton;
 	@FXML
-	private RadioButton intimidationRadioButton;
+	protected RadioButton intimidationRadioButton;
 	@FXML
-	private RadioButton investigationRadioButton;
+	protected RadioButton investigationRadioButton;
 	@FXML
-	private RadioButton medicineRadioButton;
+	protected RadioButton medicineRadioButton;
 	@FXML
-	private RadioButton natureRadioButton;
+	protected RadioButton natureRadioButton;
 	@FXML
-	private RadioButton perceptionRadioButton;
+	protected RadioButton perceptionRadioButton;
 	@FXML
-	private RadioButton performanceRadioButton;
+	protected RadioButton performanceRadioButton;
 	@FXML
-	private RadioButton persuasionRadioButton;
+	protected RadioButton persuasionRadioButton;
 	@FXML
-	private RadioButton religionRadioButton;
+	protected RadioButton religionRadioButton;
 	@FXML
-	private RadioButton sleightOfHandRadioButton;
+	protected RadioButton sleightOfHandRadioButton;
 	@FXML
-	private RadioButton stealthRadioButton;
+	protected RadioButton stealthRadioButton;
 	@FXML
-	private RadioButton survivalRadioButton;
+	protected RadioButton survivalRadioButton;
 
-	private Label remainingSkillChoices = new Label();
-
-	private Main mainApp;
+	protected Main mainApp;
 
 	public MyCharactersController() {
 	}
 
 	@FXML
-	private void initialize() {
+	protected void initialize() {
 		// Initialize the character table with the character name.
 		characterNameColumn
 				.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getCharacterName()));
-
-		// Clear character details.
-		showCharacterDetails(null);
 
 		// Listen for selection changes and show the person details when
 		// changed.
@@ -168,14 +163,12 @@ public class MyCharactersController {
 				investigationRadioButton, medicineRadioButton, natureRadioButton, perceptionRadioButton,
 				performanceRadioButton, persuasionRadioButton, religionRadioButton, sleightOfHandRadioButton,
 				stealthRadioButton, survivalRadioButton, strengthTxt, dexterityTxt, intelligenceTxt, wisdomTxt,
-				charismaTxt, remainingSkillChoices);
+				charismaTxt, null /*remainingSkillChoices*/);
 	}
 
-	private void showCharacterDetails(CharacterDto character) {
+	protected void showCharacterDetails(CharacterDto character) {
 		if (character != null) {
-			raceTxt.setText(character.getSubRace() == null ? ""
-					: character.getSubRace().equalsIgnoreCase(SubRaces.NO_SUBRACE.getSubRaceName())
-							? character.getRace() : character.getSubRace());
+			raceTxt.setText(character.getSubRace() == null ? "" : character.getSubRace().equalsIgnoreCase(SubRaces.NO_SUBRACE.getSubRaceName()) ? character.getRace() : character.getSubRace());
 			classTxt.setText(character.getClassName() == null ? "" : character.getClassName());
 			strengthTxt.setText(character.getStrength().toString());
 			dexterityTxt.setText(character.getDexterity().toString());
@@ -199,12 +192,12 @@ public class MyCharactersController {
 	}
 
 	@FXML
-	private void handleNewCharacter() {
+	protected void handleNewCharacter() {
 		mainApp.showNewCharacterMain(false, null);
 	}
 
 	@FXML
-	private void handleEditCharacter() {
+	protected void handleEditCharacter() {
 		CharacterDto selectedCharacter = null;
 		if (myCharacterTable != null && myCharacterTable.getSelectionModel() != null) {
 			selectedCharacter = myCharacterTable.getSelectionModel().getSelectedItem();
@@ -213,7 +206,7 @@ public class MyCharactersController {
 	}
 
 	@FXML
-	private void handleDeleteCharacter() {
+	protected void handleDeleteCharacter() {
 		if (myCharacterTable != null && myCharacterTable.getSelectionModel() != null) {
 			int selectedIndex = myCharacterTable.getSelectionModel().getSelectedIndex();
 			myCharacterTable.getItems().remove(selectedIndex);
@@ -221,7 +214,7 @@ public class MyCharactersController {
 	}
 
 	@FXML
-	private void handleExportCharacter() {
+	protected void handleExportCharacter() {
 		if (mainApp != null && mainApp.getCharactersFile() != null) {
 			File characterXml = mainApp.getCharactersFile();
 

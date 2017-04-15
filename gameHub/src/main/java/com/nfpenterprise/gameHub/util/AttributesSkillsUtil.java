@@ -118,7 +118,7 @@ public class AttributesSkillsUtil {
 		 this.wisdomTxt = wisdomTxt;
 		 this.charismaTxt = charismaTxt;
 
-		 this.remainingSkillChoices = remainingSkillChoices;
+		 this.remainingSkillChoices = remainingSkillChoices == null ? new Label() : remainingSkillChoices;
 		 
 		 skillRadioButtons = setupSkillKeyValues();
 	}
