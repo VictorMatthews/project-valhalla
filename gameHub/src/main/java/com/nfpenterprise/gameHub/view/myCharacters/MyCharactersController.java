@@ -1,7 +1,9 @@
 package com.nfpenterprise.gameHub.view.myCharacters;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -19,6 +21,7 @@ import com.nfpenterprise.gameHub.util.AttributesSkillsUtil;
 import com.nfpenterprise.gameHub.util.GoogleDriveExporter;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -29,61 +32,111 @@ import javafx.scene.control.TextField;
 public class MyCharactersController {
 	private AttributesSkillsUtil attributesSkillsUtil;
 
-    @FXML private TableView<CharacterDto> myCharacterTable;
-    @FXML private TableColumn<CharacterDto, String> characterNameColumn;
+	@FXML
+	private TableView<CharacterDto> myCharacterTable;
+	@FXML
+	private TableColumn<CharacterDto, String> characterNameColumn;
 
-	@FXML private TextField strengthTxt;
-	@FXML private TextField dexterityTxt;
-	@FXML private TextField constitutionTxt;
-	@FXML private TextField intelligenceTxt;
-	@FXML private TextField wisdomTxt;
-	@FXML private TextField charismaTxt;
-	
-	@FXML private TextField raceTxt;
-	@FXML private TextField classTxt;
+	@FXML
+	private TextField strengthTxt;
+	@FXML
+	private TextField dexterityTxt;
+	@FXML
+	private TextField constitutionTxt;
+	@FXML
+	private TextField intelligenceTxt;
+	@FXML
+	private TextField wisdomTxt;
+	@FXML
+	private TextField charismaTxt;
 
-	@FXML private Label personalityTraitLabel;
-	@FXML private Label idealLabel;
-	@FXML private Label bondLabel;
-	@FXML private Label flawLabel;
+	@FXML
+	private TextField raceTxt;
+	@FXML
+	private TextField classTxt;
 
-	@FXML private Label acrobaticsIncrease;
-	@FXML private Label animalHandlingIncrease;
-	@FXML private Label arcanaIncrease;
-	@FXML private Label athleticsIncrease;
-	@FXML private Label deceptionIncrease;
-	@FXML private Label historyIncrease;
-	@FXML private Label insightIncrease;
-	@FXML private Label intimidationIncrease;
-	@FXML private Label investigationIncrease;
-	@FXML private Label medicineIncrease;
-	@FXML private Label natureIncrease;
-	@FXML private Label perceptionIncrease;
-	@FXML private Label performanceIncrease;
-	@FXML private Label persuasionIncrease;
-	@FXML private Label religionIncrease;
-	@FXML private Label sleightOfHandIncrease;
-	@FXML private Label stealthIncrease;
-	@FXML private Label survivalIncrease;
+	@FXML
+	private Label personalityTraitLabel;
+	@FXML
+	private Label idealLabel;
+	@FXML
+	private Label bondLabel;
+	@FXML
+	private Label flawLabel;
 
-	@FXML private RadioButton acrobaticsRadioButton;
-	@FXML private RadioButton animalHandlingRadioButton;
-	@FXML private RadioButton arcanaRadioButton;
-	@FXML private RadioButton athleticsRadioButton;
-	@FXML private RadioButton deceptionRadioButton;
-	@FXML private RadioButton historyRadioButton;
-	@FXML private RadioButton insightRadioButton;
-	@FXML private RadioButton intimidationRadioButton;
-	@FXML private RadioButton investigationRadioButton;
-	@FXML private RadioButton medicineRadioButton;
-	@FXML private RadioButton natureRadioButton;
-	@FXML private RadioButton perceptionRadioButton;
-	@FXML private RadioButton performanceRadioButton;
-	@FXML private RadioButton persuasionRadioButton;
-	@FXML private RadioButton religionRadioButton;
-	@FXML private RadioButton sleightOfHandRadioButton;
-	@FXML private RadioButton stealthRadioButton;
-	@FXML private RadioButton survivalRadioButton;
+	@FXML
+	private Label acrobaticsIncrease;
+	@FXML
+	private Label animalHandlingIncrease;
+	@FXML
+	private Label arcanaIncrease;
+	@FXML
+	private Label athleticsIncrease;
+	@FXML
+	private Label deceptionIncrease;
+	@FXML
+	private Label historyIncrease;
+	@FXML
+	private Label insightIncrease;
+	@FXML
+	private Label intimidationIncrease;
+	@FXML
+	private Label investigationIncrease;
+	@FXML
+	private Label medicineIncrease;
+	@FXML
+	private Label natureIncrease;
+	@FXML
+	private Label perceptionIncrease;
+	@FXML
+	private Label performanceIncrease;
+	@FXML
+	private Label persuasionIncrease;
+	@FXML
+	private Label religionIncrease;
+	@FXML
+	private Label sleightOfHandIncrease;
+	@FXML
+	private Label stealthIncrease;
+	@FXML
+	private Label survivalIncrease;
+
+	@FXML
+	private RadioButton acrobaticsRadioButton;
+	@FXML
+	private RadioButton animalHandlingRadioButton;
+	@FXML
+	private RadioButton arcanaRadioButton;
+	@FXML
+	private RadioButton athleticsRadioButton;
+	@FXML
+	private RadioButton deceptionRadioButton;
+	@FXML
+	private RadioButton historyRadioButton;
+	@FXML
+	private RadioButton insightRadioButton;
+	@FXML
+	private RadioButton intimidationRadioButton;
+	@FXML
+	private RadioButton investigationRadioButton;
+	@FXML
+	private RadioButton medicineRadioButton;
+	@FXML
+	private RadioButton natureRadioButton;
+	@FXML
+	private RadioButton perceptionRadioButton;
+	@FXML
+	private RadioButton performanceRadioButton;
+	@FXML
+	private RadioButton persuasionRadioButton;
+	@FXML
+	private RadioButton religionRadioButton;
+	@FXML
+	private RadioButton sleightOfHandRadioButton;
+	@FXML
+	private RadioButton stealthRadioButton;
+	@FXML
+	private RadioButton survivalRadioButton;
 
 	private Label remainingSkillChoices = new Label();
 
@@ -169,41 +222,46 @@ public class MyCharactersController {
 
 	@FXML
 	private void handleExportCharacter() {
-		// TODO
 		if (mainApp != null && mainApp.getCharactersFile() != null) {
 			File characterXml = mainApp.getCharactersFile();
 
 			final ExecutorService executor = Executors.newFixedThreadPool(2);
 
-			Future<?> googleDriveService = executor.submit(new Callable<Drive>() {
+			Task<Integer> task = new Task<Integer>() {
 				@Override
-				public Drive call() throws IOException {
-					return GoogleDriveExporter.getDriveService();
-				}
-			});
+				protected Integer call() throws Exception {
+					Future<?> googleDriveService = executor.submit(new Callable<Drive>() {
+						@Override
+						public Drive call() throws IOException {
+							return GoogleDriveExporter.getDriveService();
+						}
+					});
 
-			try {
-	            final Drive drive = (Drive) googleDriveService.get(20, TimeUnit.MINUTES);
-	            
-				Future<?> upload = executor.submit(new Callable<String>() {
-					@Override
-					public String call() throws IOException, URISyntaxException {
-						GoogleDriveExporter.exportXmlFileToGoogleDrive(drive, characterXml);
-						return null;
+					try {
+						final Drive drive = (Drive) googleDriveService.get(20, TimeUnit.SECONDS);
+
+						Future<?> upload = executor.submit(new Callable<String>() {
+							@Override
+							public String call() throws IOException, URISyntaxException {
+								String webViewURL = GoogleDriveExporter.exportXmlFileToGoogleDrive(drive, characterXml);
+								Desktop.getDesktop().browse(new URI(webViewURL));
+								return null;
+							}
+						});
+						upload.get();
+
+					} catch (TimeoutException e) {
+						e.printStackTrace();
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						googleDriveService.cancel(true);
+						executor.shutdown();
 					}
-				});
-				upload.get();
-	            
-			} catch (TimeoutException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				googleDriveService.cancel(true);
-				executor.shutdown();
-			}
+					return null;
+				}
+			};
+			executor.execute(task);
 		}
 	}
 
