@@ -5,19 +5,15 @@
 }
 
 #htmlTitle {
-    color: DarkGoldenRod;
+	text-align: center;
     font-family: Cinzel Decorative;
     font-size: 300%;
 }
 
 #htmlHeader {
-    color: DarkGoldenRod;
-    font-family: Cinzel Decorative;
     font-size: 200%;
 }
 
 #htmlParagraph {
-    color: DarkGoldenRod;
-    font-family: Cinzel Decorative;
     font-size: 100%;
 }
