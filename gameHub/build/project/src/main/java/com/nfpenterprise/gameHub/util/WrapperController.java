@@ -35,8 +35,6 @@ public class WrapperController {
             setCharacterFilePath(file);
 
         } catch (Exception e) { // catches and swallows ANY exception
-        	Alert alert = couldNotSaveData(file);
-            alert.showAndWait();
         }
     }
 

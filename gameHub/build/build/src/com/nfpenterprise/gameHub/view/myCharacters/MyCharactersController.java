@@ -188,8 +188,6 @@ public class MyCharactersController {
 			attributesSkillsUtil.updateSkills(Attributes.CHARISMA);
 
 			attributesSkillsUtil.handleSkills(0, character);
-
-			personalityTraitLabel.setText(mainApp.getCharactersFile().getAbsolutePath());
 		}
 	}
 
@@ -204,7 +202,9 @@ public class MyCharactersController {
 		if (myCharacterTable != null && myCharacterTable.getSelectionModel() != null) {
 			selectedCharacter = myCharacterTable.getSelectionModel().getSelectedItem();
 		}
-		mainApp.showNewCharacterMain(true, selectedCharacter);
+		if (selectedCharacter != null) {
+			mainApp.showNewCharacterMain(true, selectedCharacter);
+		}
 	}
 
 	@FXML

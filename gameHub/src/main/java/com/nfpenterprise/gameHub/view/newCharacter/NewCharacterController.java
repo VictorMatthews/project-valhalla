@@ -283,8 +283,7 @@ public class NewCharacterController {
 		attributesSkillsUtil.handleSkills(profSkillsToChoose, newCharacter);
 	}
 
-	protected <T> void loadTablesForEditableCharacter(TableView<T> table, ObservableList<T> dataList,
-			String newCharacterData) {
+	protected <T> void loadTablesForEditableCharacter(TableView<T> table, ObservableList<T> dataList, String newCharacterData) {
 		if (table != null && table.getSelectionModel() != null) {
 			for (T data : dataList) {
 				if (newCharacterData.equals(data.toString())) {
