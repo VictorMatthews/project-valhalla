@@ -188,6 +188,8 @@ public class MyCharactersController {
 			attributesSkillsUtil.updateSkills(Attributes.CHARISMA);
 
 			attributesSkillsUtil.handleSkills(0, character);
+
+			personalityTraitLabel.setText(mainApp.getCharactersFile().getAbsolutePath());
 		}
 	}
 
