@@ -113,4 +113,21 @@ public class MyCharactersControllerTest {
     	Assert.assertEquals(character.getBonds(), mcc.bondLabel.getText());
     	Assert.assertEquals(character.getFlaws(), mcc.flawLabel.getText());
     }
+	
+    /**
+     * <pre>
+     * @requirement MCCQC-?
+     *
+     * Feature: 
+     * 
+     * Given
+     * When
+     * Then
+     *
+     * </pre>
+     */
+//    @Test
+//    public void test_() {
+//
+//    }
 }

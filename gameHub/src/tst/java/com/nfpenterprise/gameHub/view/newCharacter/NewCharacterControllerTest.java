@@ -150,37 +150,6 @@ public class NewCharacterControllerTest {
 	
     /**
      * <pre>
-     * @requirement NCCQC-B
-     *
-     * Feature: The next and back button move the through the tabs
-     * 
-     * Given a user is at the races tab
-     * When they click next
-     * Then the selected tab will switch to sub races
-     * 
-     * When they click the back button
-     * Then the selected tab will switch back to the race tab
-     *
-     * </pre>
-     */
-    @Test
-    public void test_NextBackButtons() {
-    	Tab currentTab = ncc.tabs.getSelectionModel().getSelectedItem();
-    	Assert.assertEquals(ncc.raceTab, currentTab);
-
-    	ncc.handleNext();
-
-    	currentTab = ncc.tabSelectionModel.getSelectedItem();
-    	Assert.assertEquals(ncc.subRaceTab, currentTab);
-
-    	ncc.handleBack();
-
-    	currentTab = ncc.tabSelectionModel.getSelectedItem();
-    	Assert.assertEquals(ncc.raceTab, currentTab);
-    }
-	
-    /**
-     * <pre>
      * @requirement NCCQC-?
      *
      * Feature: 
@@ -191,8 +160,8 @@ public class NewCharacterControllerTest {
      *
      * </pre>
      */
-    @Test
-    public void test_() {
-
-    }
+//    @Test
+//    public void test_() {
+//
+//    }
 }
