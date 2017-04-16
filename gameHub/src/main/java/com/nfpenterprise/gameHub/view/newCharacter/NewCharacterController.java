@@ -38,124 +38,204 @@ import javafx.scene.web.WebView;
 
 public class NewCharacterController {
 
-	private Main mainApp;
-	private AttributesSkillsUtil attributesSkillsUtil;
-	private CharacterDto newCharacter;
-	private CharacterDto characterBeingEdited;
-	private SingleSelectionModel<Tab> tabSelectionModel;
-	private DataController dataController;
+	protected Main mainApp;
+	protected AttributesSkillsUtil attributesSkillsUtil;
+	protected CharacterDto newCharacter;
+	protected CharacterDto characterBeingEdited;
+	protected SingleSelectionModel<Tab> tabSelectionModel;
+	protected DataController dataController;
 	public ObservableList<Races> raceData;
 	public ObservableList<SubRaces> subRaceData;
 	public ObservableList<Classes> classData;
-	private final static Integer BASE_ATTRIBUTE_INCREASE = 27;
-	private final static Integer MIN_ATTRIBUTE_VALUE = 8;
-	private final static Integer MAX_ATTRIBUTE_VALUE = 15;
-	private Integer profSkillsToChoose = 0;
-	private ObservableList<SubRaces> subRacesFromRaces;
-	private boolean isEdit = false;
+	protected final static Integer BASE_ATTRIBUTE_INCREASE = 27;
+	protected final static Integer MIN_ATTRIBUTE_VALUE = 8;
+	protected final static Integer MAX_ATTRIBUTE_VALUE = 15;
+	protected Integer profSkillsToChoose = 0;
+	protected ObservableList<SubRaces> subRacesFromRaces;
+	protected boolean isEdit = false;
 
-	@FXML private TabPane tabs;
-	@FXML private Tab raceTab;
-	@FXML private Tab subRaceTab;
-	@FXML private Tab classTab;
-	@FXML private Tab backgorundTab;
-	@FXML private Tab attributesSkillsTab;
-	@FXML private TableView<Races> racesTable;
-    @FXML private TableColumn<Races, String> racesColumn;
-	@FXML private TableView<SubRaces> subRacesTable;
-    @FXML private TableColumn<SubRaces, String> subRacesColumn;
-	@FXML private TableView<Classes> classesTable;
-    @FXML private TableColumn<Classes, String> classesColumn;
-	@FXML private ComboBox<Backgrounds> cmbBackground;
-	@FXML private ComboBox<PersonalityTraits> cmbPersonalityTraits;
-	@FXML private ComboBox<Ideals> cmbIdeals;
-	@FXML private ComboBox<Bonds> cmbBonds;
-	@FXML private ComboBox<Flaws> cmbFlaws;
-	@FXML private WebView raceWebView;
-	@FXML private WebView subRaceWebView;
-	@FXML private WebView classWebView;
-	@FXML private WebView spellWebView;
-	
-	@FXML private Label acrobaticsIncrease;
-	@FXML private Label animalHandlingIncrease;
-	@FXML private Label arcanaIncrease;
-	@FXML private Label athleticsIncrease;
-	@FXML private Label deceptionIncrease;
-	@FXML private Label historyIncrease;
-	@FXML private Label insightIncrease;
-	@FXML private Label intimidationIncrease;
-	@FXML private Label investigationIncrease;
-	@FXML private Label medicineIncrease;
-	@FXML private Label natureIncrease;
-	@FXML private Label perceptionIncrease;
-	@FXML private Label performanceIncrease;
-	@FXML private Label persuasionIncrease;
-	@FXML private Label religionIncrease;
-	@FXML private Label sleightOfHandIncrease;
-	@FXML private Label stealthIncrease;
-	@FXML private Label survivalIncrease;
-	
-	@FXML private RadioButton acrobaticsRadioButton;
-	@FXML private RadioButton animalHandlingRadioButton;
-	@FXML private RadioButton arcanaRadioButton;
-	@FXML private RadioButton athleticsRadioButton;
-	@FXML private RadioButton deceptionRadioButton;
-	@FXML private RadioButton historyRadioButton;
-	@FXML private RadioButton insightRadioButton;
-	@FXML private RadioButton intimidationRadioButton;
-	@FXML private RadioButton investigationRadioButton;
-	@FXML private RadioButton medicineRadioButton;
-	@FXML private RadioButton natureRadioButton;
-	@FXML private RadioButton perceptionRadioButton;
-	@FXML private RadioButton performanceRadioButton;
-	@FXML private RadioButton persuasionRadioButton;
-	@FXML private RadioButton religionRadioButton;
-	@FXML private RadioButton sleightOfHandRadioButton;
-	@FXML private RadioButton stealthRadioButton;
-	@FXML private RadioButton survivalRadioButton;
+	@FXML
+	protected TabPane tabs;
+	@FXML
+	protected Tab raceTab;
+	@FXML
+	protected Tab subRaceTab;
+	@FXML
+	protected Tab classTab;
+	@FXML
+	protected Tab backgorundTab;
+	@FXML
+	protected Tab attributesSkillsTab;
+	@FXML
+	protected TableView<Races> racesTable;
+	@FXML
+	protected TableColumn<Races, String> racesColumn;
+	@FXML
+	protected TableView<SubRaces> subRacesTable;
+	@FXML
+	protected TableColumn<SubRaces, String> subRacesColumn;
+	@FXML
+	protected TableView<Classes> classesTable;
+	@FXML
+	protected TableColumn<Classes, String> classesColumn;
+	@FXML
+	protected ComboBox<Backgrounds> cmbBackground;
+	@FXML
+	protected ComboBox<PersonalityTraits> cmbPersonalityTraits;
+	@FXML
+	protected ComboBox<Ideals> cmbIdeals;
+	@FXML
+	protected ComboBox<Bonds> cmbBonds;
+	@FXML
+	protected ComboBox<Flaws> cmbFlaws;
+	@FXML
+	protected WebView raceWebView;
+	@FXML
+	protected WebView subRaceWebView;
+	@FXML
+	protected WebView classWebView;
+	@FXML
+	protected WebView spellWebView;
 
-	private Set<KeyValue<Integer, KeyValue<RadioButton, Label>>> skillRadioButtons = null;
-	
-	@FXML private Button strengthAdd;
-	@FXML private Button strengthSub;
-	@FXML private Button dexterityAdd;
-	@FXML private Button dexteritySub;
-	@FXML private Button constitutionAdd;
-	@FXML private Button constitutionSub;
-	@FXML private Button intelligenceAdd;
-	@FXML private Button intelligenceSub;
-	@FXML private Button wisdomAdd;
-	@FXML private Button wisdomSub;
-	@FXML private Button charismaAdd;
-	@FXML private Button charismaSub;
+	@FXML
+	protected Label acrobaticsIncrease;
+	@FXML
+	protected Label animalHandlingIncrease;
+	@FXML
+	protected Label arcanaIncrease;
+	@FXML
+	protected Label athleticsIncrease;
+	@FXML
+	protected Label deceptionIncrease;
+	@FXML
+	protected Label historyIncrease;
+	@FXML
+	protected Label insightIncrease;
+	@FXML
+	protected Label intimidationIncrease;
+	@FXML
+	protected Label investigationIncrease;
+	@FXML
+	protected Label medicineIncrease;
+	@FXML
+	protected Label natureIncrease;
+	@FXML
+	protected Label perceptionIncrease;
+	@FXML
+	protected Label performanceIncrease;
+	@FXML
+	protected Label persuasionIncrease;
+	@FXML
+	protected Label religionIncrease;
+	@FXML
+	protected Label sleightOfHandIncrease;
+	@FXML
+	protected Label stealthIncrease;
+	@FXML
+	protected Label survivalIncrease;
 
-	@FXML private TextField strengthTxt;
-	@FXML private TextField dexterityTxt;
-	@FXML private TextField constitutionTxt;
-	@FXML private TextField intelligenceTxt;
-	@FXML private TextField wisdomTxt;
-	@FXML private TextField charismaTxt;
+	@FXML
+	protected RadioButton acrobaticsRadioButton;
+	@FXML
+	protected RadioButton animalHandlingRadioButton;
+	@FXML
+	protected RadioButton arcanaRadioButton;
+	@FXML
+	protected RadioButton athleticsRadioButton;
+	@FXML
+	protected RadioButton deceptionRadioButton;
+	@FXML
+	protected RadioButton historyRadioButton;
+	@FXML
+	protected RadioButton insightRadioButton;
+	@FXML
+	protected RadioButton intimidationRadioButton;
+	@FXML
+	protected RadioButton investigationRadioButton;
+	@FXML
+	protected RadioButton medicineRadioButton;
+	@FXML
+	protected RadioButton natureRadioButton;
+	@FXML
+	protected RadioButton perceptionRadioButton;
+	@FXML
+	protected RadioButton performanceRadioButton;
+	@FXML
+	protected RadioButton persuasionRadioButton;
+	@FXML
+	protected RadioButton religionRadioButton;
+	@FXML
+	protected RadioButton sleightOfHandRadioButton;
+	@FXML
+	protected RadioButton stealthRadioButton;
+	@FXML
+	protected RadioButton survivalRadioButton;
 
-	@FXML private Label remainingAttributeIncrease;
-	@FXML private Label remainingSkillChoices;
+	protected Set<KeyValue<Integer, KeyValue<RadioButton, Label>>> skillRadioButtons = null;
+
+	@FXML
+	protected Button strengthAdd;
+	@FXML
+	protected Button strengthSub;
+	@FXML
+	protected Button dexterityAdd;
+	@FXML
+	protected Button dexteritySub;
+	@FXML
+	protected Button constitutionAdd;
+	@FXML
+	protected Button constitutionSub;
+	@FXML
+	protected Button intelligenceAdd;
+	@FXML
+	protected Button intelligenceSub;
+	@FXML
+	protected Button wisdomAdd;
+	@FXML
+	protected Button wisdomSub;
+	@FXML
+	protected Button charismaAdd;
+	@FXML
+	protected Button charismaSub;
+
+	@FXML
+	protected TextField strengthTxt;
+	@FXML
+	protected TextField dexterityTxt;
+	@FXML
+	protected TextField constitutionTxt;
+	@FXML
+	protected TextField intelligenceTxt;
+	@FXML
+	protected TextField wisdomTxt;
+	@FXML
+	protected TextField charismaTxt;
+
+	@FXML
+	protected Label remainingAttributeIncrease;
+	@FXML
+	protected Label remainingSkillChoices;
 
 	public NewCharacterController() {
-		
+
 	}
 
 	@FXML
-	private void initialize() {
+	protected void initialize() {
 		isEdit = false;
 		newCharacter = new CharacterDto();
 		tabSelectionModel = tabs.getSelectionModel();
 		dataController = new DataController();
 
 		racesColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getRaceName()));
-		racesTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showRaceDetails(oldValue, newValue));
+		racesTable.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> showRaceDetails(oldValue, newValue));
 		subRacesColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getSubRaceName()));
-		subRacesTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showSubRaceDetails(newValue));
+		subRacesTable.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> showSubRaceDetails(newValue));
 		classesColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getClassName()));
-		classesTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showClassDetails(newValue));
+		classesTable.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> showClassDetails(newValue));
 		racesTable.setItems(dataController.populateRaceData());
 		racesTable.getSelectionModel().selectFirst();
 
@@ -166,15 +246,17 @@ public class NewCharacterController {
 		cmbBackground.setItems(dataController.populateBackgroundData());
 		cmbBackground.getSelectionModel().selectFirst();
 		refreshBackground();
-		
-		attributesSkillsUtil = new AttributesSkillsUtil(acrobaticsIncrease, animalHandlingIncrease, arcanaIncrease, athleticsIncrease, deceptionIncrease, historyIncrease,
-				 insightIncrease, intimidationIncrease, investigationIncrease, medicineIncrease, natureIncrease, perceptionIncrease, performanceIncrease,
-				 persuasionIncrease, religionIncrease, sleightOfHandIncrease, stealthIncrease, survivalIncrease, acrobaticsRadioButton, animalHandlingRadioButton,
-				 arcanaRadioButton, athleticsRadioButton, deceptionRadioButton, historyRadioButton, insightRadioButton, intimidationRadioButton,
-				 investigationRadioButton, medicineRadioButton, natureRadioButton, perceptionRadioButton, performanceRadioButton, persuasionRadioButton,
-				 religionRadioButton, sleightOfHandRadioButton, stealthRadioButton, survivalRadioButton, strengthTxt, dexterityTxt,
-				 intelligenceTxt, wisdomTxt, charismaTxt, remainingSkillChoices);
 
+		attributesSkillsUtil = new AttributesSkillsUtil(acrobaticsIncrease, animalHandlingIncrease, arcanaIncrease,
+				athleticsIncrease, deceptionIncrease, historyIncrease, insightIncrease, intimidationIncrease,
+				investigationIncrease, medicineIncrease, natureIncrease, perceptionIncrease, performanceIncrease,
+				persuasionIncrease, religionIncrease, sleightOfHandIncrease, stealthIncrease, survivalIncrease,
+				acrobaticsRadioButton, animalHandlingRadioButton, arcanaRadioButton, athleticsRadioButton,
+				deceptionRadioButton, historyRadioButton, insightRadioButton, intimidationRadioButton,
+				investigationRadioButton, medicineRadioButton, natureRadioButton, perceptionRadioButton,
+				performanceRadioButton, persuasionRadioButton, religionRadioButton, sleightOfHandRadioButton,
+				stealthRadioButton, survivalRadioButton, strengthTxt, dexterityTxt, intelligenceTxt, wisdomTxt,
+				charismaTxt, remainingSkillChoices);
 
 		skillRadioButtons = attributesSkillsUtil.setupSkillKeyValues();
 	}
@@ -186,11 +268,14 @@ public class NewCharacterController {
 
 		loadTablesForEditableCharacter(racesTable, dataController.populateRaceData(), newCharacter.getRace());
 		showRaceDetails(null, racesTable.getSelectionModel().getSelectedItem());
-		loadTablesForEditableCharacter(subRacesTable, dataController.populateSubRaceData(racesTable.getSelectionModel().getSelectedItem()), newCharacter.getSubRace());
+		loadTablesForEditableCharacter(subRacesTable,
+				dataController.populateSubRaceData(racesTable.getSelectionModel().getSelectedItem()),
+				newCharacter.getSubRace());
 		showSubRaceDetails(subRacesTable.getSelectionModel().getSelectedItem());
 		loadTablesForEditableCharacter(classesTable, dataController.populateClassData(), newCharacter.getClassName());
 		showClassDetails(classesTable.getSelectionModel().getSelectedItem());
-		loadCharacterBackgroundData(cmbBackground, dataController.populateBackgroundData(), newCharacter.getBackground());
+		loadCharacterBackgroundData(cmbBackground, dataController.populateBackgroundData(),
+				newCharacter.getBackground());
 		refreshBackground(cmbBackground.getSelectionModel().getSelectedItem(), newCharacter);
 		updateCharacterData();
 
@@ -198,7 +283,8 @@ public class NewCharacterController {
 		attributesSkillsUtil.handleSkills(profSkillsToChoose, newCharacter);
 	}
 
-	private <T> void loadTablesForEditableCharacter(TableView<T> table, ObservableList<T> dataList, String newCharacterData) {
+	protected <T> void loadTablesForEditableCharacter(TableView<T> table, ObservableList<T> dataList,
+			String newCharacterData) {
 		if (table != null && table.getSelectionModel() != null) {
 			for (T data : dataList) {
 				if (newCharacterData.equals(data.toString())) {
@@ -209,7 +295,7 @@ public class NewCharacterController {
 		}
 	}
 
-	private void showRaceDetails(Races oldRace, Races newRace) {
+	protected void showRaceDetails(Races oldRace, Races newRace) {
 		if (oldRace == null) {
 			oldRace = newRace;
 			populateSubRaces(newRace);
@@ -221,10 +307,10 @@ public class NewCharacterController {
 		}
 	}
 
-	private void populateSubRaces(Races race) {
+	protected void populateSubRaces(Races race) {
 		subRacesFromRaces = dataController.populateSubRaceData(race);
 		if (subRacesFromRaces != null && !subRacesFromRaces.isEmpty()) {
-			if  (!subRacesFromRaces.contains(SubRaces.NO_SUBRACE)) {
+			if (!subRacesFromRaces.contains(SubRaces.NO_SUBRACE)) {
 				subRacesTable.setItems(subRacesFromRaces);
 				subRacesTable.getSelectionModel().selectFirst();
 				subRaceTab.setDisable(false);
@@ -236,21 +322,21 @@ public class NewCharacterController {
 		}
 	}
 
-	private void showSubRaceDetails(SubRaces newSubRace) {
-		if (newSubRace != null) { 
+	protected void showSubRaceDetails(SubRaces newSubRace) {
+		if (newSubRace != null) {
 			loadHtmlIntoWebView(newSubRace.getHtmlPath(), subRaceWebView);
 		}
 	}
 
-	private void showClassDetails(Classes newClass) {
+	protected void showClassDetails(Classes newClass) {
 		if (newClass != null) {
 			loadHtmlIntoWebView(newClass.getHtmlPath(), classWebView);
 		}
 	}
 
-	private void loadHtmlIntoWebView(String htmlPath, WebView webView) {
+	protected void loadHtmlIntoWebView(String htmlPath, WebView webView) {
 		if (mainApp != null) {
-	        URL url = mainApp.getClass().getClassLoader().getResource(htmlPath);
+			URL url = mainApp.getClass().getClassLoader().getResource(htmlPath);
 			if (url != null) {
 				webView.getEngine().load(url.toExternalForm());
 			}
@@ -262,7 +348,8 @@ public class NewCharacterController {
 		if (racesTable != null && raceWebView != null && racesTable.getSelectionModel().getSelectedItem() != null) {
 			loadHtmlIntoWebView(racesTable.getSelectionModel().getSelectedItem().getHtmlPath(), raceWebView);
 		}
-		if (racesTable != null && subRaceWebView != null && subRacesTable.getSelectionModel().getSelectedItem() != null) {
+		if (racesTable != null && subRaceWebView != null
+				&& subRacesTable.getSelectionModel().getSelectedItem() != null) {
 			loadHtmlIntoWebView(subRacesTable.getSelectionModel().getSelectedItem().getHtmlPath(), subRaceWebView);
 		}
 		if (racesTable != null && classWebView != null && classesTable.getSelectionModel().getSelectedItem() != null) {
@@ -270,33 +357,34 @@ public class NewCharacterController {
 		}
 	}
 
-    @FXML
-    private void handleBack() {
+	@FXML
+	protected void handleBack() {
 		if (tabSelectionModel.getSelectedItem().equals(classTab) && subRacesFromRaces.contains(SubRaces.NO_SUBRACE)) {
 			tabSelectionModel.selectPrevious();
 			subRaceTab.setDisable(true);
 		}
-    	tabSelectionModel.selectPrevious();
-    }
+		tabSelectionModel.selectPrevious();
+	}
 
 	@FXML
-    private void handleNext() {
+	protected void handleNext() {
 		if (tabSelectionModel.getSelectedItem().equals(raceTab) && subRacesFromRaces.contains(SubRaces.NO_SUBRACE)) {
 			tabSelectionModel.selectNext();
 			subRaceTab.setDisable(true);
 		}
 		tabSelectionModel.selectNext();
 		tabSelectionModel.getSelectedItem().setDisable(false);
-    }
+	}
 
-    private boolean updateCharacterData() {
-    	boolean dataChanged = false;
+	protected boolean updateCharacterData() {
+		boolean dataChanged = false;
 		if (tabSelectionModel != null) {
 			String oldRace = newCharacter.getRace();
 			String oldSubRace = newCharacter.getSubRace();
 			String oldClass = newCharacter.getClassName();
 			String oldBackground = newCharacter.getBackground();
-			if (oldRace == null || (oldSubRace == null && !subRacesFromRaces.contains(SubRaces.NO_SUBRACE)) || oldClass == null || oldBackground.equals(null)) {
+			if (oldRace == null || (oldSubRace == null && !subRacesFromRaces.contains(SubRaces.NO_SUBRACE))
+					|| oldClass == null || oldBackground.equals(null)) {
 				dataChanged = true;
 			}
 
@@ -312,10 +400,10 @@ public class NewCharacterController {
 			attributesSkillsUtil.setProfSkillChoices(selectedClass.getProfSkillsChoices());
 			profSkillsToChoose = selectedClass.getProfSkillsToChoose();
 
-			if ((oldRace != null && !oldRace.equals(selectedRace.getRaceName())) || 
-					(oldSubRace != null &&  !oldSubRace.equals(selectedSubRace.getSubRaceName())) ||
-					(oldClass != null &&  !oldClass.equals(selectedClass.getClassName())) || 
-					(oldBackground != null &&  !oldBackground.equals(selectedBackground.getBackgroundName()))) {
+			if ((oldRace != null && !oldRace.equals(selectedRace.getRaceName()))
+					|| (oldSubRace != null && !oldSubRace.equals(selectedSubRace.getSubRaceName()))
+					|| (oldClass != null && !oldClass.equals(selectedClass.getClassName()))
+					|| (oldBackground != null && !oldBackground.equals(selectedBackground.getBackgroundName()))) {
 				dataChanged = true;
 			}
 
@@ -345,17 +433,17 @@ public class NewCharacterController {
 	}
 
 	@FXML
-	private void handleAttributesAndSkills() {
+	protected void handleAttributesAndSkills() {
 		if (tabSelectionModel != null && tabSelectionModel.getSelectedItem().equals(attributesSkillsTab)) {
 			boolean dataChanged = updateCharacterData();
 			if (dataChanged) {
 				handleAttributes();
 				attributesSkillsUtil.handleSkills(profSkillsToChoose, newCharacter);
-			}		
+			}
 		}
 	}
 
-	private void handleAttributes() {
+	protected void handleAttributes() {
 		remainingAttributeIncrease.setText(BASE_ATTRIBUTE_INCREASE.toString());
 
 		Integer strengthVal = MIN_ATTRIBUTE_VALUE;
@@ -408,7 +496,8 @@ public class NewCharacterController {
 		diasableAddButtons(false);
 	}
 
-	private void handleAttributeAddSubBtn(TextField attributeValue, Button btnAdd, Button btnSub, Attributes attribute, boolean isAddition) {
+	protected void handleAttributeAddSubBtn(TextField attributeValue, Button btnAdd, Button btnSub,
+			Attributes attribute, boolean isAddition) {
 		Integer oldValue = Integer.parseInt(attributeValue.getText());
 		Integer newValue = oldValue;
 		Integer raceAttributeIncrease = getRaceAttributeIncrease(attribute);
@@ -416,7 +505,7 @@ public class NewCharacterController {
 		Integer oldAttributePoints = Integer.parseInt(remainingAttributeIncrease.getText());
 		Integer newAttributePoints = oldAttributePoints;
 		Integer attributeCost = getAttributeCost(trueValue, isAddition);
-		
+
 		if (isAddition) {
 			newAttributePoints = Math.subtractExact(oldAttributePoints, attributeCost);
 			newValue = Math.addExact(oldValue, 1);
@@ -444,7 +533,7 @@ public class NewCharacterController {
 		attributesSkillsUtil.updateSkills(attribute);
 	}
 
-	private void enableAttributeBtn(Integer trueValue, Button btnAdd, Button btnSub, boolean isAddition) {
+	protected void enableAttributeBtn(Integer trueValue, Button btnAdd, Button btnSub, boolean isAddition) {
 		if (isAddition) {
 			if (!MIN_ATTRIBUTE_VALUE.equals(trueValue) && btnSub.isDisabled()) {
 				btnSub.setDisable(false);
@@ -462,7 +551,7 @@ public class NewCharacterController {
 		}
 	}
 
-	private Integer getAttributeCost(Integer trueValue, boolean isAddition) {
+	protected Integer getAttributeCost(Integer trueValue, boolean isAddition) {
 		Integer cost = 1;
 		if (isAddition) {
 			if (trueValue.equals(13) || trueValue.equals(14)) {
@@ -476,7 +565,7 @@ public class NewCharacterController {
 		return cost;
 	}
 
-	private void diasableAddButtons(boolean disable) {
+	protected void diasableAddButtons(boolean disable) {
 		strengthAdd.setDisable(disable);
 		dexterityAdd.setDisable(disable);
 		constitutionAdd.setDisable(disable);
@@ -485,13 +574,19 @@ public class NewCharacterController {
 		charismaAdd.setDisable(disable);
 	}
 
-	private void enableAddButtons(Integer attributePoints) {
-		Integer str = Math.subtractExact(Integer.parseInt(strengthTxt.getText()), getRaceAttributeIncrease(Attributes.STRENGTH));
-		Integer dex = Math.subtractExact(Integer.parseInt(dexterityTxt.getText()), getRaceAttributeIncrease(Attributes.DEXTERITY));
-		Integer con = Math.subtractExact(Integer.parseInt(constitutionTxt.getText()), getRaceAttributeIncrease(Attributes.CONSTITUTION));
-		Integer intel = Math.subtractExact(Integer.parseInt(intelligenceTxt.getText()), getRaceAttributeIncrease(Attributes.INTELLIGENCE));
-		Integer wis = Math.subtractExact(Integer.parseInt(wisdomTxt.getText()), getRaceAttributeIncrease(Attributes.WISDOM));
-		Integer cha = Math.subtractExact(Integer.parseInt(charismaTxt.getText()), getRaceAttributeIncrease(Attributes.CHARISMA));
+	protected void enableAddButtons(Integer attributePoints) {
+		Integer str = Math.subtractExact(Integer.parseInt(strengthTxt.getText()),
+				getRaceAttributeIncrease(Attributes.STRENGTH));
+		Integer dex = Math.subtractExact(Integer.parseInt(dexterityTxt.getText()),
+				getRaceAttributeIncrease(Attributes.DEXTERITY));
+		Integer con = Math.subtractExact(Integer.parseInt(constitutionTxt.getText()),
+				getRaceAttributeIncrease(Attributes.CONSTITUTION));
+		Integer intel = Math.subtractExact(Integer.parseInt(intelligenceTxt.getText()),
+				getRaceAttributeIncrease(Attributes.INTELLIGENCE));
+		Integer wis = Math.subtractExact(Integer.parseInt(wisdomTxt.getText()),
+				getRaceAttributeIncrease(Attributes.WISDOM));
+		Integer cha = Math.subtractExact(Integer.parseInt(charismaTxt.getText()),
+				getRaceAttributeIncrease(Attributes.CHARISMA));
 
 		strengthAdd.setDisable(false);
 		dexterityAdd.setDisable(false);
@@ -517,10 +612,10 @@ public class NewCharacterController {
 		}
 		if (cha.equals(15) || ((cha.equals(13) || cha.equals(14)) && attributePoints.equals(1))) {
 			charismaAdd.setDisable(true);
-		}	
+		}
 	}
 
-	private Integer getRaceAttributeIncrease(Attributes attribute) {
+	protected Integer getRaceAttributeIncrease(Attributes attribute) {
 		for (AttributeDto attributeDto : newCharacter.getIncreaseAttributes()) {
 			if (attributeDto.getAttributeId().equals(attribute.getAttributeId())) {
 				return attributeDto.getIncreasedValue();
@@ -530,16 +625,16 @@ public class NewCharacterController {
 	}
 
 	@FXML
-    private void handleFinish() {
-    	updateCharacterData();
-    	nameCharacter();
-    	newCharacter.getCharacterName();
-    	mainApp.getMyCharacterData().add(newCharacter);
-    	mainApp.saveCharacterDataToFile(mainApp.getCharactersFile());
-    	mainApp.showMyCharacters();
-    }
+	protected void handleFinish() {
+		updateCharacterData();
+		nameCharacter();
+		newCharacter.getCharacterName();
+		mainApp.getMyCharacterData().add(newCharacter);
+		mainApp.saveCharacterDataToFile(mainApp.getCharactersFile());
+		mainApp.showMyCharacters();
+	}
 
-	private void nameCharacter() {
+	protected void nameCharacter() {
 		TextInputDialog dialog = new TextInputDialog("");
 		dialog.setTitle("Character Name");
 		dialog.setHeaderText("What would you like to name your new character?");
@@ -548,197 +643,211 @@ public class NewCharacterController {
 		result.ifPresent(characterName -> newCharacter.setCharacterName(characterName));
 	}
 
-    @FXML
-    private void handleCancel() {
-    	if (isEdit) {
-    		newCharacter = characterBeingEdited;
-    	}
-    	if (mainApp != null) {
-    		mainApp.showMyCharacters();
-    	}
-    }
-
-    @FXML
-    private void refreshBackground() {
-    	Backgrounds background = cmbBackground.getSelectionModel().getSelectedItem();
-    	if (background != null) {
-    		refreshBackground(background, newCharacter);
-    	}
-    }
-
-	private void refreshBackground(Backgrounds background, CharacterDto character) {
-		loadCharacterBackgroundData(cmbPersonalityTraits, dataController.populatePersonalityTraitData(background), isEdit == false ? null : character.getPersonalityTrait());
-		loadCharacterBackgroundData(cmbIdeals, dataController.populateIdealData(background), isEdit == false ? null : character.getIdeals());
-		loadCharacterBackgroundData(cmbBonds, dataController.populateBondData(background), isEdit == false ? null : character.getBonds());
-		loadCharacterBackgroundData(cmbFlaws, dataController.populateFlawData(background), isEdit == false ? null : character.getFlaws());
-	}
-
-	private <T> void loadCharacterBackgroundData(ComboBox<T> cmbBox, ObservableList<T> dataList, String characterData) {
-		if (cmbBox != null && cmbBox.getSelectionModel() != null) {
-			cmbBox.setItems(dataList);
-    		cmbBox.setDisable(false);
-
-    		if (characterData != null && !characterData.isEmpty()) {
-    			for (T data : dataList) {
-    				if (characterData.equals(data.toString())) {
-    					cmbBox.getSelectionModel().select(data);
-    					break;
-    				}
-    			}
-    		} else {
-    			cmbBox.getSelectionModel().selectFirst();
-    		}
+	@FXML
+	protected void handleCancel() {
+		if (isEdit) {
+			newCharacter = characterBeingEdited;
+		}
+		if (mainApp != null) {
+			mainApp.showMyCharacters();
 		}
 	}
 
-    @FXML
-    private void handleSkillAcrobatics() {
-    	attributesSkillsUtil.handleSkillSelected(acrobaticsRadioButton, acrobaticsIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillAnimalHandling() {
-    	attributesSkillsUtil.handleSkillSelected(animalHandlingRadioButton, animalHandlingIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillArcana() {
-    	attributesSkillsUtil.handleSkillSelected(arcanaRadioButton, arcanaIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillAthletics() {
-    	attributesSkillsUtil.handleSkillSelected(athleticsRadioButton, athleticsIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillDeception() {
-    	attributesSkillsUtil.handleSkillSelected(deceptionRadioButton, deceptionIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillHistory() {
-    	attributesSkillsUtil.handleSkillSelected(historyRadioButton, historyIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillInsight() {
-    	attributesSkillsUtil.handleSkillSelected(insightRadioButton, insightIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillIntimidation() {
-    	attributesSkillsUtil.handleSkillSelected(intimidationRadioButton, intimidationIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillInvestigation() {
-    	attributesSkillsUtil.handleSkillSelected(investigationRadioButton, investigationIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillMedicine() {
-    	attributesSkillsUtil.handleSkillSelected(medicineRadioButton, medicineIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillNature() {
-    	attributesSkillsUtil.handleSkillSelected(natureRadioButton, natureIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillPerception() {
-    	attributesSkillsUtil.handleSkillSelected(perceptionRadioButton, perceptionIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillPerformance() {
-    	attributesSkillsUtil.handleSkillSelected(performanceRadioButton, performanceIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillPersuasion() {
-    	attributesSkillsUtil.handleSkillSelected(persuasionRadioButton, persuasionIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillReligion() {
-    	attributesSkillsUtil.handleSkillSelected(religionRadioButton, religionIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillSleightOfHand() {
-    	attributesSkillsUtil.handleSkillSelected(sleightOfHandRadioButton, sleightOfHandIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillStealth() {
-    	attributesSkillsUtil.handleSkillSelected(stealthRadioButton, stealthIncrease, true /*fromUserClick*/);
-    }
-
-    @FXML
-    private void handleSkillSurvival() {
-    	attributesSkillsUtil.handleSkillSelected(survivalRadioButton, survivalIncrease, true /*fromUserClick*/);
-    }
-
 	@FXML
-	private void handleAddStr() {
-		handleAttributeAddSubBtn(strengthTxt, strengthAdd, strengthSub, Attributes.STRENGTH, true /*isAddition*/);
+	protected void refreshBackground() {
+		Backgrounds background = cmbBackground.getSelectionModel().getSelectedItem();
+		if (background != null) {
+			refreshBackground(background, newCharacter);
+		}
+	}
+
+	protected void refreshBackground(Backgrounds background, CharacterDto character) {
+		loadCharacterBackgroundData(cmbPersonalityTraits, dataController.populatePersonalityTraitData(background),
+				isEdit == false ? null : character.getPersonalityTrait());
+		loadCharacterBackgroundData(cmbIdeals, dataController.populateIdealData(background),
+				isEdit == false ? null : character.getIdeals());
+		loadCharacterBackgroundData(cmbBonds, dataController.populateBondData(background),
+				isEdit == false ? null : character.getBonds());
+		loadCharacterBackgroundData(cmbFlaws, dataController.populateFlawData(background),
+				isEdit == false ? null : character.getFlaws());
+	}
+
+	protected <T> void loadCharacterBackgroundData(ComboBox<T> cmbBox, ObservableList<T> dataList,
+			String characterData) {
+		if (cmbBox != null && cmbBox.getSelectionModel() != null) {
+			cmbBox.setItems(dataList);
+			cmbBox.setDisable(false);
+
+			if (characterData != null && !characterData.isEmpty()) {
+				for (T data : dataList) {
+					if (characterData.equals(data.toString())) {
+						cmbBox.getSelectionModel().select(data);
+						break;
+					}
+				}
+			} else {
+				cmbBox.getSelectionModel().selectFirst();
+			}
+		}
 	}
 
 	@FXML
-	private void handleSubStr() {
-		handleAttributeAddSubBtn(strengthTxt, strengthAdd, strengthSub, Attributes.STRENGTH, false /*isAddition*/);		
+	protected void handleSkillAcrobatics() {
+		attributesSkillsUtil.handleSkillSelected(acrobaticsRadioButton, acrobaticsIncrease, true /* fromUserClick */);
 	}
 
 	@FXML
-	private void handleAddDex() {
-		handleAttributeAddSubBtn(dexterityTxt, dexterityAdd, dexteritySub, Attributes.DEXTERITY, true /*isAddition*/);
+	protected void handleSkillAnimalHandling() {
+		attributesSkillsUtil.handleSkillSelected(animalHandlingRadioButton, animalHandlingIncrease,
+				true /* fromUserClick */);
 	}
 
 	@FXML
-	private void handleSubDex() {
-		handleAttributeAddSubBtn(dexterityTxt, dexterityAdd, dexteritySub, Attributes.DEXTERITY, false /*isAddition*/);
+	protected void handleSkillArcana() {
+		attributesSkillsUtil.handleSkillSelected(arcanaRadioButton, arcanaIncrease, true /* fromUserClick */);
 	}
 
 	@FXML
-	private void handleAddCon() {
-		handleAttributeAddSubBtn(constitutionTxt, constitutionAdd, constitutionSub, Attributes.CONSTITUTION, true /*isAddition*/);
-		
+	protected void handleSkillAthletics() {
+		attributesSkillsUtil.handleSkillSelected(athleticsRadioButton, athleticsIncrease, true /* fromUserClick */);
 	}
 
 	@FXML
-	private void handleSubCon() {
-		handleAttributeAddSubBtn(constitutionTxt, constitutionAdd, constitutionSub, Attributes.CONSTITUTION, false /*isAddition*/);
+	protected void handleSkillDeception() {
+		attributesSkillsUtil.handleSkillSelected(deceptionRadioButton, deceptionIncrease, true /* fromUserClick */);
 	}
 
 	@FXML
-	private void handleAddInt() {
-		handleAttributeAddSubBtn(intelligenceTxt, intelligenceAdd, intelligenceSub, Attributes.INTELLIGENCE, true /*isAddition*/);
+	protected void handleSkillHistory() {
+		attributesSkillsUtil.handleSkillSelected(historyRadioButton, historyIncrease, true /* fromUserClick */);
 	}
 
 	@FXML
-	private void handleSubInt() {
-		handleAttributeAddSubBtn(intelligenceTxt, intelligenceAdd, intelligenceSub, Attributes.INTELLIGENCE, false /*isAddition*/);
+	protected void handleSkillInsight() {
+		attributesSkillsUtil.handleSkillSelected(insightRadioButton, insightIncrease, true /* fromUserClick */);
 	}
 
 	@FXML
-	private void handleAddWis() {
-		handleAttributeAddSubBtn(wisdomTxt, wisdomAdd, wisdomSub, Attributes.WISDOM, true /*isAddition*/);
+	protected void handleSkillIntimidation() {
+		attributesSkillsUtil.handleSkillSelected(intimidationRadioButton, intimidationIncrease,
+				true /* fromUserClick */);
 	}
 
 	@FXML
-	private void handleSubWis() {
-		handleAttributeAddSubBtn(wisdomTxt, wisdomAdd, wisdomSub, Attributes.WISDOM, false /*isAddition*/);
+	protected void handleSkillInvestigation() {
+		attributesSkillsUtil.handleSkillSelected(investigationRadioButton, investigationIncrease,
+				true /* fromUserClick */);
 	}
 
 	@FXML
-	private void handleAddCha() {
-		handleAttributeAddSubBtn(charismaTxt, charismaAdd, charismaSub, Attributes.CHARISMA, true /*isAddition*/);
+	protected void handleSkillMedicine() {
+		attributesSkillsUtil.handleSkillSelected(medicineRadioButton, medicineIncrease, true /* fromUserClick */);
 	}
 
 	@FXML
-	private void handleSubCha() {
-		handleAttributeAddSubBtn(charismaTxt, charismaAdd, charismaSub, Attributes.CHARISMA, false /*isAddition*/);
+	protected void handleSkillNature() {
+		attributesSkillsUtil.handleSkillSelected(natureRadioButton, natureIncrease, true /* fromUserClick */);
+	}
+
+	@FXML
+	protected void handleSkillPerception() {
+		attributesSkillsUtil.handleSkillSelected(perceptionRadioButton, perceptionIncrease, true /* fromUserClick */);
+	}
+
+	@FXML
+	protected void handleSkillPerformance() {
+		attributesSkillsUtil.handleSkillSelected(performanceRadioButton, performanceIncrease, true /* fromUserClick */);
+	}
+
+	@FXML
+	protected void handleSkillPersuasion() {
+		attributesSkillsUtil.handleSkillSelected(persuasionRadioButton, persuasionIncrease, true /* fromUserClick */);
+	}
+
+	@FXML
+	protected void handleSkillReligion() {
+		attributesSkillsUtil.handleSkillSelected(religionRadioButton, religionIncrease, true /* fromUserClick */);
+	}
+
+	@FXML
+	protected void handleSkillSleightOfHand() {
+		attributesSkillsUtil.handleSkillSelected(sleightOfHandRadioButton, sleightOfHandIncrease,
+				true /* fromUserClick */);
+	}
+
+	@FXML
+	protected void handleSkillStealth() {
+		attributesSkillsUtil.handleSkillSelected(stealthRadioButton, stealthIncrease, true /* fromUserClick */);
+	}
+
+	@FXML
+	protected void handleSkillSurvival() {
+		attributesSkillsUtil.handleSkillSelected(survivalRadioButton, survivalIncrease, true /* fromUserClick */);
+	}
+
+	@FXML
+	protected void handleAddStr() {
+		handleAttributeAddSubBtn(strengthTxt, strengthAdd, strengthSub, Attributes.STRENGTH, true /* isAddition */);
+	}
+
+	@FXML
+	protected void handleSubStr() {
+		handleAttributeAddSubBtn(strengthTxt, strengthAdd, strengthSub, Attributes.STRENGTH, false /* isAddition */);
+	}
+
+	@FXML
+	protected void handleAddDex() {
+		handleAttributeAddSubBtn(dexterityTxt, dexterityAdd, dexteritySub, Attributes.DEXTERITY, true /* isAddition */);
+	}
+
+	@FXML
+	protected void handleSubDex() {
+		handleAttributeAddSubBtn(dexterityTxt, dexterityAdd, dexteritySub, Attributes.DEXTERITY,
+				false /* isAddition */);
+	}
+
+	@FXML
+	protected void handleAddCon() {
+		handleAttributeAddSubBtn(constitutionTxt, constitutionAdd, constitutionSub, Attributes.CONSTITUTION,
+				true /* isAddition */);
+
+	}
+
+	@FXML
+	protected void handleSubCon() {
+		handleAttributeAddSubBtn(constitutionTxt, constitutionAdd, constitutionSub, Attributes.CONSTITUTION,
+				false /* isAddition */);
+	}
+
+	@FXML
+	protected void handleAddInt() {
+		handleAttributeAddSubBtn(intelligenceTxt, intelligenceAdd, intelligenceSub, Attributes.INTELLIGENCE,
+				true /* isAddition */);
+	}
+
+	@FXML
+	protected void handleSubInt() {
+		handleAttributeAddSubBtn(intelligenceTxt, intelligenceAdd, intelligenceSub, Attributes.INTELLIGENCE,
+				false /* isAddition */);
+	}
+
+	@FXML
+	protected void handleAddWis() {
+		handleAttributeAddSubBtn(wisdomTxt, wisdomAdd, wisdomSub, Attributes.WISDOM, true /* isAddition */);
+	}
+
+	@FXML
+	protected void handleSubWis() {
+		handleAttributeAddSubBtn(wisdomTxt, wisdomAdd, wisdomSub, Attributes.WISDOM, false /* isAddition */);
+	}
+
+	@FXML
+	protected void handleAddCha() {
+		handleAttributeAddSubBtn(charismaTxt, charismaAdd, charismaSub, Attributes.CHARISMA, true /* isAddition */);
+	}
+
+	@FXML
+	protected void handleSubCha() {
+		handleAttributeAddSubBtn(charismaTxt, charismaAdd, charismaSub, Attributes.CHARISMA, false /* isAddition */);
 	}
 }

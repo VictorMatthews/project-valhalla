@@ -10,9 +10,8 @@ import com.nfpenterprise.gameHub.constants.Races;
 import com.nfpenterprise.gameHub.constants.SubRaces;
 
 public class CharacterDtoFixture {
-	public static CharacterDto createCharacterDto(String characterName) {
+	public static CharacterDto createCharacterDto() {
 		CharacterDto character = new CharacterDto();
-		character.setCharacterName(characterName);
 		character.setBackground(Backgrounds.CRIMINAL);
 		character.setRace(Races.GNOME);
 		character.setSubRace(SubRaces.FOREST_GNOME);

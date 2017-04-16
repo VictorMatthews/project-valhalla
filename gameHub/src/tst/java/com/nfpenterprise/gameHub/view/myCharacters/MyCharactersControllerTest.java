@@ -84,7 +84,7 @@ public class MyCharactersControllerTest {
 	
     /**
      * <pre>
-     * @requirement PVQC-A
+     * @requirement MCCQC-A
      *
      * Feature: When a user selects a character the character info is updated on the screen.
      * 
@@ -96,8 +96,7 @@ public class MyCharactersControllerTest {
      */
     @Test
     public void test_showCharacterDetails() {
-    	String characterName = "Aifur Gott";
-    	CharacterDto character = CharacterDtoFixture.createCharacterDto(characterName);
+    	CharacterDto character = CharacterDtoFixture.createCharacterDto();
 
     	mcc.showCharacterDetails(character);
 
