@@ -137,11 +137,6 @@
 				<include name="src/main/java/**" />
 			</fileset>
 		</copy>
-		<copy todir="project">
-			<fileset dir="/Users/victormatthews/git/projectvalhalla/gameHub">
-				<include name="src/test/java/**" />
-			</fileset>
-		</copy>
 	
 		<mkdir dir="projectRefs" />
 	</target>
@@ -181,11 +176,6 @@
 	
 		<!-- Copy project sources itself -->
 		<copy todir="build/src">
-			<fileset dir="project/src/test/java">
-				<include name="**/*"/>
-			</fileset>
-		</copy>
-		<copy todir="build/src">
 			<fileset dir="project/src/main/resources">
 				<include name="**/*"/>
 			</fileset>
@@ -211,9 +201,6 @@
 	
 		<!-- Copy over none Java-Files -->
 		<copy todir="build/classes">
-		<fileset dir="project/src/test/java">
-			<exclude name="**/*.java"/>
-		</fileset>
 		<fileset dir="project/src/main/resources">
 			<exclude name="**/*.java"/>
 		</fileset>
@@ -249,7 +236,7 @@
 	
 		<fx:application id="fxApplication"
 			name="ProjectValhalla"
-			mainClass="com.nfpenterprise.gamehub.Main"
+			mainClass="com.nfpenterprise.gameHub.Main"
 			version="1.0"
 		/>
 	

@@ -1,0 +1,10 @@
+.tab *.tab-label {
+    -fx-rotate: 90;
+}
+
+.tab-pane {
+	-fx-tab-min-width:25px;
+	-fx-tab-max-width:125px;
+	-fx-tab-min-height:120px;
+	-fx-tab-max-height:120px;
+}
