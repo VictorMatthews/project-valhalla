@@ -16,75 +16,75 @@ import javafx.scene.control.TextField;
 
 @RunWith( JfxTestRunner.class )
 public class MyCharactersControllerTest {
-    private MyCharactersController mcc;
+    private MyCharactersController controller;
 
     @Before
     public void onSetUpInTransaction() {
-    	mcc = new MyCharactersController();
-    	mcc.strengthTxt = new TextField();
-    	mcc.dexterityTxt = new TextField();
-    	mcc.constitutionTxt = new TextField();
-    	mcc.intelligenceTxt = new TextField();
-    	mcc.wisdomTxt = new TextField();
-    	mcc.charismaTxt = new TextField();
-    	mcc.raceTxt = new TextField();
-    	mcc.classTxt = new TextField();
-    	mcc.personalityTraitLabel = new Label();
-    	mcc.idealLabel = new Label();
-    	mcc.bondLabel = new Label();
-    	mcc.flawLabel = new Label();
-    	mcc.acrobaticsIncrease = new Label();
-    	mcc.animalHandlingIncrease = new Label();
-    	mcc.arcanaIncrease = new Label();
-    	mcc.athleticsIncrease = new Label();
-    	mcc.deceptionIncrease = new Label();
-    	mcc.historyIncrease = new Label();
-    	mcc.insightIncrease = new Label();
-    	mcc.intimidationIncrease = new Label();
-    	mcc.investigationIncrease = new Label();
-    	mcc.medicineIncrease = new Label();
-    	mcc.natureIncrease = new Label();
-    	mcc.perceptionIncrease = new Label();
-    	mcc.performanceIncrease = new Label();
-    	mcc.persuasionIncrease = new Label();
-    	mcc.religionIncrease = new Label();
-    	mcc.sleightOfHandIncrease = new Label();
-    	mcc.stealthIncrease = new Label();
-    	mcc.survivalIncrease = new Label();
-    	mcc.acrobaticsRadioButton = new RadioButton();
-    	mcc.animalHandlingRadioButton = new RadioButton();
-    	mcc.arcanaRadioButton = new RadioButton();
-    	mcc.athleticsRadioButton = new RadioButton();
-    	mcc.deceptionRadioButton = new RadioButton();
-    	mcc.historyRadioButton = new RadioButton();
-    	mcc.insightRadioButton = new RadioButton();
-    	mcc.intimidationRadioButton = new RadioButton();
-    	mcc.investigationRadioButton = new RadioButton();
-    	mcc.medicineRadioButton = new RadioButton();
-    	mcc.natureRadioButton = new RadioButton();
-    	mcc.perceptionRadioButton = new RadioButton();
-    	mcc.performanceRadioButton = new RadioButton();
-    	mcc.persuasionRadioButton = new RadioButton();
-    	mcc.religionRadioButton = new RadioButton();
-    	mcc.sleightOfHandRadioButton = new RadioButton();
-    	mcc.stealthRadioButton = new RadioButton();
-    	mcc.survivalRadioButton = new RadioButton();
+    	controller = new MyCharactersController();
+    	controller.strengthTxt = new TextField();
+    	controller.dexterityTxt = new TextField();
+    	controller.constitutionTxt = new TextField();
+    	controller.intelligenceTxt = new TextField();
+    	controller.wisdomTxt = new TextField();
+    	controller.charismaTxt = new TextField();
+    	controller.raceTxt = new TextField();
+    	controller.classTxt = new TextField();
+    	controller.personalityTraitLabel = new Label();
+    	controller.idealLabel = new Label();
+    	controller.bondLabel = new Label();
+    	controller.flawLabel = new Label();
+    	controller.acrobaticsIncrease = new Label();
+    	controller.animalHandlingIncrease = new Label();
+    	controller.arcanaIncrease = new Label();
+    	controller.athleticsIncrease = new Label();
+    	controller.deceptionIncrease = new Label();
+    	controller.historyIncrease = new Label();
+    	controller.insightIncrease = new Label();
+    	controller.intimidationIncrease = new Label();
+    	controller.investigationIncrease = new Label();
+    	controller.medicineIncrease = new Label();
+    	controller.natureIncrease = new Label();
+    	controller.perceptionIncrease = new Label();
+    	controller.performanceIncrease = new Label();
+    	controller.persuasionIncrease = new Label();
+    	controller.religionIncrease = new Label();
+    	controller.sleightOfHandIncrease = new Label();
+    	controller.stealthIncrease = new Label();
+    	controller.survivalIncrease = new Label();
+    	controller.acrobaticsRadioButton = new RadioButton();
+    	controller.animalHandlingRadioButton = new RadioButton();
+    	controller.arcanaRadioButton = new RadioButton();
+    	controller.athleticsRadioButton = new RadioButton();
+    	controller.deceptionRadioButton = new RadioButton();
+    	controller.historyRadioButton = new RadioButton();
+    	controller.insightRadioButton = new RadioButton();
+    	controller.intimidationRadioButton = new RadioButton();
+    	controller.investigationRadioButton = new RadioButton();
+    	controller.medicineRadioButton = new RadioButton();
+    	controller.natureRadioButton = new RadioButton();
+    	controller.perceptionRadioButton = new RadioButton();
+    	controller.performanceRadioButton = new RadioButton();
+    	controller.persuasionRadioButton = new RadioButton();
+    	controller.religionRadioButton = new RadioButton();
+    	controller.sleightOfHandRadioButton = new RadioButton();
+    	controller.stealthRadioButton = new RadioButton();
+    	controller.survivalRadioButton = new RadioButton();
 
-    	mcc.attributesSkillsUtil = new AttributesSkillsUtil(mcc.acrobaticsIncrease, mcc.animalHandlingIncrease, mcc.arcanaIncrease,
-    			mcc.athleticsIncrease, mcc.deceptionIncrease, mcc.historyIncrease, mcc.insightIncrease, mcc.intimidationIncrease,
-    			mcc.investigationIncrease, mcc.medicineIncrease, mcc.natureIncrease, mcc.perceptionIncrease, mcc.performanceIncrease,
-    			mcc.persuasionIncrease, mcc.religionIncrease, mcc.sleightOfHandIncrease, mcc.stealthIncrease, mcc.survivalIncrease,
-    			mcc.acrobaticsRadioButton, mcc.animalHandlingRadioButton, mcc.arcanaRadioButton, mcc.athleticsRadioButton,
-    			mcc.deceptionRadioButton, mcc.historyRadioButton, mcc.insightRadioButton, mcc.intimidationRadioButton,
-    			mcc.investigationRadioButton, mcc.medicineRadioButton, mcc.natureRadioButton, mcc.perceptionRadioButton,
-    			mcc.performanceRadioButton, mcc.persuasionRadioButton, mcc.religionRadioButton, mcc.sleightOfHandRadioButton,
-				mcc.stealthRadioButton, mcc.survivalRadioButton, mcc.strengthTxt, mcc.dexterityTxt, mcc.intelligenceTxt, mcc.wisdomTxt,
-				mcc.charismaTxt, null);
+    	controller.attributesSkillsUtil = new AttributesSkillsUtil(controller.acrobaticsIncrease, controller.animalHandlingIncrease, controller.arcanaIncrease,
+    			controller.athleticsIncrease, controller.deceptionIncrease, controller.historyIncrease, controller.insightIncrease, controller.intimidationIncrease,
+    			controller.investigationIncrease, controller.medicineIncrease, controller.natureIncrease, controller.perceptionIncrease, controller.performanceIncrease,
+    			controller.persuasionIncrease, controller.religionIncrease, controller.sleightOfHandIncrease, controller.stealthIncrease, controller.survivalIncrease,
+    			controller.acrobaticsRadioButton, controller.animalHandlingRadioButton, controller.arcanaRadioButton, controller.athleticsRadioButton,
+    			controller.deceptionRadioButton, controller.historyRadioButton, controller.insightRadioButton, controller.intimidationRadioButton,
+    			controller.investigationRadioButton, controller.medicineRadioButton, controller.natureRadioButton, controller.perceptionRadioButton,
+    			controller.performanceRadioButton, controller.persuasionRadioButton, controller.religionRadioButton, controller.sleightOfHandRadioButton,
+				controller.stealthRadioButton, controller.survivalRadioButton, controller.strengthTxt, controller.dexterityTxt, controller.intelligenceTxt, controller.wisdomTxt,
+				controller.charismaTxt, null);
     }
 	
     /**
      * <pre>
-     * @requirement MCCQC-A
+     * @requirement QC-A
      *
      * Feature: When a user selects a character the character info is updated on the screen.
      * 
@@ -98,25 +98,25 @@ public class MyCharactersControllerTest {
     public void test_showCharacterDetails() {
     	CharacterDto character = CharacterDtoFixture.createCharacterDto();
 
-    	mcc.showCharacterDetails(character);
+    	controller.showCharacterDetails(character);
 
-    	Assert.assertEquals(character.getSubRace(), mcc.raceTxt.getText());
-    	Assert.assertEquals(character.getClassName(), mcc.classTxt.getText());
-    	Assert.assertEquals(character.getStrength().toString(), mcc.strengthTxt.getText());
-    	Assert.assertEquals(character.getDexterity().toString(), mcc.dexterityTxt.getText());
-    	Assert.assertEquals(character.getConstitution().toString(), mcc.constitutionTxt.getText());
-    	Assert.assertEquals(character.getIntelligence().toString(), mcc.intelligenceTxt.getText());
-    	Assert.assertEquals(character.getWisdom().toString(), mcc.wisdomTxt.getText());
-    	Assert.assertEquals(character.getCharisma().toString(), mcc.charismaTxt.getText());
-    	Assert.assertEquals(character.getPersonalityTrait(), mcc.personalityTraitLabel.getText());
-    	Assert.assertEquals(character.getIdeals(), mcc.idealLabel.getText());
-    	Assert.assertEquals(character.getBonds(), mcc.bondLabel.getText());
-    	Assert.assertEquals(character.getFlaws(), mcc.flawLabel.getText());
+    	Assert.assertEquals(character.getSubRace(), controller.raceTxt.getText());
+    	Assert.assertEquals(character.getClassName(), controller.classTxt.getText());
+    	Assert.assertEquals(character.getStrength().toString(), controller.strengthTxt.getText());
+    	Assert.assertEquals(character.getDexterity().toString(), controller.dexterityTxt.getText());
+    	Assert.assertEquals(character.getConstitution().toString(), controller.constitutionTxt.getText());
+    	Assert.assertEquals(character.getIntelligence().toString(), controller.intelligenceTxt.getText());
+    	Assert.assertEquals(character.getWisdom().toString(), controller.wisdomTxt.getText());
+    	Assert.assertEquals(character.getCharisma().toString(), controller.charismaTxt.getText());
+    	Assert.assertEquals(character.getPersonalityTrait(), controller.personalityTraitLabel.getText());
+    	Assert.assertEquals(character.getIdeals(), controller.idealLabel.getText());
+    	Assert.assertEquals(character.getBonds(), controller.bondLabel.getText());
+    	Assert.assertEquals(character.getFlaws(), controller.flawLabel.getText());
     }
 	
     /**
      * <pre>
-     * @requirement MCCQC-?
+     * @requirement QC-?
      *
      * Feature: 
      * 

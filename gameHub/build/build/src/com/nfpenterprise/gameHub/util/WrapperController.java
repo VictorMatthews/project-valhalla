@@ -8,7 +8,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import com.nfpenterprise.gameHub.Main;
-import com.nfpenterprise.gameHub.character.collection.CharactersWrapper;
+import com.nfpenterprise.gameHub.character.collection.Characters;
 import com.nfpenterprise.gameHub.character.dto.CharacterDto;
 
 import javafx.collections.ObservableList;
@@ -23,14 +23,14 @@ public class WrapperController {
 
     public void loadCharacterDataFromFile(File file, ObservableList<CharacterDto> characterData) {
         try {
-            JAXBContext context = JAXBContext.newInstance(CharactersWrapper.class);
+            JAXBContext context = JAXBContext.newInstance(Characters.class);
             Unmarshaller um = context.createUnmarshaller();
 
             // Reading XML from the file and unmarshalling.
-            CharactersWrapper wrapper = (CharactersWrapper) um.unmarshal(file);
+            Characters characters = (Characters) um.unmarshal(file);
 
             characterData.clear();
-            characterData.addAll(wrapper.getCharacters());
+            characterData.addAll(characters.getCharacters());
             // Save the file path to the registry.
             setCharacterFilePath(file);
 
@@ -41,16 +41,16 @@ public class WrapperController {
 	public void saveCharacterDataToFile(File file, ObservableList<CharacterDto> characterData) {
         try {
         	if (!characterData.isEmpty()) {
-	            JAXBContext context = JAXBContext.newInstance(CharactersWrapper.class);
+	            JAXBContext context = JAXBContext.newInstance(Characters.class);
 	            Marshaller m = context.createMarshaller();
 	            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 	
-	            // Wrapping our person data.
-	            CharactersWrapper wrapper = new CharactersWrapper();
-	            wrapper.setCharacters(characterData);
+	            // Wrapping our character data.
+	            Characters characters = new Characters();
+	            characters.setCharacters(characterData);
 	
 	            // Marshalling and saving XML to the file.
-	            m.marshal(wrapper, file);
+	            m.marshal(characters, file);
 	
 	            // Save the file path to the registry.
 	            setCharacterFilePath(file);

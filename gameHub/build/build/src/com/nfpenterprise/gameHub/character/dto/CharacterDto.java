@@ -56,6 +56,10 @@ public class CharacterDto {
 		return background;
 	}
 
+	public void setBackground(String background) {
+		this.background =  background;
+	}
+
 	public void setBackground(Backgrounds background) {
 		if (background != null) {
 			this.background =  background.getBackgroundName();
@@ -66,6 +70,10 @@ public class CharacterDto {
     @XmlElement(name = "race")
 	public String getRace() {
 		return race;
+	}
+
+	public void setRace(String race) {
+		this.race =  race;
 	}
 
 	public void setRace(Races race) {
@@ -80,6 +88,10 @@ public class CharacterDto {
 		return subRace;
 	}
 
+	public void setSubRace(String subRace) {
+		this.subRace =  subRace;
+	}
+
 	public void setSubRace(SubRaces subRace) {
 		if (subRace != null) {
 			this.subRace = subRace.getSubRaceName();
@@ -90,6 +102,10 @@ public class CharacterDto {
     @XmlElement(name = "class")
 	public String getClassName() {
 		return className;
+	}
+
+	public void setClassName(String classData) {
+		this.className =  classData;
 	}
 
 	public void setClassName(Classes classData) {
@@ -157,6 +173,10 @@ public class CharacterDto {
 		return personalityTrait;
 	}
 
+	public void setPersonalityTrait(String personalityTrait) {
+		this.personalityTrait =  personalityTrait;
+	}
+
 	public void setPersonalityTrait(PersonalityTraits personalityTrait) {
 		this.personalityTrait = personalityTrait != null ? personalityTrait.getPersonalityTraitText() : null;
 	}
@@ -164,6 +184,10 @@ public class CharacterDto {
     @XmlElement(name = "ideals")
 	public String getIdeals() {
 		return ideals;
+	}
+
+	public void setIdeals(String ideals) {
+		this.ideals =  ideals;
 	}
 
 	public void setIdeals(Ideals ideals) {
@@ -175,6 +199,10 @@ public class CharacterDto {
 		return bonds;
 	}
 
+	public void setBonds(String bonds) {
+		this.bonds =  bonds;
+	}
+
 	public void setBonds(Bonds bonds) {
 		this.bonds = bonds != null ? bonds.getBondText() : null;
 	}
@@ -182,6 +210,10 @@ public class CharacterDto {
     @XmlElement(name = "flaws")
 	public String getFlaws() {
 		return flaws;
+	}
+
+	public void setFlaws(String flaws) {
+		this.flaws =  flaws;
 	}
 
 	public void setFlaws(Flaws flaws) {

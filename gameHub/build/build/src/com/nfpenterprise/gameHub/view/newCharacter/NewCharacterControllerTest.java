@@ -29,101 +29,101 @@ import javafx.scene.control.TextField;
 
 @RunWith( JfxTestRunner.class )
 public class NewCharacterControllerTest {
-    private NewCharacterController ncc;
+    private NewCharacterController controller;
 
     @Before
     public void onSetUpInTransaction() {
-    	ncc = new NewCharacterController();
+    	controller = new NewCharacterController();
 
-    	ncc.tabs = new TabPane();
-    	ncc.raceTab = new Tab();
-    	ncc.subRaceTab = new Tab();
-    	ncc.classTab = new Tab();
-    	ncc.backgorundTab = new Tab();
-    	ncc.attributesSkillsTab = new Tab();
-    	ncc.racesTable = new TableView<Races>();
-        ncc.racesColumn = new TableColumn<Races, String>();
-    	ncc.subRacesTable = new TableView<SubRaces>();
-        ncc.subRacesColumn = new TableColumn<SubRaces, String>();
-    	ncc.classesTable = new TableView<Classes>();
-        ncc.classesColumn = new TableColumn<Classes, String>();
-    	ncc.cmbBackground = new ComboBox<Backgrounds>();
-    	ncc.cmbPersonalityTraits = new ComboBox<PersonalityTraits>();
-    	ncc.cmbIdeals = new ComboBox<Ideals>();
-    	ncc.cmbBonds = new ComboBox<Bonds>();
-    	ncc.cmbFlaws = new ComboBox<Flaws>();
-//    	ncc.raceWebView = new WebView();
-//    	ncc.subRaceWebView = new WebView();
-//    	ncc.classWebView = new WebView();
-//    	ncc.spellWebView = new WebView();
+    	controller.tabs = new TabPane();
+    	controller.raceTab = new Tab();
+    	controller.subRaceTab = new Tab();
+    	controller.classTab = new Tab();
+    	controller.backgorundTab = new Tab();
+    	controller.attributesSkillsTab = new Tab();
+    	controller.racesTable = new TableView<Races>();
+        controller.racesColumn = new TableColumn<Races, String>();
+    	controller.subRacesTable = new TableView<SubRaces>();
+        controller.subRacesColumn = new TableColumn<SubRaces, String>();
+    	controller.classesTable = new TableView<Classes>();
+        controller.classesColumn = new TableColumn<Classes, String>();
+    	controller.cmbBackground = new ComboBox<Backgrounds>();
+    	controller.cmbPersonalityTraits = new ComboBox<PersonalityTraits>();
+    	controller.cmbIdeals = new ComboBox<Ideals>();
+    	controller.cmbBonds = new ComboBox<Bonds>();
+    	controller.cmbFlaws = new ComboBox<Flaws>();
+//    	controller.raceWebView = new WebView();
+//    	controller.subRaceWebView = new WebView();
+//    	controller.classWebView = new WebView();
+//    	controller.spellWebView = new WebView();
     	
-    	ncc.acrobaticsIncrease = new Label();
-    	ncc.animalHandlingIncrease = new Label();
-    	ncc.arcanaIncrease = new Label();
-    	ncc.athleticsIncrease = new Label();
-    	ncc.deceptionIncrease = new Label();
-    	ncc.historyIncrease = new Label();
-    	ncc.insightIncrease = new Label();
-    	ncc.intimidationIncrease = new Label();
-    	ncc.investigationIncrease = new Label();
-    	ncc.medicineIncrease = new Label();
-    	ncc.natureIncrease = new Label();
-    	ncc.perceptionIncrease = new Label();
-    	ncc.performanceIncrease = new Label();
-    	ncc.persuasionIncrease = new Label();
-    	ncc.religionIncrease = new Label();
-    	ncc.sleightOfHandIncrease = new Label();
-    	ncc.stealthIncrease = new Label();
-    	ncc.survivalIncrease = new Label();
+    	controller.acrobaticsIncrease = new Label();
+    	controller.animalHandlingIncrease = new Label();
+    	controller.arcanaIncrease = new Label();
+    	controller.athleticsIncrease = new Label();
+    	controller.deceptionIncrease = new Label();
+    	controller.historyIncrease = new Label();
+    	controller.insightIncrease = new Label();
+    	controller.intimidationIncrease = new Label();
+    	controller.investigationIncrease = new Label();
+    	controller.medicineIncrease = new Label();
+    	controller.natureIncrease = new Label();
+    	controller.perceptionIncrease = new Label();
+    	controller.performanceIncrease = new Label();
+    	controller.persuasionIncrease = new Label();
+    	controller.religionIncrease = new Label();
+    	controller.sleightOfHandIncrease = new Label();
+    	controller.stealthIncrease = new Label();
+    	controller.survivalIncrease = new Label();
     	
-    	ncc.acrobaticsRadioButton = new RadioButton();
-    	ncc.animalHandlingRadioButton = new RadioButton();
-    	ncc.arcanaRadioButton = new RadioButton();
-    	ncc.athleticsRadioButton = new RadioButton();
-    	ncc.deceptionRadioButton = new RadioButton();
-    	ncc.historyRadioButton = new RadioButton();
-    	ncc.insightRadioButton = new RadioButton();
-    	ncc.intimidationRadioButton = new RadioButton();
-    	ncc.investigationRadioButton = new RadioButton();
-    	ncc.medicineRadioButton = new RadioButton();
-    	ncc.natureRadioButton = new RadioButton();
-    	ncc.perceptionRadioButton = new RadioButton();
-    	ncc.performanceRadioButton = new RadioButton();
-    	ncc.persuasionRadioButton = new RadioButton();
-    	ncc.religionRadioButton = new RadioButton();
-    	ncc.sleightOfHandRadioButton = new RadioButton();
-    	ncc.stealthRadioButton = new RadioButton();
-    	ncc.survivalRadioButton = new RadioButton();
+    	controller.acrobaticsRadioButton = new RadioButton();
+    	controller.animalHandlingRadioButton = new RadioButton();
+    	controller.arcanaRadioButton = new RadioButton();
+    	controller.athleticsRadioButton = new RadioButton();
+    	controller.deceptionRadioButton = new RadioButton();
+    	controller.historyRadioButton = new RadioButton();
+    	controller.insightRadioButton = new RadioButton();
+    	controller.intimidationRadioButton = new RadioButton();
+    	controller.investigationRadioButton = new RadioButton();
+    	controller.medicineRadioButton = new RadioButton();
+    	controller.natureRadioButton = new RadioButton();
+    	controller.perceptionRadioButton = new RadioButton();
+    	controller.performanceRadioButton = new RadioButton();
+    	controller.persuasionRadioButton = new RadioButton();
+    	controller.religionRadioButton = new RadioButton();
+    	controller.sleightOfHandRadioButton = new RadioButton();
+    	controller.stealthRadioButton = new RadioButton();
+    	controller.survivalRadioButton = new RadioButton();
     	
-    	ncc.strengthAdd= new Button();
-    	ncc.strengthSub= new Button();
-    	ncc.dexterityAdd= new Button();
-    	ncc.dexteritySub= new Button();
-    	ncc.constitutionAdd= new Button();
-    	ncc.constitutionSub= new Button();
-    	ncc.intelligenceAdd= new Button();
-    	ncc.intelligenceSub= new Button();
-    	ncc.wisdomAdd= new Button();
-    	ncc.wisdomSub= new Button();
-    	ncc.charismaAdd= new Button();
-    	ncc.charismaSub= new Button();
+    	controller.strengthAdd= new Button();
+    	controller.strengthSub= new Button();
+    	controller.dexterityAdd= new Button();
+    	controller.dexteritySub= new Button();
+    	controller.constitutionAdd= new Button();
+    	controller.constitutionSub= new Button();
+    	controller.intelligenceAdd= new Button();
+    	controller.intelligenceSub= new Button();
+    	controller.wisdomAdd= new Button();
+    	controller.wisdomSub= new Button();
+    	controller.charismaAdd= new Button();
+    	controller.charismaSub= new Button();
 
-    	ncc.strengthTxt= new TextField();
-    	ncc.dexterityTxt= new TextField();
-    	ncc.constitutionTxt= new TextField();
-    	ncc.intelligenceTxt= new TextField();
-    	ncc.wisdomTxt= new TextField();
-    	ncc.charismaTxt= new TextField();
+    	controller.strengthTxt= new TextField();
+    	controller.dexterityTxt= new TextField();
+    	controller.constitutionTxt= new TextField();
+    	controller.intelligenceTxt= new TextField();
+    	controller.wisdomTxt= new TextField();
+    	controller.charismaTxt= new TextField();
 
-    	ncc.remainingAttributeIncrease = new Label();
-    	ncc.remainingSkillChoices = new Label();
+    	controller.remainingAttributeIncrease = new Label();
+    	controller.remainingSkillChoices = new Label();
     	
-    	ncc.initialize();
+    	controller.initialize();
     }
 	
     /**
      * <pre>
-     * @requirement NCCQC-A
+     * @requirement QC-A
      *
      * Feature: Subraces populate off of selected race
      * 
@@ -135,22 +135,22 @@ public class NewCharacterControllerTest {
      */
     @Test
     public void test_SubRaceTablePopulation() {
-    	Races oldRace = ncc.racesTable.getSelectionModel().getSelectedItem();
-    	Integer currentSelectedRace = ncc.racesTable.getSelectionModel().getSelectedIndex();
-    	ncc.racesTable.getSelectionModel().select(Math.addExact(currentSelectedRace, 1));
-    	Races newRace = ncc.racesTable.getSelectionModel().getSelectedItem();
+    	Races oldRace = controller.racesTable.getSelectionModel().getSelectedItem();
+    	Integer currentSelectedRace = controller.racesTable.getSelectionModel().getSelectedIndex();
+    	controller.racesTable.getSelectionModel().select(Math.addExact(currentSelectedRace, 1));
+    	Races newRace = controller.racesTable.getSelectionModel().getSelectedItem();
     	
-    	ncc.subRacesTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-    	ncc.subRacesTable.getSelectionModel().selectAll();
-    	ObservableList<SubRaces> subRacesInSubRaceTable = ncc.subRacesTable.getSelectionModel().getSelectedItems();
+    	controller.subRacesTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    	controller.subRacesTable.getSelectionModel().selectAll();
+    	ObservableList<SubRaces> subRacesInSubRaceTable = controller.subRacesTable.getSelectionModel().getSelectedItems();
     	
     	Assert.assertNotEquals(oldRace, newRace);
-    	Assert.assertEquals(ncc.dataController.populateSubRaceData(newRace), subRacesInSubRaceTable);
+    	Assert.assertEquals(controller.dataController.populateSubRaceData(newRace), subRacesInSubRaceTable);
     }
 	
     /**
      * <pre>
-     * @requirement NCCQC-?
+     * @requirement QC-?
      *
      * Feature: 
      * 
