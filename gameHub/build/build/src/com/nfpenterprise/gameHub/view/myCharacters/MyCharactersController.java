@@ -269,4 +269,8 @@ public class MyCharactersController {
 		}
 	}
 
+	public void loadCharacter(CharacterDto character) {
+		myCharacterTable.getSelectionModel().select(character);		
+	}
+
 }

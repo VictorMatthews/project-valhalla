@@ -626,11 +626,12 @@ public class NewCharacterController {
 	@FXML
 	protected void handleFinish() {
 		updateCharacterData();
-		nameCharacter();
-		newCharacter.getCharacterName();
-		mainApp.getMyCharacterData().add(newCharacter);
+		if (!isEdit) {
+			nameCharacter();
+			mainApp.getMyCharacterData().add(newCharacter);
+		}
 		mainApp.saveCharacterDataToFile(mainApp.getCharactersFile());
-		mainApp.showMyCharacters();
+		mainApp.showMyCharacters(newCharacter);
 	}
 
 	protected void nameCharacter() {
@@ -648,7 +649,7 @@ public class NewCharacterController {
 			newCharacter = characterBeingEdited;
 		}
 		if (mainApp != null) {
-			mainApp.showMyCharacters();
+			mainApp.showMyCharacters(newCharacter);
 		}
 	}
 

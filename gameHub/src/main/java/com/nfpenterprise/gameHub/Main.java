@@ -44,7 +44,7 @@ public class Main extends Application {
 
 		initRootLayout();
 
-		showMyCharacters();
+		showMyCharacters(null);
 		wrapperController = new WrapperController();
 		File file = getCharactersFile();
         if (file != null) {
@@ -100,7 +100,7 @@ public class Main extends Application {
 		}
 	}
 
-	public void showMyCharacters() {
+	public void showMyCharacters(CharacterDto character) {
 		try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
@@ -113,6 +113,9 @@ public class Main extends Application {
             //Give the controller access to the main app.
             MyCharactersController controller = loader.getController();
             controller.setMainApp(this);
+            if (character != null) {
+            	controller.loadCharacter(character);
+            }
 
     		this.primaryStage.setTitle(Field.APPLICATION_NAME.toString() + " - " + Field.MY_CHARACTERS.toString());
         } catch (IOException e) {
