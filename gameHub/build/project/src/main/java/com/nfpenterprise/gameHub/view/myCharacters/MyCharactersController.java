@@ -168,7 +168,7 @@ public class MyCharactersController {
 
 	protected void showCharacterDetails(CharacterDto character) {
 		if (character != null) {
-			raceTxt.setText(character.getSubRace() == null ? "" : character.getSubRace().equalsIgnoreCase(SubRaces.NO_SUBRACE.getSubRaceName()) ? character.getRace() : character.getSubRace());
+			raceTxt.setText(character.getSubRace() == null ? character.getRace() == null ? "" : character.getRace() : character.getSubRace());
 			classTxt.setText(character.getClassName() == null ? "" : character.getClassName());
 			strengthTxt.setText(character.getStrength().toString());
 			dexterityTxt.setText(character.getDexterity().toString());
