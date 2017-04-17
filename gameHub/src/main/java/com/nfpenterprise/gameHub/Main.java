@@ -149,7 +149,11 @@ public class Main extends Application {
 
     @Override
     public void stop(){
-    	mainController.handleSave();
+    	if (myCharacters.isEmpty() && getCharactersFile() != null) {
+    		getCharactersFile().deleteOnExit();
+    	} else {
+    		mainController.handleSave();
+    	}
     }
 
 }

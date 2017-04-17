@@ -77,8 +77,7 @@ public class Main extends Application {
     	URL characterUrlFromResources = Main.class.getClassLoader().getResource(Paths.MY_CHARACTER_DATA.getPath());
         if (filePath != null) {
             return new File(filePath);
-        } else 
-        	if (characterUrlFromResources != null) {
+        } else if (characterUrlFromResources != null) {
         	return new File(characterUrlFromResources.getFile());
     	} else {
     		return null;
@@ -150,7 +149,11 @@ public class Main extends Application {
 
     @Override
     public void stop(){
-    	mainController.handleSave();
+    	if (myCharacters.isEmpty() && getCharactersFile() != null) {
+    		getCharactersFile().deleteOnExit();
+    	} else {
+    		mainController.handleSave();
+    	}
     }
 
 }
