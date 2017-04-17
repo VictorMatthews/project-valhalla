@@ -3,7 +3,7 @@ package com.nfpenterprise.gameHub.constants;
 public enum Paths {
 	APPLICATION_ICON("file:src/main/resources/images/Project_Valhalla.png"),
 
-	MY_CHARACTER_DATA("save/Characters.xml"),
+	MY_CHARACTER_DATA("user.home/ProjectValhallaCharacters.xml"),
 
 	DWARF_HTML("file/races/Dwarf.html"),
 	ELF_HTML("file/races/Elf.html"),
