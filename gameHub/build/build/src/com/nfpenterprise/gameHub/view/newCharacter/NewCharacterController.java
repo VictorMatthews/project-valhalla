@@ -227,8 +227,7 @@ public class NewCharacterController {
 		tabSelectionModel = tabs.getSelectionModel();
 		dataController = new DataController();
 
-		racesColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getRaceName() + " " +
-				mainApp.getClass().getClassLoader().getResource(cellData.getValue().getHtmlPath()).getPath() ));
+		racesColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getRaceName()));
 		racesTable.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> showRaceDetails(oldValue, newValue));
 		subRacesColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getSubRaceName()));
