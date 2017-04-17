@@ -1,23 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Cinzel+Decorative');
 
 #htmlBackground {
-	background-image: url("../images/parchment-paper.jpg");
 }
 
 #htmlTitle {
-    color: DarkGoldenRod;
-    font-family: Cinzel Decorative;
-    font-size: 300%;
 }
 
 #htmlHeader {
-    color: DarkGoldenRod;
-    font-family: Cinzel Decorative;
-    font-size: 200%;
 }
 
 #htmlParagraph {
-    color: DarkGoldenRod;
-    font-family: Cinzel Decorative;
-    font-size: 100%;
 }
