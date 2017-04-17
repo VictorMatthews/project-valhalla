@@ -99,7 +99,7 @@ public class GoogleDriveExporter {
 		String folderId = findOrCreateFolderIdForExport(driveService);
 
 		File fileMetadata = new File();
-		fileMetadata.setName("Project Valhalla Characters");
+		fileMetadata.setName("ProjectValhallaCharacters");
 		fileMetadata.setParents(Collections.singletonList(folderId));
 		fileMetadata.setMimeType("application/vnd.xml");
 

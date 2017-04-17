@@ -209,9 +209,9 @@ public class MyCharactersController {
 	@FXML
 	protected void handleDeleteCharacter() {
 		if (myCharacterTable != null && myCharacterTable.getSelectionModel() != null) {
+			clearMyCharacterData();
 			int selectedIndex = myCharacterTable.getSelectionModel().getSelectedIndex();
 			myCharacterTable.getItems().remove(selectedIndex);
-			clearMyCharacterData();
 		}
 	}
 
