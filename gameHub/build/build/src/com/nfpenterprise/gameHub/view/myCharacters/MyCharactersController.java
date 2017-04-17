@@ -16,7 +16,6 @@ import com.google.api.services.drive.Drive;
 import com.nfpenterprise.gameHub.Main;
 import com.nfpenterprise.gameHub.character.dto.CharacterDto;
 import com.nfpenterprise.gameHub.constants.Attributes;
-import com.nfpenterprise.gameHub.constants.SubRaces;
 import com.nfpenterprise.gameHub.util.AttributesSkillsUtil;
 import com.nfpenterprise.gameHub.util.GoogleDriveExporter;
 
@@ -212,6 +211,7 @@ public class MyCharactersController {
 		if (myCharacterTable != null && myCharacterTable.getSelectionModel() != null) {
 			int selectedIndex = myCharacterTable.getSelectionModel().getSelectedIndex();
 			myCharacterTable.getItems().remove(selectedIndex);
+			clearMyCharacterData();
 		}
 	}
 
@@ -271,6 +271,62 @@ public class MyCharactersController {
 
 	public void loadCharacter(CharacterDto character) {
 		myCharacterTable.getSelectionModel().select(character);		
+	}
+
+	private void clearMyCharacterData() {
+		raceTxt.setText("");
+		classTxt.setText("");
+		strengthTxt.setText("");
+		dexterityTxt.setText("");
+		constitutionTxt.setText("");
+		intelligenceTxt.setText("");
+		wisdomTxt.setText("");
+		charismaTxt.setText("");
+		personalityTraitLabel.setText("");
+		idealLabel.setText("");
+		bondLabel.setText("");
+		flawLabel.setText("");
+		acrobaticsIncrease.setText("");
+		animalHandlingIncrease.setText("");
+		arcanaIncrease.setText("");
+		athleticsIncrease.setText("");
+		deceptionIncrease.setText("");
+		historyIncrease.setText("");
+		insightIncrease.setText("");
+		intimidationIncrease.setText("");
+		investigationIncrease.setText("");
+		medicineIncrease.setText("");
+		natureIncrease.setText("");
+		perceptionIncrease.setText("");
+		performanceIncrease.setText("");
+		persuasionIncrease.setText("");
+		religionIncrease.setText("");
+		sleightOfHandIncrease.setText("");
+		stealthIncrease.setText("");
+		survivalIncrease.setText("");
+		acrobaticsRadioButton.setSelected(false);
+		animalHandlingRadioButton.setSelected(false);
+		arcanaRadioButton.setSelected(false);
+		athleticsRadioButton.setSelected(false);
+		deceptionRadioButton.setSelected(false);
+		historyRadioButton.setSelected(false);
+		insightRadioButton.setSelected(false);
+		intimidationRadioButton.setSelected(false);
+		investigationRadioButton.setSelected(false);
+		medicineRadioButton.setSelected(false);
+		natureRadioButton.setSelected(false);
+		perceptionRadioButton.setSelected(false);
+		performanceRadioButton.setSelected(false);
+		persuasionRadioButton.setSelected(false);
+		religionRadioButton.setSelected(false);
+		sleightOfHandRadioButton.setSelected(false);
+		stealthRadioButton.setSelected(false);
+		survivalRadioButton.setSelected(false);
+		strengthTxt.setText("");
+		dexterityTxt.setText("");
+		intelligenceTxt.setText("");
+		wisdomTxt.setText("");
+		charismaTxt.setText("");
 	}
 
 }
