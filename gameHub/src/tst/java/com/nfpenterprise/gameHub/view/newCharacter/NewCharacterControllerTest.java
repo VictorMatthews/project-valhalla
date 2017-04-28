@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.nfpenterprise.gameHub.character.dto.CharacterDtoFixture;
 import com.nfpenterprise.gameHub.constants.Backgrounds;
 import com.nfpenterprise.gameHub.constants.Bonds;
 import com.nfpenterprise.gameHub.constants.Classes;
@@ -41,6 +42,8 @@ public class NewCharacterControllerTest {
     	controller.classTab = new Tab();
     	controller.backgorundTab = new Tab();
     	controller.attributesSkillsTab = new Tab();
+    	controller.tabs.getTabs().addAll(controller.raceTab, controller.subRaceTab, controller.classTab, controller.backgorundTab, controller.attributesSkillsTab);
+
     	controller.racesTable = new TableView<Races>();
         controller.racesColumn = new TableColumn<Races, String>();
     	controller.subRacesTable = new TableView<SubRaces>();
@@ -52,10 +55,6 @@ public class NewCharacterControllerTest {
     	controller.cmbIdeals = new ComboBox<Ideals>();
     	controller.cmbBonds = new ComboBox<Bonds>();
     	controller.cmbFlaws = new ComboBox<Flaws>();
-//    	controller.raceWebView = new WebView();
-//    	controller.subRaceWebView = new WebView();
-//    	controller.classWebView = new WebView();
-//    	controller.spellWebView = new WebView();
     	
     	controller.acrobaticsIncrease = new Label();
     	controller.animalHandlingIncrease = new Label();
@@ -150,18 +149,132 @@ public class NewCharacterControllerTest {
 	
     /**
      * <pre>
-     * @requirement QC-?
+     * @requirement QC-B
      *
-     * Feature: 
+     * Feature: User Clicks Next and Back button to move through tabs
      * 
-     * Given
-     * When
-     * Then
+     * Given the user is on the race tab
+     * When they click next
+     * Then they will be on the subrace tab
+     * When they click back
+     * Then they will be on the race tab again
      *
      * </pre>
      */
-//    @Test
-//    public void test_() {
-//
-//    }
+    @Test
+    public void test_NextBackButtons() {
+    	controller.tabSelectionModel.select(controller.raceTab);
+    	Assert.assertEquals(controller.raceTab, controller.tabSelectionModel.getSelectedItem());
+    	controller.handleNext();
+    	Assert.assertEquals(controller.subRaceTab, controller.tabSelectionModel.getSelectedItem());
+    	controller.handleBack();
+    	Assert.assertEquals(controller.raceTab, controller.tabSelectionModel.getSelectedItem());
+    }
+	
+    /**
+     * <pre>
+     * @requirement QC-C
+     *
+     * Feature: User can add or remove attributes points
+     * 
+     * Given a strength of 8 
+	 * And the subtract button disabled 
+	 * And the add button enabled
+     * When the user clicks the add button
+     * Then the strength will increase to 9 and the subtract button will enable
+     * When the user clicks the subtract button
+     * Then the strength will decrease to 8 and the subtract button will be disabled again
+     * 
+     * Given a strength of 14
+     * And both buttons enabled
+     * When the user clicks the add button
+     * Then the strength will increase to 15 and the add button will be disabled
+     * When the user clicks the subtract button
+     * Then the strength will decrease to 14 and the add button will be enabled again
+     *
+     * </pre>
+     */
+    @Test
+    public void test_AddSubAttributes() {
+    	controller.newCharacter = CharacterDtoFixture.createCharacterDto();
+    	controller.handleAttributes();
+    	Integer fourteen = 14;
+
+    	controller.handleAddStr();
+    	Assert.assertEquals(false, controller.strengthSub.isDisable());
+    	Assert.assertEquals(9, Integer.parseInt(controller.strengthTxt.getText()));
+
+    	controller.handleSubStr();
+    	Assert.assertEquals(true, controller.strengthSub.isDisable());
+    	Assert.assertEquals(8, Integer.parseInt(controller.strengthTxt.getText()));
+
+    	controller.strengthTxt.setText(fourteen.toString());
+    	controller.strengthSub.setDisable(false);
+    	controller.strengthAdd.setDisable(false);
+
+    	controller.handleAddStr();
+    	Assert.assertEquals(true, controller.strengthAdd.isDisable());
+    	Assert.assertEquals(15, Integer.parseInt(controller.strengthTxt.getText()));
+
+    	controller.handleSubStr();
+    	Assert.assertEquals(false, controller.strengthAdd.isDisable());
+    	Assert.assertEquals(14, Integer.parseInt(controller.strengthTxt.getText()));
+    }
+	
+    /**
+     * <pre>
+     * @requirement QC-D
+     *
+     * Feature: The user can select select skills
+     * 
+     * Given the user is on the attributeSkillsTab
+     * When the users selects a skill
+     * Then the remaining skill points goes down
+     *
+     * </pre>
+     */
+    @Test
+    public void test_SkillSelection() {
+    	controller.newCharacter = CharacterDtoFixture.createCharacterDto();
+    	controller.tabSelectionModel.select(controller.attributesSkillsTab);
+    	controller.handleAttributes();
+    	controller.handleAttributesAndSkills();
+    	String currentRemainingSkills = controller.remainingSkillChoices.getText();
+    	
+    	controller.handleSkillAcrobatics();
+    	Assert.assertNotEquals(currentRemainingSkills, controller.remainingSkillChoices.getText());
+    }
+	
+    /**
+     * <pre>
+     * @requirement QC-E
+     *
+     * Feature: User can select characters background and traits that go along with it.
+     * 
+     * Given the user is on the background tab
+     * When the user selects a background in the background combo box
+     * Then all the combo boxes below it populate with the correct background data
+     *
+     * </pre>
+     */
+    @Test
+    public void test_Background() {
+    	controller.newCharacter = CharacterDtoFixture.createCharacterDto();
+    	controller.tabSelectionModel.select(controller.backgorundTab);
+
+    	for (Backgrounds selectedBackground : Backgrounds.getBackgrounds()) {
+	    	controller.cmbBackground.getSelectionModel().select(selectedBackground);
+	    	controller.refreshBackground();
+	
+	    	ObservableList<PersonalityTraits> expectedPersonalityTraits = controller.dataController.populatePersonalityTraitData(controller.cmbBackground.getSelectionModel().getSelectedItem());
+	    	ObservableList<Bonds> expectedBonds = controller.dataController.populateBondData(controller.cmbBackground.getSelectionModel().getSelectedItem());
+	    	ObservableList<Ideals> expectedIdeals = controller.dataController.populateIdealData(controller.cmbBackground.getSelectionModel().getSelectedItem());
+	    	ObservableList<Flaws> expectedFlaws = controller.dataController.populateFlawData(controller.cmbBackground.getSelectionModel().getSelectedItem());
+	
+	    	Assert.assertEquals(expectedPersonalityTraits, controller.cmbPersonalityTraits.getItems());
+	    	Assert.assertEquals(expectedBonds, controller.cmbBonds.getItems());
+	    	Assert.assertEquals(expectedIdeals, controller.cmbIdeals.getItems());
+	    	Assert.assertEquals(expectedFlaws, controller.cmbFlaws.getItems());
+    	}
+    }
 }

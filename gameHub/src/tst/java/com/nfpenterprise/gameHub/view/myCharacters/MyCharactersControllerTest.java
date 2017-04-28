@@ -8,10 +8,11 @@ import org.junit.runner.RunWith;
 import com.nfpenterprise.gameHub.character.dto.CharacterDto;
 import com.nfpenterprise.gameHub.character.dto.CharacterDtoFixture;
 import com.nfpenterprise.gameHub.testUtil.JfxTestRunner;
-import com.nfpenterprise.gameHub.util.AttributesSkillsUtil;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 @RunWith( JfxTestRunner.class )
@@ -69,17 +70,10 @@ public class MyCharactersControllerTest {
     	controller.sleightOfHandRadioButton = new RadioButton();
     	controller.stealthRadioButton = new RadioButton();
     	controller.survivalRadioButton = new RadioButton();
+    	controller.myCharacterTable = new TableView<CharacterDto>();
+    	controller.characterNameColumn = new TableColumn<CharacterDto, String>();
 
-    	controller.attributesSkillsUtil = new AttributesSkillsUtil(controller.acrobaticsIncrease, controller.animalHandlingIncrease, controller.arcanaIncrease,
-    			controller.athleticsIncrease, controller.deceptionIncrease, controller.historyIncrease, controller.insightIncrease, controller.intimidationIncrease,
-    			controller.investigationIncrease, controller.medicineIncrease, controller.natureIncrease, controller.perceptionIncrease, controller.performanceIncrease,
-    			controller.persuasionIncrease, controller.religionIncrease, controller.sleightOfHandIncrease, controller.stealthIncrease, controller.survivalIncrease,
-    			controller.acrobaticsRadioButton, controller.animalHandlingRadioButton, controller.arcanaRadioButton, controller.athleticsRadioButton,
-    			controller.deceptionRadioButton, controller.historyRadioButton, controller.insightRadioButton, controller.intimidationRadioButton,
-    			controller.investigationRadioButton, controller.medicineRadioButton, controller.natureRadioButton, controller.perceptionRadioButton,
-    			controller.performanceRadioButton, controller.persuasionRadioButton, controller.religionRadioButton, controller.sleightOfHandRadioButton,
-				controller.stealthRadioButton, controller.survivalRadioButton, controller.strengthTxt, controller.dexterityTxt, controller.intelligenceTxt, controller.wisdomTxt,
-				controller.charismaTxt, null);
+    	controller.initialize();
     }
 	
     /**
@@ -95,10 +89,13 @@ public class MyCharactersControllerTest {
      * </pre>
      */
     @Test
-    public void test_showCharacterDetails() {
+    public void test_ShowCharacterDetails() {
     	CharacterDto character = CharacterDtoFixture.createCharacterDto();
+    	controller.myCharacterTable.getItems().add(character);
 
-    	controller.showCharacterDetails(character);
+    	Assert.assertEquals(1, controller.myCharacterTable.getItems().size());
+
+    	controller.myCharacterTable.getSelectionModel().selectFirst();
 
     	Assert.assertEquals(character.getSubRace(), controller.raceTxt.getText());
     	Assert.assertEquals(character.getClassName(), controller.classTxt.getText());
@@ -116,18 +113,27 @@ public class MyCharactersControllerTest {
 	
     /**
      * <pre>
-     * @requirement QC-?
+     * @requirement QC-B
      *
-     * Feature: 
+     * Feature: When a character is selected the user can delete that character.
      * 
-     * Given
-     * When
-     * Then
+     * Given a user has selected a character in the my characters table
+     * When the user clicks delete
+     * Then the character will no longer be in the table
      *
      * </pre>
      */
-//    @Test
-//    public void test_() {
-//
-//    }
+    @Test
+    public void test_DeleteCharacter() {
+    	CharacterDto character = CharacterDtoFixture.createCharacterDto();
+    	controller.myCharacterTable.getItems().add(character);
+
+    	Assert.assertEquals(1, controller.myCharacterTable.getItems().size());
+
+    	controller.myCharacterTable.getSelectionModel().selectFirst();
+
+    	controller.handleDeleteCharacter();
+
+    	Assert.assertEquals(0, controller.myCharacterTable.getItems().size());
+    }
 }

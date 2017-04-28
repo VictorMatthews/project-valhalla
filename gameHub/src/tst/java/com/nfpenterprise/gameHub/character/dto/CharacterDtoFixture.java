@@ -17,11 +17,11 @@ public class CharacterDtoFixture {
 		character.setSubRace(SubRaces.FOREST_GNOME);
 		character.setClassName(Classes.BARD);
 		character.setStrength(8);
-		character.setDexterity(16);
-		character.setConstitution(12);
-		character.setIntelligence(10);
-		character.setWisdom(13);
-		character.setCharisma(15);
+		character.setDexterity(8);
+		character.setConstitution(8);
+		character.setIntelligence(8);
+		character.setWisdom(8);
+		character.setCharisma(8);
 		character.setPersonalityTrait(PersonalityTraits.CRIMINAL_1);
 		character.setBonds(Bonds.CRIMINAL_1);
 		character.setFlaws(Flaws.CRIMINAL_1);
